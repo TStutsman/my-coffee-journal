@@ -1,16 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Home from './components/Home'
+import Navigation from './components/Navigation'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
+import BrewForm from './components/BrewForm'
+import BrewList from './components/BrewList'
+import CoffeeForm from './components/CoffeeForm'
+import CoffeeList from './components/CoffeeList'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Layout() {
   return (
     <>
-      <h1>My Coffee Journal</h1>
+      <Navigation />
+      <Outlet />
     </>
   )
+}
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/coffees',
+        element: <CoffeeList />
+      },
+      {
+        path: '/coffees/new',
+        element: <CoffeeForm />
+      },
+      {
+        path: '/brews',
+        element: <BrewList />
+      },
+      {
+        path: '/brews/new',
+        element: <BrewForm />
+      }
+      
+    ]
+  }
+])
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App
