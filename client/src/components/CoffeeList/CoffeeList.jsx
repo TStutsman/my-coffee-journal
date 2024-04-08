@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
+import CoffeeListItem from "../CoffeeListItem";
+
 function CoffeeList(){
-    const coffees = [1, 2, 3, 4, 5]
+    const [coffees, setCoffees] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/coffees/').then(res => res.json()).then(coffees => setCoffees(coffees));
+    }, [])
+
     return (
         <div className="brew-list">
             { coffees.map(coffee => (
-                <p key={coffee}>Coffee {coffee}</p>
+                <CoffeeListItem key={coffee.id} coffee={coffee}/>
             ))}
         </div>
     );

@@ -1,4 +1,18 @@
 nav {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+
+    background-color: #242424;
+
+    height: 60px;
+    width: 100vw;
+    margin: 0;
+}
+
+#nav-logo {
+    font-size: 24px;
 }

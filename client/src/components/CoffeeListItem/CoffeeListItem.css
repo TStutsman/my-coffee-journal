@@ -1,0 +1,13 @@
+.coffee-list-item {
+    width: 400px;
+    margin: 10px auto;
+    padding-bottom: 5px;
+
+    border-top: 1px solid white;
+
+    background-color: #3e3d3d;
+}
+
+.coffee-list-item > p {
+    margin: 5px auto;
+}

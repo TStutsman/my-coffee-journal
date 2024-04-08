@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Navigation.css'
 
 function Navigation() {
     return (
         <nav>
-            <NavLink to="/">Home</NavLink>
+            <Link to='/' id='nav-logo'>My Coffee Journal</Link>
             <NavLink to="/coffees">Coffees</NavLink>
             <NavLink to="/brews">Brews</NavLink>
             <NavLink to="/coffees/new">Add Coffee</NavLink>

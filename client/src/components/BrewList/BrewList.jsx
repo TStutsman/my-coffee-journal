@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
+import BrewListItem from "../BrewListItem";
+
 function BrewList(){
-    const brews = [1, 2, 3, 4, 5]
+    const [brews, setBrews] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/brews/').then(res => res.json()).then(brews => setBrews(brews));
+    }, []);
+
     return (
         <div className="brew-list">
             { brews.map(brew => (
-                <p key={brew}>Brew {brew}</p>
+                <BrewListItem key={brew.id} brew={brew}/>
             ))}
         </div>
     );

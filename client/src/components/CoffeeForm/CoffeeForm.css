@@ -1,0 +1,9 @@
+#coffee-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+#coffee-form input {
+    margin: 5px 10px;
+}
