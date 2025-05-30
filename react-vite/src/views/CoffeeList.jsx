@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import CoffeeListItem from "@components";
+import { CoffeeListItem } from "@components";
+import './CoffeeList.css';
 
 function CoffeeList(){
     const [coffees, setCoffees] = useState([]);

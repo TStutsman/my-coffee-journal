@@ -3,7 +3,8 @@
     margin: 10px auto;
     padding-bottom: 5px;
 
-    border-top: 1px solid white;
+    border: 1px solid white;
+    border-radius: 8px;
 
     background-color: #3e3d3d;
 }
