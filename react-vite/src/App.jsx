@@ -1,11 +1,11 @@
-import Home from './components/Home'
-import Navigation from './components/Navigation'
+import Home from '@views/Home'
+import Navigation from '@components/Navigation'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
-import BrewForm from './components/BrewForm'
-import BrewList from './components/BrewList'
-import CoffeeForm from './components/CoffeeForm'
-import CoffeeList from './components/CoffeeList'
+import BrewForm from '@views/BrewForm'
+import BrewList from '@views/BrewList'
+import CoffeeForm from '@views/CoffeeForm'
+import CoffeeList from '@views/CoffeeList'
 
 function Layout() {
   return (
