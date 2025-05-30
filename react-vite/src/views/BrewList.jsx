@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BrewListItem from "@components/BrewListItem";
+import BrewListItem from "@components";
 
 function BrewList(){
     const [brews, setBrews] = useState([]);

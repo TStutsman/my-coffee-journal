@@ -1,5 +1,5 @@
 import { BrewForm, BrewList, CoffeeForm, CoffeeList, Home } from '@views'
-import Navigation from '@components/Navigation'
+import { Navigation } from '@components'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 
