@@ -1,11 +1,7 @@
-import Home from '@views/Home'
+import { BrewForm, BrewList, CoffeeForm, CoffeeList, Home } from '@views'
 import Navigation from '@components/Navigation'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
-import BrewForm from '@views/BrewForm'
-import BrewList from '@views/BrewList'
-import CoffeeForm from '@views/CoffeeForm'
-import CoffeeList from '@views/CoffeeList'
 
 function Layout() {
   return (
