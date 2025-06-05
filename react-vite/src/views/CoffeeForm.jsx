@@ -9,12 +9,13 @@ function CoffeeForm() {
     const [ process, setProcess ] = useState("");
     const [ roaster, setRoaster ] = useState("");
     const [ roastProfile, setRoastProfile ] = useState("");
+    const [ color, setColor ] = useState("")
 
     const handleSubmit = e => {
         e.preventDefault()
 
         const coffee = {
-            country, region, farm, varietal, process, roaster, roastProfile
+            country, region, farm, varietal, process, roaster, roastProfile, color
         }
         
         fetch('/api/coffees/', {
@@ -82,6 +83,14 @@ function CoffeeForm() {
                     type="text"
                     value={roastProfile}
                     onChange={(e) => setRoastProfile(e.target.value)}
+                />
+            </label>
+            <label>
+                Color:
+                <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => setColor(e.target.value)}
                 />
             </label>
             <button type="submit">Submit</button>

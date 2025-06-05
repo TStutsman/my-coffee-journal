@@ -24,6 +24,7 @@ class Coffee(db.Model):
     process = db.Column(db.String(50), nullable=False)
     roaster = db.Column(db.String(50), nullable=False)
     roast_profile = db.Column(db.String(25))
+    color = db.Column(db.String(7))
 
     brews = db.relationship('Brew', back_populates='coffee')
     notes = db.relationship('FlavorNote', secondary='coffees_flavor_notes', back_populates='coffees')
@@ -38,6 +39,7 @@ class Coffee(db.Model):
             "process": self.process,
             "roaster": self.roaster,
             "roast_profile": self.roast_profile,
+            "color": self.color
         }
     
     def __repr__(self):
