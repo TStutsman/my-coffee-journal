@@ -9,6 +9,11 @@ def all_brews():
     brews = Brew.query.all()
     return jsonify([brew.to_dict() for brew in brews])
 
+@brews.get('/<int:id>')
+def get_brew(id):
+    brew:Brew = Brew.query.get(id)
+    return brew.to_dict()
+
 @brews.post('/')
 def save_brew():
     data = format_request(request.json)
@@ -18,6 +23,22 @@ def save_brew():
     db.session.commit()
 
     # Gets the saved instance from the db
+    db.session.refresh(brew)
+
+    return brew.to_dict()
+
+@brews.put('/<int:id>')
+def update_brew(id):
+    data = format_request(request.json)
+
+    brew:Brew = Brew.query.get(id)
+    for key in data:
+        if key == 'coffee':
+            continue
+        brew[key] = data[key]
+    
+    db.session.commit()
+
     db.session.refresh(brew)
 
     return brew.to_dict()

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './BrewForm.css';
 
 function BrewForm() {
     const navigate = useNavigate();
+
+    const { brewId } = useParams();
 
     const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
@@ -22,6 +24,18 @@ function BrewForm() {
             }))
         });
     }, [])
+
+    useEffect(() => {
+        if(brewId) {
+            fetch(`/api/brews/${brewId}`).then(res => res.json()).then(brew => {
+                setCoffeeId(brew.coffeeId);
+                setGrinder(brew.grinder);
+                setGrindSize(brew.grindSize);
+                setBrewer(brew.brewer);
+                setRatio(brew.ratio);
+            });
+        }
+    }, [brewId]);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -73,7 +87,7 @@ function BrewForm() {
                 Ratio: 1/
                 <input type="number" min={0} step={0.0001} value={ratio} onChange={e => setRatio(+e.target.value)}/>
             </label>
-            <button type="submit">Add Brew</button>
+            <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
         </form>
     );
 }
