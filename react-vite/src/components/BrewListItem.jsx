@@ -10,6 +10,14 @@ function BrewListItem({ brew }) {
 
     const navigate = useNavigate();
 
+    const deleteBrew = () => {
+        fetch(`/api/brews/${id}`,
+            {
+                method: 'DELETE'
+            }
+        ).then(res => console.log(res.status));
+    }
+
     return (
         <div className="brew-list-item">
             <p>Coffee: {coffee}</p>
@@ -18,7 +26,8 @@ function BrewListItem({ brew }) {
             <p>Brewer: {brewer}</p>
             <p>Ratio: 1/{pRatio}</p>
 
-            <button onClick={() => navigate(`/brews/update/${id}`)}>Edit</button>
+            <button onClick={() => navigate(`/brews/edit/${id}`)}>Edit</button>
+            <button onClick={deleteBrew}>Delete</button>
         </div>
     );
 }

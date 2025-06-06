@@ -42,3 +42,12 @@ def update_brew(id):
     db.session.refresh(brew)
 
     return brew.to_dict()
+
+@brews.delete('/<int:id>')
+def delete_brew(id):
+    brew:Brew = Brew.query.get(id)
+
+    db.session.delete(brew)
+    db.session.commit()
+
+    return "", 204

@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <BrewForm />
       },
       {
-        path: '/brews/update/:brewId',
+        path: '/brews/edit/:brewId',
         element: <BrewForm />
       }
       
