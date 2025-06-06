@@ -26,7 +26,7 @@ class Coffee(db.Model):
     roast_profile = db.Column(db.String(25))
     color = db.Column(db.String(7))
 
-    brews = db.relationship('Brew', back_populates='coffee')
+    brews = db.relationship('Brew', back_populates='coffee', cascade='all, delete-orphan')
     notes = db.relationship('FlavorNote', secondary='coffees_flavor_notes', back_populates='coffees')
     
     def to_dict(self):

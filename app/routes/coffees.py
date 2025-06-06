@@ -6,8 +6,13 @@ coffees = Blueprint('coffees', __name__)
 
 @coffees.get('/')
 def all_coffees():
-    coffees = Coffee.query.all()
+    coffees:list[Coffee] = Coffee.query.all()
     return jsonify([coffee.to_dict() for coffee in coffees])
+
+@coffees.get('/<int:id>')
+def get_coffee(id):
+    coffee:Coffee = Coffee.query.get(id)
+    return coffee.to_dict()
 
 @coffees.post('/')
 def save_coffee():
@@ -21,3 +26,26 @@ def save_coffee():
     db.session.refresh(coffee)
 
     return coffee.to_dict()
+
+@coffees.put('/<int:id>')
+def edit_coffee(id):
+    data = format_request(request.json)
+
+    coffee:Coffee = Coffee.query.get(id)
+
+    for key in data:
+        setattr(coffee, key, data[key])
+
+    db.session.commit()
+    db.session.refresh(coffee)
+
+    return coffee.to_dict()
+
+@coffees.delete('/<int:id>')
+def delete_coffee(id):
+    coffee = Coffee.query.get(id)
+
+    db.session.delete(coffee)
+    db.session.commit()
+
+    return "", 204

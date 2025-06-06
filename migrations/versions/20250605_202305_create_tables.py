@@ -1,8 +1,8 @@
-"""create tables coffees, brews, flavor_notes
+"""create_tables
 
-Revision ID: 30e05a46cf1a
+Revision ID: 42efcbfd9f9e
 Revises: 
-Create Date: 2024-04-05 19:32:11.881433
+Create Date: 2025-06-05 20:23:05.903257
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '30e05a46cf1a'
+revision = '42efcbfd9f9e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,7 @@ def upgrade():
     sa.Column('process', sa.String(length=50), nullable=False),
     sa.Column('roaster', sa.String(length=50), nullable=False),
     sa.Column('roast_profile', sa.String(length=25), nullable=True),
+    sa.Column('color', sa.String(length=7), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('flavor_notes',

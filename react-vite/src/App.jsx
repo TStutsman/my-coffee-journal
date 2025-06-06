@@ -29,6 +29,10 @@ const router = createBrowserRouter([
         element: <CoffeeForm />
       },
       {
+        path: '/coffees/edit/:coffeeId',
+        element: <CoffeeForm />
+      },
+      {
         path: '/brews',
         element: <BrewList />
       },
