@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import './CoffeeForm.css';
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 function CoffeeForm() {
+    const navigate = useNavigate();
     const { coffeeId } = useParams();
 
     const [ country, setCountry ] = useState("");
@@ -27,7 +28,8 @@ function CoffeeForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(coffee)
-        });
+        })
+        .then(res => res.ok && navigate('/coffees'));
     }
 
     const updateCoffee = e => {
@@ -43,7 +45,7 @@ function CoffeeForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(coffee)
-        });
+        }).then(res => res.ok && navigate('/coffees'));
     }
 
     useEffect(() => {
