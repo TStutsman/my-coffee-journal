@@ -12,3 +12,12 @@
 .coffee-list-item > p {
     margin: 5px auto;
 }
+
+.delete-coffee-button {
+    align-self: flex-end;
+    background-color: #612121;
+}
+
+.trash-icon {
+    height: 12px;
+}
