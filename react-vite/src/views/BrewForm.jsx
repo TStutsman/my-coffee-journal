@@ -37,7 +37,7 @@ function BrewForm() {
         }
     }, [brewId]);
 
-    const handleSubmit = async e => {
+    const submitNew = async e => {
         e.preventDefault();
 
         const new_brew = {
@@ -58,10 +58,32 @@ function BrewForm() {
         }
     }
 
+    const submitUpdate = async e => {
+        e.preventDefault();
+
+        const brew_update = {
+            coffeeId, grinder, grindSize, brewer, ratio
+        }
+
+        let status;
+        await fetch(`/api/brews/${brewId}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(brew_update)
+        }).then(res => status = res.status);
+
+        if(status && status < 400) {
+            console.log(brew_update);
+            navigate('/brews');
+        }
+    }
+
     if(coffees.length < 1) return null;
 
     return (
-        <form id="brew-form" onSubmit={handleSubmit}>
+        <form id="brew-form" onSubmit={brewId ? submitUpdate : submitNew}>
             <label>
                 Coffee:
                 <select value={coffeeId} onChange={e => setCoffeeId(+e.target.value)}>

@@ -35,7 +35,7 @@ def update_brew(id):
     for key in data:
         if key == 'coffee':
             continue
-        brew[key] = data[key]
+        setattr(brew, key, data[key])
     
     db.session.commit()
 
