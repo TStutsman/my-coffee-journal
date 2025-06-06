@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import './CoffeeForm.css';
-import { useParams, useNavigate } from "react-router";
 
 function CoffeeForm() {
     const navigate = useNavigate();
@@ -15,32 +15,18 @@ function CoffeeForm() {
     const [ roastProfile, setRoastProfile ] = useState("");
     const [ color, setColor ] = useState("")
 
-    const createCoffee = e => {
+    const handleSubmit = e => {
         e.preventDefault()
 
         const coffee = {
             country, region, farm, varietal, process, roaster, roastProfile, color
         }
         
-        fetch('/api/coffees/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(coffee)
-        })
-        .then(res => res.ok && navigate('/coffees'));
-    }
+        const url = coffeeId ? `/api/coffees/${coffeeId}` : '/api/coffees';
+        const method = coffeeId ? 'PUT' : 'POST';
 
-    const updateCoffee = e => {
-        e.preventDefault()
-
-        const coffee = {
-            country, region, farm, varietal, process, roaster, roastProfile, color
-        }
-        
-        fetch(`/api/coffees/${coffeeId}`, {
-            method: 'PUT',
+        fetch(url, {
+            method,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -66,7 +52,7 @@ function CoffeeForm() {
     }, [coffeeId]);
 
     return (
-        <form id="coffee-form" method="post" onSubmit={coffeeId ? updateCoffee : createCoffee}>
+        <form id="coffee-form" method="post" onSubmit={handleSubmit}>
             <label>
                 Country:
                 <input 
