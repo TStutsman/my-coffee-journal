@@ -52,73 +52,76 @@ function CoffeeForm() {
     }, [coffeeId]);
 
     return (
-        <form id="coffee-form" method="post" onSubmit={handleSubmit}>
-            <label>
-                Country:
-                <input 
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                />
-            </label>
-            <label>
-                Region:
-                <input 
-                    type="text"
-                    value={region}
-                    onChange={(e) => setRegion(e.target.value)}
-                />
-            </label>
-            <label>
-                Farm:
-                <input 
-                    type="text"
-                    value={farm}
-                    onChange={(e) => setFarm(e.target.value)}
-                />
-            </label>
-            <label>
-                Varietal:
-                <input 
-                    type="text"
-                    value={varietal}
-                    onChange={(e) => setVarietal(e.target.value)}
-                />
-            </label>
-            <label>
-                Process:
-                <input 
-                    type="text"
-                    value={process}
-                    onChange={(e) => setProcess(e.target.value)}
-                />
-            </label>
-            <label>
-                Roaster:
-                <input
-                    type="text"
-                    value={roaster}
-                    onChange={e => setRoaster(e.target.value)}
-                />
-            </label>
-            <label>
-                Roast Profile:
-                <input 
-                    type="text"
-                    value={roastProfile}
-                    onChange={(e) => setRoastProfile(e.target.value)}
-                />
-            </label>
-            <label>
-                Color:
-                <input
-                    type="color"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+        <div className="form-container">
+            <form id="coffee-form" method="post" onSubmit={handleSubmit}>
+                <h2>Add A Coffee</h2>
+                <label>
+                    Country:
+                    <input 
+                        type="text"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Region:
+                    <input 
+                        type="text"
+                        value={region}
+                        onChange={(e) => setRegion(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Farm:
+                    <input 
+                        type="text"
+                        value={farm}
+                        onChange={(e) => setFarm(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Varietal:
+                    <input 
+                        type="text"
+                        value={varietal}
+                        onChange={(e) => setVarietal(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Process:
+                    <input 
+                        type="text"
+                        value={process}
+                        onChange={(e) => setProcess(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Roaster:
+                    <input
+                        type="text"
+                        value={roaster}
+                        onChange={e => setRoaster(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Roast Profile:
+                    <input 
+                        type="text"
+                        value={roastProfile}
+                        onChange={(e) => setRoastProfile(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Color:
+                    <input
+                        type="color"
+                        value={color}
+                        onChange={(e) => setColor(e.target.value)}
+                    />
+                </label>
+                <button type="submit">Add</button>
+            </form>
+        </div>
     )
 }
 

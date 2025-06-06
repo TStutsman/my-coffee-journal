@@ -1,9 +1,33 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
 #coffee-form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start
+    align-items: flex-start;
+
+    padding: 20px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+}
+
+#coffee-form h2 {
+    margin: 0;
 }
 
 #coffee-form input {
     margin: 5px 10px;
+}
+
+#coffee-form button {
+    align-self: flex-end;
+    background-color: #174217;
+    transition: background-color .2s ease;
+}
+
+#coffee-form button:hover {
+    background-color: #174e17;
 }
