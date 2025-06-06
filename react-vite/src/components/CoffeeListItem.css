@@ -1,5 +1,8 @@
 .coffee-list-item {
-    width: 400px;
+    width: 350px;
+    height: 20px;
+    overflow-y: hidden;
+
     margin: 10px auto;
     padding-bottom: 5px;
 
@@ -7,6 +10,13 @@
     border-radius: 8px;
 
     background-color: #3e3d3d;
+
+    transition: all .3s ease;
+}
+
+.coffee-list-item.show-item {
+    height: 250px;
+    overflow-y: auto;
 }
 
 .coffee-list-item > p {

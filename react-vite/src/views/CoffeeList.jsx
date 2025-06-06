@@ -4,15 +4,21 @@ import './CoffeeList.css';
 
 function CoffeeList(){
     const [coffees, setCoffees] = useState([]);
+    const [focusedCoffee, setFocusedCoffee] = useState(0);
 
     useEffect(() => {
         fetch('/api/coffees/').then(res => res.json()).then(coffees => setCoffees(coffees));
     }, [])
 
     return (
-        <div className="brew-list">
-            { coffees.map(coffee => (
-                <CoffeeListItem key={coffee.id} coffee={coffee}/>
+        <div className="coffee-list">
+            { coffees.map((coffee, index) => (
+                <CoffeeListItem 
+                    key={coffee.id} 
+                    coffee={coffee} 
+                    show={focusedCoffee == index} 
+                    focusCoffee={() => setFocusedCoffee(index)}
+                />
             ))}
         </div>
     );

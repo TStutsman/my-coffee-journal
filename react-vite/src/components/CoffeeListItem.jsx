@@ -1,8 +1,19 @@
 import { useNavigate } from 'react-router'
 import './CoffeeListItem.css'
+import { useEffect, useState } from 'react';
 
-function CoffeeListItem({ coffee }){
+function CoffeeListItem({ coffee, show, focusCoffee }){
     const navigate = useNavigate();
+
+    const [itemClass, setItemClass] = useState("coffee-list-item");
+
+    useEffect(() => {
+        if(show) {
+            setItemClass("coffee-list-item show-item");
+        } else {
+            setItemClass("coffee-list-item");
+        }
+    }, [show])
 
     const deleteCoffee = () => {
         fetch(`/api/coffees/${coffee.id}`,
@@ -12,8 +23,10 @@ function CoffeeListItem({ coffee }){
         ).then(res => console.log(res.status));
     }
 
+    const showItem = () => focusCoffee();
+
     return (
-        <div className="coffee-list-item" style={{backgroundColor: coffee.color}}>
+        <div className={itemClass} style={{backgroundColor: coffee.color}} onTouchStart={showItem} onMouseOver={showItem}>
             <p>Country: {coffee.country}</p>
             {coffee.region &&
             <p>Region: {coffee.region || 'unknown'}</p>
