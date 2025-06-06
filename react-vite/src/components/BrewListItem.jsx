@@ -18,7 +18,7 @@ function BrewListItem({ brew }) {
             <p>Brewer: {brewer}</p>
             <p>Ratio: 1/{pRatio}</p>
 
-            <button onClick={() => navigate(`/brews/update/${id}`)}>update</button>
+            <button onClick={() => navigate(`/brews/update/${id}`)}>Edit</button>
         </div>
     );
 }

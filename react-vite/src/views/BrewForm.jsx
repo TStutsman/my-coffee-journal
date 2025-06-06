@@ -30,7 +30,7 @@ function BrewForm() {
             fetch(`/api/brews/${brewId}`).then(res => res.json()).then(brew => {
                 setCoffeeId(brew.coffeeId);
                 setGrinder(brew.grinder);
-                setGrindSize(brew.grindSize);
+                setGrindSize(brew.grind_size);
                 setBrewer(brew.brewer);
                 setRatio(brew.ratio);
             });
