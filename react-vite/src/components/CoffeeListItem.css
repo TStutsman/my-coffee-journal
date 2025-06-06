@@ -1,9 +1,12 @@
 .coffee-list-item {
-    width: 350px;
-    height: 20px;
-    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-    margin: 10px auto;
+    width: 350px;
+    height: 200px;
+
+    margin: 10px auto -185px;
     padding-bottom: 5px;
 
     border: 1px solid white;
@@ -11,23 +14,57 @@
 
     background-color: #3e3d3d;
 
-    transition: all .3s ease;
+    transition: all .5s ease;
+}
+
+.coffee-list-item > * {
+    padding: 0 10px;
 }
 
 .coffee-list-item.show-item {
-    height: 250px;
-    overflow-y: auto;
+    margin-bottom: 10px;
 }
 
-.coffee-list-item > p {
-    margin: 5px auto;
+.coffee-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    padding: 10px 10px 0;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
 }
 
-.delete-coffee-button {
-    align-self: flex-end;
-    background-color: #612121;
+.coffee-title > * {
+    margin: 0;
 }
 
-.trash-icon {
-    height: 12px;
+.coffee-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.coffee-content p {
+    margin: 0;
+}
+
+.coffee-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.coffee-buttons > button {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.87);
+    padding: 5px 10px;
+}
+
+.coffee-buttons > button:hover, .coffee-buttons > button:active {
+    color: rgba(255, 255, 255, 0.95)
+}
+
+.trash-icon, .edit-icon {
+    height: 16px;
 }
