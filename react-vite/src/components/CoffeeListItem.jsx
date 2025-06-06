@@ -13,7 +13,7 @@ function CoffeeListItem({ coffee }){
     }
 
     return (
-        <div className="coffee-list-item" style={{borderColor: coffee.color}}>
+        <div className="coffee-list-item" style={{backgroundColor: coffee.color}}>
             <p>Country: {coffee.country}</p>
             {coffee.region &&
             <p>Region: {coffee.region || 'unknown'}</p>
