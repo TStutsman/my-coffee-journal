@@ -1,6 +1,6 @@
-import { BrewForm, BrewList, CoffeeForm, CoffeeList, Home } from '@views'
 import { Navigation } from '@components'
-import { ModalProvider, Modal } from '@context'
+import { Modal, ModalProvider } from '@context'
+import { BrewList, CoffeeList, Home } from '@views'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 
@@ -29,24 +29,8 @@ const router = createBrowserRouter([
         element: <CoffeeList />
       },
       {
-        path: '/coffees/new',
-        element: <CoffeeForm />
-      },
-      {
-        path: '/coffees/edit/:coffeeId',
-        element: <CoffeeForm />
-      },
-      {
         path: '/brews',
         element: <BrewList />
-      },
-      {
-        path: '/brews/new',
-        element: <BrewForm />
-      },
-      {
-        path: '/brews/edit/:brewId',
-        element: <BrewForm />
       }
       
     ]

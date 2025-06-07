@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useModal } from '@context';
 import './CoffeeForm.css';
 
-function CoffeeForm() {
-    const navigate = useNavigate();
-    const { coffeeId } = useParams();
+function CoffeeForm({ coffeeId }) {
+    const { closeModal } = useModal();
 
     const [ country, setCountry ] = useState("");
     const [ region, setRegion ] = useState("");
@@ -31,7 +30,7 @@ function CoffeeForm() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(coffee)
-        }).then(res => res.ok && navigate('/coffees'));
+        }).then(res => res.ok && closeModal());
     }
 
     useEffect(() => {
@@ -53,22 +52,15 @@ function CoffeeForm() {
 
     return (
         <div className="form-container">
-            <form id="coffee-form" method="post" onSubmit={handleSubmit}>
-                <h2>Add A Coffee</h2>
+            <form id="coffee-form" onSubmit={handleSubmit}>
+                <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
+
                 <label>
-                    Country:
-                    <input 
+                    Roaster:
+                    <input
                         type="text"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Region:
-                    <input 
-                        type="text"
-                        value={region}
-                        onChange={(e) => setRegion(e.target.value)}
+                        value={roaster}
+                        onChange={e => setRoaster(e.target.value)}
                     />
                 </label>
                 <label>
@@ -79,6 +71,24 @@ function CoffeeForm() {
                         onChange={(e) => setFarm(e.target.value)}
                     />
                 </label>
+
+                <label>
+                    Region:
+                    <input 
+                        type="text"
+                        value={region}
+                        onChange={(e) => setRegion(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Country:
+                    <input 
+                        type="text"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
+                </label>
+                
                 <label>
                     Varietal:
                     <input 
@@ -96,14 +106,6 @@ function CoffeeForm() {
                     />
                 </label>
                 <label>
-                    Roaster:
-                    <input
-                        type="text"
-                        value={roaster}
-                        onChange={e => setRoaster(e.target.value)}
-                    />
-                </label>
-                <label>
                     Roast Profile:
                     <input 
                         type="text"
@@ -114,6 +116,7 @@ function CoffeeForm() {
                 <label>
                     Color:
                     <input
+                        id="coffee-color-picker"
                         type="color"
                         value={color}
                         onChange={(e) => setColor(e.target.value)}

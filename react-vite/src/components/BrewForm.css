@@ -1,7 +1,9 @@
 #brew-form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start
+    align-items: flex-start;
+
+    background-color: #323238;
 }
 
 #brew-form input {

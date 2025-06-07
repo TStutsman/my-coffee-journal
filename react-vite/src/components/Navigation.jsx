@@ -1,7 +1,6 @@
 import { useModal } from '@context';
 import { Link, NavLink } from 'react-router-dom';
-import CoffeeForm from '@views/CoffeeForm';
-import BrewForm from '@views/BrewForm';
+import { BrewForm, CoffeeForm } from '@components';
 import './Navigation.css';
 
 function Navigation() {
