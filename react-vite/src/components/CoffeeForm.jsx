@@ -12,7 +12,7 @@ function CoffeeForm({ coffeeId }) {
     const [ process, setProcess ] = useState("");
     const [ roaster, setRoaster ] = useState("");
     const [ roastProfile, setRoastProfile ] = useState("");
-    const [ color, setColor ] = useState("")
+    const [ color, setColor ] = useState("#141414")
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -52,13 +52,14 @@ function CoffeeForm({ coffeeId }) {
 
     return (
         <div className="form-container">
-            <form id="coffee-form" onSubmit={handleSubmit}>
+            <form id="coffee-form" onSubmit={handleSubmit} style={{backgroundColor: color}}>
                 <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
 
                 <label>
                     Roaster:
                     <input
                         type="text"
+                        placeholder="Roaster"
                         value={roaster}
                         onChange={e => setRoaster(e.target.value)}
                     />
@@ -67,6 +68,7 @@ function CoffeeForm({ coffeeId }) {
                     Farm:
                     <input 
                         type="text"
+                        placeholder="Farm"
                         value={farm}
                         onChange={(e) => setFarm(e.target.value)}
                     />
@@ -76,6 +78,7 @@ function CoffeeForm({ coffeeId }) {
                     Region:
                     <input 
                         type="text"
+                        placeholder="Region"
                         value={region}
                         onChange={(e) => setRegion(e.target.value)}
                     />
@@ -84,6 +87,7 @@ function CoffeeForm({ coffeeId }) {
                     Country:
                     <input 
                         type="text"
+                        placeholder="Country"
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
                     />
@@ -93,6 +97,7 @@ function CoffeeForm({ coffeeId }) {
                     Varietal:
                     <input 
                         type="text"
+                        placeholder="Varietal"
                         value={varietal}
                         onChange={(e) => setVarietal(e.target.value)}
                     />
@@ -101,6 +106,7 @@ function CoffeeForm({ coffeeId }) {
                     Process:
                     <input 
                         type="text"
+                        placeholder="Process"
                         value={process}
                         onChange={(e) => setProcess(e.target.value)}
                     />
@@ -109,6 +115,7 @@ function CoffeeForm({ coffeeId }) {
                     Roast Profile:
                     <input 
                         type="text"
+                        placeholder="Roast Profile"
                         value={roastProfile}
                         onChange={(e) => setRoastProfile(e.target.value)}
                     />
@@ -122,7 +129,7 @@ function CoffeeForm({ coffeeId }) {
                         onChange={(e) => setColor(e.target.value)}
                     />
                 </label>
-                <button type="submit">Add</button>
+                <button type="submit">{ coffeeId ? 'Update' : 'Add' }</button>
             </form>
         </div>
     )

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import { CoffeeListItem } from "@components";
+import { useModal } from '@context';
+import { useEffect, useState } from "react";
 import './CoffeeList.css';
 
 function CoffeeList(){
@@ -8,7 +9,7 @@ function CoffeeList(){
 
     useEffect(() => {
         fetch('/api/coffees/').then(res => res.json()).then(coffees => setCoffees(coffees));
-    }, [])
+    }, []);
 
     return (
         <div className="coffee-list">
