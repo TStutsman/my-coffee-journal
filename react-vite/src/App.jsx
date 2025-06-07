@@ -1,13 +1,17 @@
 import { BrewForm, BrewList, CoffeeForm, CoffeeList, Home } from '@views'
 import { Navigation } from '@components'
+import { ModalProvider, Modal } from '@context'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 
 function Layout() {
   return (
     <>
-      <Navigation />
-      <Outlet />
+      <ModalProvider>
+        <Navigation />
+        <Outlet />
+        <Modal />
+      </ModalProvider>
     </>
   )
 }

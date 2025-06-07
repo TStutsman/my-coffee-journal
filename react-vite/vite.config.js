@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => ({
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
       '@views': resolve(__dirname, './src/views'),
+      '@context': resolve(__dirname, './src/context'),
     }
   }
 }));
