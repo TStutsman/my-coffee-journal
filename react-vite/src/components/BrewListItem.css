@@ -1,13 +1,49 @@
 .brew-list-item {
     width: 400px;
     margin: 10px auto;
-    padding-bottom: 5px;
+    padding: 15px;
 
-    border-top: 1px solid white;
+    border: 1px solid var(--cream);
+    border-radius: 12px;
 
-    background-color: #3e3d3d;
+    background-color: var(--mocha);
 }
 
-.brew-list-item > p {
-    margin: 5px auto;
+.brew-title {
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--cream);
+}
+
+.brew-list-item p, .brew-list-item h3 {
+    margin: 0;
+}
+
+.brew-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 5px 0;
+}
+
+.brew-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.brew-buttons > button {
+    padding: 5px 10px;
+    color: rgba(246, 235, 218, .7);
+    background-color: transparent;
+    border: none;
+
+    transition: color .2s ease;
+}
+
+.brew-buttons > button:hover, .brew-buttons > button:active, .coffee-buttons > button:focus {
+    color: #f6ebda;
+    outline: none;
+    border: none;
 }

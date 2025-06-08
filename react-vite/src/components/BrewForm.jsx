@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useModal } from '@context';
 import './BrewForm.css';
 
-function BrewForm() {
-    const navigate = useNavigate();
-
-    const { brewId } = useParams();
+function BrewForm({ brewId }) {
+    const { closeModal } = useModal();
 
     const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
@@ -19,7 +17,7 @@ function BrewForm() {
             setCoffees(coffees.map(coffee => {
                 return {
                     id: coffee.id,
-                    label: `${coffee.roaster} - ${coffee.country}`
+                    label: `${coffee.roaster} - ${coffee.farm}`
                 }
             }))
         });
@@ -27,65 +25,43 @@ function BrewForm() {
 
     useEffect(() => {
         if(brewId) {
-            fetch(`/api/brews/${brewId}`).then(res => res.json()).then(brew => {
-                setCoffeeId(brew.coffeeId);
-                setGrinder(brew.grinder);
-                setGrindSize(brew.grind_size);
-                setBrewer(brew.brewer);
-                setRatio(brew.ratio);
+            fetch(`/api/brews/${brewId}`)
+            .then(res => res.json())
+            .then(data => {
+                setCoffeeId(data.coffee.id);
+                setGrinder(data.grinder);
+                setGrindSize(data.grind_size);
+                setBrewer(data.brewer);
+                setRatio(data.ratio);
             });
         }
     }, [brewId]);
 
-    const submitNew = async e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        const new_brew = {
+        const brew = {
             coffeeId, grinder, grindSize, brewer, ratio
         }
 
-        await fetch('/api/brews/', {
-            method: 'POST',
+        const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
+        fetch(url, {
+            method: brewId ? 'PUT' : 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(new_brew)
-        }).then(res => res.json()).then(brew => Object.assign(new_brew, brew));
-
-        if(new_brew.id) {
-            console.log(new_brew);
-            navigate('/brews');
-        }
-    }
-
-    const submitUpdate = async e => {
-        e.preventDefault();
-
-        const brew_update = {
-            coffeeId, grinder, grindSize, brewer, ratio
-        }
-
-        let status;
-        await fetch(`/api/brews/${brewId}`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(brew_update)
-        }).then(res => status = res.status);
-
-        if(status && status < 400) {
-            console.log(brew_update);
-            navigate('/brews');
-        }
+            body: JSON.stringify(brew)
+        })
+        .then(res => res.ok ? closeModal() : console.log('error response:', res));
     }
 
     if(coffees.length < 1) return null;
 
     return (
-        <form id="brew-form" onSubmit={brewId ? submitUpdate : submitNew}>
-            <h3>Add a brew</h3>
+        <form id="brew-form" onSubmit={handleSubmit}>
+            <h3>{brewId ? 'Edit': 'Add a'} Brew</h3>
             <label>
+                <span>Coffee</span>
                 <select 
                     value={coffeeId} 
                     onChange={e => setCoffeeId(+e.target.value)}
@@ -102,7 +78,7 @@ function BrewForm() {
             </label>
             <label>
                 <span>Grind Size</span>
-                <input type="number" min={0} step={0.01} value={grindSize} onChange={e => setGrindSize(e.target.value)}/>
+                <input type="number" min={0} step={0.25} value={grindSize} onChange={e => setGrindSize(e.target.value)}/>
             </label>
             <label>
                 <span>Brewer</span>

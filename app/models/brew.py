@@ -16,7 +16,7 @@ class Brew(db.Model):
         return {
             "id": self.id,
             "coffee_id": self.coffee_id,
-            "coffee": self.coffee.country + ' - ' + self.coffee.roaster,
+            "coffee": self.coffee.to_dict(),
             "grinder": self.grinder,
             "grind_size": self.grind_size,
             "brewer": self.brewer,
