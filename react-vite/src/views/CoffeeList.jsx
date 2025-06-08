@@ -1,5 +1,4 @@
 import { CoffeeListItem } from "@components";
-import { useModal } from '@context';
 import { useEffect, useState } from "react";
 import './CoffeeList.css';
 
