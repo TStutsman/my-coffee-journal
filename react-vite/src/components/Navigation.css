@@ -22,6 +22,24 @@ nav h1 {
     aspect-ratio: 1;
 }
 
+#new-coffee-icon {
+    height: 26px;
+    aspect-ratio: 1;
+}
+
+nav button {
+    color: #2d1e11;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+nav button:hover, nav button:active, nav button:focus {
+    color: #f6ebda;
+    border: none;
+    outline: none;
+}
+
 #brew-icon {
-    height: 20px;
+    height: 24px;
 }

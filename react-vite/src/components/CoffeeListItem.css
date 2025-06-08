@@ -7,10 +7,10 @@
     height: 200px;
 
     margin: 10px auto -185px;
-    padding-bottom: 5px;
+    padding:0 5px 5px;
 
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
+    border: 1px solid #f6ebda;
+    border-radius: 12px;
 
     background-color: #3e3d3d;
 
@@ -57,7 +57,7 @@
 
 .coffee-buttons > button {
     padding: 5px 10px;
-    color: rgba(255, 255, 255, 0.67);
+    color: rgba(246, 235, 218, .7);
     background-color: transparent;
     border: none;
 
@@ -65,7 +65,7 @@
 }
 
 .coffee-buttons > button:hover, .coffee-buttons > button:active, .coffee-buttons > button:focus {
-    color: rgba(255, 255, 255, 0.95);
+    color: #f6ebda;
     outline: none;
     border: none;
 }

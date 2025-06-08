@@ -84,9 +84,12 @@ function BrewForm() {
 
     return (
         <form id="brew-form" onSubmit={brewId ? submitUpdate : submitNew}>
+            <h3>Add a brew</h3>
             <label>
-                Coffee:
-                <select value={coffeeId} onChange={e => setCoffeeId(+e.target.value)}>
+                <select 
+                    value={coffeeId} 
+                    onChange={e => setCoffeeId(+e.target.value)}
+                >
                     <option value="" disabled>Select a coffee</option>
                     { coffees.map(coffee => (
                         <option key={coffee.id} value={coffee.id}>{coffee.label}</option>
@@ -94,19 +97,19 @@ function BrewForm() {
                 </select>
             </label>
             <label>
-                Grinder:
+                <span>Grinder</span>
                 <input type="text" value={grinder} onChange={e => setGrinder(e.target.value)}/>
             </label>
             <label>
-                Grind Size:
+                <span>Grind Size</span>
                 <input type="number" min={0} step={0.01} value={grindSize} onChange={e => setGrindSize(e.target.value)}/>
             </label>
             <label>
-                Brewer:
+                <span>Brewer</span>
                 <input type="text" value={brewer} onChange={e => setBrewer(e.target.value)}/>
             </label>
             <label>
-                Ratio: 1/
+                <span>Ratio 1/</span>
                 <input type="number" min={0} step={0.0001} value={ratio} onChange={e => setRatio(+e.target.value)}/>
             </label>
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
