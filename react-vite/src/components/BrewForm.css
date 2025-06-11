@@ -21,14 +21,13 @@
 
     position: relative;
     box-sizing: content-box;
-    padding: 10px 2px 4px;
+
     height: 16px;
     width: calc(100% - 4px);
+    padding: 10px 2px 4px;
     margin-bottom: 20px;
 
-    border-bottom: 1px solid #f6ebda;
-
-    transition: all .3s ease;
+    border-bottom: 1px solid var(--cream);
 }
 
 #brew-form label:has(select){
@@ -44,9 +43,8 @@
 
     font-size: 16px;
     line-height: 1;
-    color: rgba(246, 235, 218, .7);
 
-    background-color: #c5a487;
+    opacity: .7;
     transition: all .3s ease;
 }
 
@@ -54,7 +52,6 @@
     top: calc(-50% + 8px);
     left: 0;
     font-size: 12px;
-    color: #f6ebda;
 }
 
 #brew-form select {
@@ -72,7 +69,7 @@
     width: 100%;
 
     font-size: 16px;
-    color: #f6ebda;
+    color: var(--cream);
 
     background-color: transparent;
 }

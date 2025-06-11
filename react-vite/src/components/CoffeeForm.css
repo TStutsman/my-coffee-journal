@@ -1,19 +1,15 @@
-.form-container {
-    display: flex;
-    justify-content: center;
-}
-
 #coffee-form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 10px;
 
+    width: 300px;
     padding: 20px;
 
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--coffee);
     border-radius: 8px;
 
-    background-color: #323238;
+    transition: background-color .3s ease;
 }
 
 #coffee-form h2 {
@@ -21,55 +17,66 @@
 }
 
 #coffee-form label {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    box-sizing: content-box;
+
+    height: 16px;
+    width: calc(100% - 10px);
+    padding: 10px 2px 4px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid var(--cream);
+}
+
+#coffee-form label:has(#color-picker){
+    border-bottom: none;
+}
+
+#coffee-form label > span {
+    position: absolute;
+    top: 8px;
+    left: 2px;
+
     line-height: 1;
-    margin: 5px 0;
+    font-size: 16px;
+
+    opacity: .7;
+    transition: all .3s ease;
+}
+
+#coffee-form label > span:has(+ input:not([value=""])), #coffee-form label > span:has( + input:focus) {
+    top: calc(-50% + 8px);
+    left: 0;
+    font-size: 12px;
 }
 
 #coffee-form input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+
+    border: none;
     outline: none;
     cursor: text;
 
-    border: none;
-    border-bottom: 1px solid #d9d9d9;
+    height: 100%;
+    width: 100%;
 
-    color: #f6ebda;
+    font-size: 16px;
+    color: var(--cream);
     background-color: transparent;
-
-    margin-left: 10px;
-}
-
-#coffee-form input[type="color"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
-	width: 14px;
-	height: 14px;
-    padding: 0;
-	border: none;
-    cursor: pointer;
-}
-#coffee-form input[type="color"]::-webkit-color-swatch-wrapper {
-    padding: 0;
-}
-#coffee-form input[type="color"]::-webkit-color-swatch {
-    border-radius: 50%;
-    border: 1px solid #d9d9d9;
-}
-#coffee-form input[type="color"]::-moz-color-swatch {
-    border-radius: 50%;
-    border: 1px solid #d9d9d9;
 }
 
 #coffee-form button {
     align-self: flex-end;
-    background-color: #174217;
-    transition: background-color .2s ease;
+    background-color: var(--coffee);
+    transition: all .2s ease;
 }
 
 #coffee-form button:hover {
-    background-color: #174e17;
+    border-color: transparent;
+    opacity: .8;
 }

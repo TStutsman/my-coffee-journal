@@ -17,7 +17,7 @@ export default function ColorPicker({ color, setColor }) {
 
     return (
         <div id='color-picker'>
-            Color: 
+            <span>Card Color: </span>
             <div style={{backgroundColor: colors[1]}} onClick={() => pickColor(1)}></div>
             <div style={{backgroundColor: colors[2]}} onClick={() => pickColor(2)}></div>
             <div style={{backgroundColor: colors[3]}} onClick={() => pickColor(3)}></div>

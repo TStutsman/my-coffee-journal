@@ -13,7 +13,7 @@ function CoffeeForm({ coffeeId }) {
     const [ process, setProcess ] = useState("");
     const [ roaster, setRoaster ] = useState("");
     const [ roastProfile, setRoastProfile ] = useState("");
-    const [ color, setColor ] = useState("#141414")
+    const [ color, setColor ] = useState("#c5a487")
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -52,81 +52,72 @@ function CoffeeForm({ coffeeId }) {
     }, [coffeeId]);
 
     return (
-        <div className="form-container">
-            <form id="coffee-form" onSubmit={handleSubmit} style={{backgroundColor: color}}>
-                <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
+        <form id="coffee-form" onSubmit={handleSubmit} style={{backgroundColor: color}}>
+            <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
 
-                <label>
-                    Roaster:
-                    <input
-                        type="text"
-                        placeholder="Roaster"
-                        value={roaster}
-                        onChange={e => setRoaster(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Farm:
-                    <input 
-                        type="text"
-                        placeholder="Farm"
-                        value={farm}
-                        onChange={(e) => setFarm(e.target.value)}
-                    />
-                </label>
+            <label>
+                <span>Roaster</span>
+                <input
+                    type="text"
+                    value={roaster}
+                    onChange={e => setRoaster(e.target.value)}
+                />
+            </label>
+            <label>
+                <span>Farm</span>
+                <input 
+                    type="text"
+                    value={farm}
+                    onChange={(e) => setFarm(e.target.value)}
+                />
+            </label>
 
-                <label>
-                    Region:
-                    <input 
-                        type="text"
-                        placeholder="Region"
-                        value={region}
-                        onChange={(e) => setRegion(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Country:
-                    <input 
-                        type="text"
-                        placeholder="Country"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
-                </label>
-                
-                <label>
-                    Varietal:
-                    <input 
-                        type="text"
-                        placeholder="Varietal"
-                        value={varietal}
-                        onChange={(e) => setVarietal(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Process:
-                    <input 
-                        type="text"
-                        placeholder="Process"
-                        value={process}
-                        onChange={(e) => setProcess(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Roast Profile:
-                    <input 
-                        type="text"
-                        placeholder="Roast Profile"
-                        value={roastProfile}
-                        onChange={(e) => setRoastProfile(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <ColorPicker color={color} setColor={setColor} />
-                </label>
-                <button type="submit">{ coffeeId ? 'Update' : 'Add' }</button>
-            </form>
-        </div>
+            <label>
+                <span>Region</span>
+                <input 
+                    type="text"
+                    value={region}
+                    onChange={(e) => setRegion(e.target.value)}
+                />
+            </label>
+            <label>
+                <span>Country</span>
+                <input 
+                    type="text"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                />
+            </label>
+            
+            <label>
+                <span>Varietal</span>
+                <input 
+                    type="text"
+                    value={varietal}
+                    onChange={(e) => setVarietal(e.target.value)}
+                />
+            </label>
+            <label>
+                <span>Process</span>
+                <input 
+                    type="text"
+                    value={process}
+                    onChange={(e) => setProcess(e.target.value)}
+                />
+            </label>
+            <label>
+                <span>Roast Profile</span>
+                <input 
+                    type="text"
+                    value={roastProfile}
+                    onChange={(e) => setRoastProfile(e.target.value)}
+                />
+            </label>
+            <label>
+                <ColorPicker color={color} setColor={setColor} />
+            </label>
+            <button type="submit">{ coffeeId ? 'Update' : 'Add' }</button>
+        </form>
     )
 }
 

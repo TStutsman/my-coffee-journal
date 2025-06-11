@@ -3,6 +3,10 @@
     gap: 5px;
 }
 
+#color-picker > span {
+    opacity: .7;
+}
+
 #color-picker div {
     cursor: pointer;
 
@@ -19,5 +23,4 @@
 
 #color-picker input {
     display: none;
-    color: #61b0af;
 }
