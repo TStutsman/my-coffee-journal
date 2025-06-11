@@ -40,10 +40,10 @@ function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
                 <div>{coffee.farm}</div>
             </div>
             <div className='coffee-content'>
-                <p>{coffee.region}, {coffee.country}</p>
+                <p>{coffee.region ? coffee.region + ', ' : ""}{coffee.country}</p>
                 {coffee.varietal && <p>{coffee.varietal}</p>}
                 <p>{coffee.process} Process</p>
-                <p>{coffee.roast_profile}</p>
+                <p>{coffee.roast_profile} Roast</p>
             </div>
 
             <div className='coffee-buttons'>

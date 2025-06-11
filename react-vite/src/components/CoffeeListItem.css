@@ -1,20 +1,18 @@
 .coffee-list-item {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     width: 350px;
-    height: 200px;
+    height: 250px;
 
-    margin: 10px auto -185px;
-    padding:0 5px 5px;
+    margin: 10px auto calc(11px - 250px);
+    padding:0 10px 5px;
 
-    border: 1px solid #f6ebda;
-    border-radius: 12px;
+    border: 1px solid var(--cream);
+    border-radius: 10px;
 
-    background-color: #3e3d3d;
-
-    transition: all .5s ease;
+    transition: margin-bottom .45s cubic-bezier(0.5, 0.2, 0.6, .9);
 }
 
 .coffee-list-item > * {
@@ -30,7 +28,7 @@
     align-items: flex-end;
     justify-content: space-between;
 
-    padding: 10px 10px 0;
+    padding:10px 0 0;
     border-bottom: 1px solid;
     margin-bottom: 5px;
 }
@@ -43,31 +41,43 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 10px;
+
+    padding: 0;
 }
 
 .coffee-content p {
     margin: 0;
+    text-align: left;
+    text-wrap: pretty;
 }
 
 .coffee-buttons {
+    position: absolute;
+    bottom: 10px;
+
+    width: calc(100% - 20px);
+    padding: 0;
+
     display: flex;
     justify-content: space-between;
 }
 
 .coffee-buttons > button {
-    padding: 5px 10px;
-    color: rgba(246, 235, 218, .7);
-    background-color: transparent;
     border: none;
 
+    padding: 5px 10px;
+
+    color: rgba(246, 235, 218, .7);
+    background-color: transparent;
+    
     transition: color .2s ease;
 }
 
 .coffee-buttons > button:hover, .coffee-buttons > button:active, .coffee-buttons > button:focus {
-    color: #f6ebda;
-    outline: none;
     border: none;
+    outline: none;
+    color: var(--cream);
 }
 
 .trash-icon, .edit-icon {
