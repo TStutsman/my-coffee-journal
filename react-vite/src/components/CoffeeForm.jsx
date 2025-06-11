@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useModal } from '@context';
+import { ColorPicker } from '@components';
 import './CoffeeForm.css';
 
 function CoffeeForm({ coffeeId }) {
@@ -121,13 +122,7 @@ function CoffeeForm({ coffeeId }) {
                     />
                 </label>
                 <label>
-                    Color:
-                    <input
-                        id="coffee-color-picker"
-                        type="color"
-                        value={color}
-                        onChange={(e) => setColor(e.target.value)}
-                    />
+                    <ColorPicker color={color} setColor={setColor} />
                 </label>
                 <button type="submit">{ coffeeId ? 'Update' : 'Add' }</button>
             </form>

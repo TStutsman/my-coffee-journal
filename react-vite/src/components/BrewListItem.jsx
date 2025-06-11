@@ -41,7 +41,7 @@ function BrewListItem({ brew:initialBrew }) {
                 <p>{brew.coffee.farm}</p>
             </div>
             <div className='brew-content'>
-                <p>Setting '{pGrindSize}' on a {brew.grinder}</p>
+                <p>Setting &apos;{pGrindSize}&apos; on a {brew.grinder}</p>
                 <p>{brew.brewer}</p>
                 <p>1/{pRatio} Ratio</p>
 

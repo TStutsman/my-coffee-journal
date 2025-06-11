@@ -1,6 +1,6 @@
 import { Navigation } from '@components'
 import { Modal, ModalProvider } from '@context'
-import { BrewList, CoffeeList, Home } from '@views'
+import { BrewList, CoffeeList } from '@views'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <CoffeeList />
       },
       {
         path: '/coffees',

@@ -1,0 +1,23 @@
+#color-picker {
+    display: flex;
+    gap: 5px;
+}
+
+#color-picker div {
+    cursor: pointer;
+
+    height: 16px;
+    width: 16px;
+    
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+}
+
+#color-picker div:hover {
+    outline: 1px solid var(--coffee);
+}
+
+#color-picker input {
+    display: none;
+    color: #61b0af;
+}
