@@ -1,13 +1,15 @@
 #color-picker {
     display: flex;
+    align-items: center;
     gap: 5px;
 }
 
-#color-picker > span {
+#color-picker > span:first-of-type {
     opacity: .7;
+    margin-right: 8px;
 }
 
-#color-picker div {
+.pick-color {
     cursor: pointer;
 
     height: 16px;
@@ -17,7 +19,7 @@
     border-radius: 50%;
 }
 
-#color-picker div:hover {
+.pick-color:hover {
     outline: 1px solid var(--coffee);
 }
 
