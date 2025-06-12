@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
 import { BrewListItem } from "@components";
+import { useStore } from '@context';
+import { useEffect } from "react";
 
 function BrewList(){
-    const [brews, setBrews] = useState([]);
+    const { brews, fetchBrews } = useStore();
 
     useEffect(() => {
-        fetch('/api/brews/').then(res => res.json()).then(brews => setBrews(brews));
-    }, []);
+        fetchBrews();
+    }, [fetchBrews]);
 
     return (
         <div className="brew-list">

@@ -1,14 +1,15 @@
 import { CoffeeListItem } from "@components";
-import { useEffect, useState } from "react";
+import { useStore } from '@context';
+import { useState, useEffect } from "react";
 import './CoffeeList.css';
 
 function CoffeeList(){
-    const [coffees, setCoffees] = useState([]);
+    const { coffees, fetchCoffees } = useStore();
     const [focusedCoffee, setFocusedCoffee] = useState(0);
 
     useEffect(() => {
-        fetch('/api/coffees/').then(res => res.json()).then(coffees => setCoffees(coffees));
-    }, []);
+        fetchCoffees();
+    }, [fetchCoffees]);
 
     return (
         <div className="coffee-list">

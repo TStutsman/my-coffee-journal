@@ -1,6 +1,6 @@
 import './ColorPicker.css';
 
-export default function ColorPicker({ color, setColor }) {
+export default function ColorPicker({ setColor }) {
 
     const colors = {
         1: '#9e4d4d',
@@ -24,10 +24,6 @@ export default function ColorPicker({ color, setColor }) {
             <span className='pick-color' style={{backgroundColor: colors[4]}} onClick={() => pickColor(4)}></span>
             <span className='pick-color' style={{backgroundColor: colors[5]}} onClick={() => pickColor(5)}></span>
             <span className='pick-color' style={{backgroundColor: colors[6]}} onClick={() => pickColor(6)}></span>
-            <input
-                id="color-input"
-                value={color}
-            />
         </div>
     )
 }

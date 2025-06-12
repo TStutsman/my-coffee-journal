@@ -1,5 +1,5 @@
 import { Navigation } from '@components'
-import { Modal, ModalProvider } from '@context'
+import { Modal, ModalProvider, StoreProvider } from '@context'
 import { BrewList, CoffeeList } from '@views'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
@@ -7,11 +7,13 @@ import './App.css'
 function Layout() {
   return (
     <>
+      <StoreProvider>
       <ModalProvider>
         <Navigation />
         <Outlet />
         <Modal />
       </ModalProvider>
+      </StoreProvider>
     </>
   )
 }
