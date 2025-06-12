@@ -19,12 +19,10 @@ nav h1 {
 
 #coffee-icon {
     height: 24px;
-    aspect-ratio: 1;
 }
 
 #new-coffee-icon {
     height: 26px;
-    aspect-ratio: 1;
 }
 
 nav button {
@@ -41,5 +39,9 @@ nav button:hover, nav button:active, nav button:focus {
 }
 
 #brew-icon {
+    height: 24px;
+}
+
+#new-brew-icon {
     height: 24px;
 }
