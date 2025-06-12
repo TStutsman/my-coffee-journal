@@ -14,34 +14,30 @@ nav {
 }
 
 nav h1 {
-    font-size: 20px;
+    font-size: 22px;
+    margin: 0;
 }
 
-#coffee-icon {
+nav svg, nav h1 {
+    transition: color .2s ease-out;
+}
+
+nav a {
     height: 24px;
 }
 
-#new-coffee-icon {
-    height: 26px;
-}
-
 nav button {
-    color: #2d1e11;
-    background-color: transparent;
+    height: 28px;
+    padding: 2px 0 0;
     border: none;
     outline: none;
+
+    color: var(--coffee);
+    background-color: transparent;
 }
 
 nav button:hover, nav button:active, nav button:focus {
     color: #f6ebda;
     border: none;
     outline: none;
-}
-
-#brew-icon {
-    height: 24px;
-}
-
-#new-brew-icon {
-    height: 24px;
 }
