@@ -1,10 +1,11 @@
 import { CoffeeForm } from '@components';
-import { useModal } from '@context';
+import { useModal, useStore } from '@context';
 import { useEffect, useState } from 'react';
 import './CoffeeListItem.css';
 
 function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
     const { setModalContent, setOnModalClose } = useModal();
+    const { fetchCoffees } = useStore();
 
     // this slice of state allows the item to update its own values (i.e. after an edit)
     const [coffee, setCoffee] = useState(initialCoffee);
@@ -28,7 +29,10 @@ function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
             {
                 method: 'DELETE'
             }
-        ).then(res => console.log(res.status));
+        ).then(res => {
+            // refresh coffee list context
+            if(res.ok) fetchCoffees();
+        });
     }
 
     const showItem = () => focusCoffee();

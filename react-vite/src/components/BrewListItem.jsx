@@ -1,23 +1,17 @@
 import { BrewForm } from '@components';
-import { useModal } from '@context';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useModal, useStore } from '@context';
+import { useState } from 'react';
 import './BrewListItem.css';
 
 function BrewListItem({ brew:initialBrew }) {
-    const navigate = useNavigate();
-
     const [ brew, setBrew ] = useState(initialBrew);
 
     const { setOnModalClose, setModalContent } = useModal();
+    const { fetchBrews } = useStore();
     
     // parsed grindSize and ratio (no trailing zeros)
     const pGrindSize = Number(brew.grind_size);
     const pRatio = Number(brew.ratio);
-
-    useEffect(() => {
-        console.log(brew);
-    }, [brew]);
 
     const editBrew = () => {
         setModalContent(<BrewForm brewId={brew.id} />);
@@ -30,7 +24,7 @@ function BrewListItem({ brew:initialBrew }) {
                 method: 'DELETE'
             }
         ).then(res => {
-            if(res.ok) navigate('/brews');
+            if(res.ok) fetchBrews();
         });
     }
 
