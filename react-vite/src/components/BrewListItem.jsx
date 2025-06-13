@@ -12,6 +12,8 @@ function BrewListItem({ brew:initialBrew }) {
     // parsed grindSize and ratio (no trailing zeros)
     const pGrindSize = Number(brew.grind_size);
     const pRatio = Number(brew.ratio);
+    const pDose = Number(brew.dose);
+    const pWater = Number(brew.water_amt);
 
     const editBrew = () => {
         setModalContent(<BrewForm brewId={brew.id} />);
@@ -37,6 +39,8 @@ function BrewListItem({ brew:initialBrew }) {
             <div className='brew-content'>
                 <p>Setting &apos;{pGrindSize}&apos; on a {brew.grinder}</p>
                 <p>{brew.brewer}</p>
+                <p>{pDose}g coffee</p>
+                <p>{pWater}g water</p>
                 <p>1/{pRatio} Ratio</p>
 
             </div>

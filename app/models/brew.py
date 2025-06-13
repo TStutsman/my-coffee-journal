@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy import func
 
 class Brew(db.Model):
     __tablename__ = 'brews'
@@ -12,6 +13,8 @@ class Brew(db.Model):
     water_amt = db.Column(db.Numeric(scale=2))
     ratio = db.Column(db.Numeric(scale=4))
     recipe = db.Column(db.String)
+    rating = db.Column(db.Numeric(scale=1))
+    date = db.Column(db.Date, server_default=func.current_date())
 
     coffee = db.relationship('Coffee', back_populates='brews')
 
@@ -26,7 +29,9 @@ class Brew(db.Model):
             "brewer": self.brewer,
             "water_amt": self.water_amt,
             "ratio": self.ratio,
-            "recipe": self.recipe
+            "recipe": self.recipe,
+            "rating": self.rating,
+            "date": self.date
         }
     
     def __repr__(self):

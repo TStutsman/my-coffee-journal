@@ -9,8 +9,9 @@ function BrewForm({ brewId }) {
     const [coffeeId, setCoffeeId] = useState("");
     const [grinder, setGrinder] = useState("");
     const [grindSize, setGrindSize] = useState("");
+    const [dose, setDose] = useState("");
     const [brewer, setBrewer] = useState("");
-    const [ratio, setRatio] = useState(16);
+    const [waterAmount, setWaterAmount] = useState("");
 
     useEffect(() => {
         fetch('/api/coffees').then(res => res.json()).then(coffees => {
@@ -32,7 +33,8 @@ function BrewForm({ brewId }) {
                 setGrinder(data.grinder);
                 setGrindSize(data.grind_size);
                 setBrewer(data.brewer);
-                setRatio(data.ratio);
+                if(data.dose) setDose(data.dose);
+                if(data.water_amt) setWaterAmount(data.water_amt);
             });
         }
     }, [brewId]);
@@ -41,7 +43,7 @@ function BrewForm({ brewId }) {
         e.preventDefault();
 
         const brew = {
-            coffeeId, grinder, grindSize, brewer, ratio
+            coffeeId, grinder, grindSize, dose, brewer, water_amt:waterAmount
         }
 
         const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
@@ -81,12 +83,16 @@ function BrewForm({ brewId }) {
                 <input type="number" min={0} step={0.25} value={grindSize} onChange={e => setGrindSize(e.target.value)}/>
             </label>
             <label>
+                <span>Dose</span>
+                <input type="number" min={0} step={0.01} value={dose} onChange={e => setDose(+e.target.value)}/>
+            </label>
+            <label>
                 <span>Brewer</span>
                 <input type="text" value={brewer} onChange={e => setBrewer(e.target.value)}/>
             </label>
             <label>
-                <span>Ratio 1/</span>
-                <input type="number" min={0} step={0.0001} value={ratio} onChange={e => setRatio(+e.target.value)}/>
+                <span>Water Amount</span>
+                <input type="number" min={0} step={0.01} value={waterAmount} onChange={e => setWaterAmount(+e.target.value)}/>
             </label>
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
         </form>
