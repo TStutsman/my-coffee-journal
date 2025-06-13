@@ -7,8 +7,11 @@ class Brew(db.Model):
     coffee_id = db.Column(db.Integer, db.ForeignKey('coffees.id'))
     grinder = db.Column(db.String(50))
     grind_size = db.Column(db.Numeric(scale=2))
+    dose = db.Column(db.Numeric(scale=2))
     brewer = db.Column(db.String(50))
+    water_amt = db.Column(db.Numeric(scale=2))
     ratio = db.Column(db.Numeric(scale=4))
+    recipe = db.Column(db.String)
 
     coffee = db.relationship('Coffee', back_populates='brews')
 
@@ -19,8 +22,11 @@ class Brew(db.Model):
             "coffee": self.coffee.to_dict(),
             "grinder": self.grinder,
             "grind_size": self.grind_size,
+            "dose": self.dose,
             "brewer": self.brewer,
-            "ratio": self.ratio
+            "water_amt": self.water_amt,
+            "ratio": self.ratio,
+            "recipe": self.recipe
         }
     
     def __repr__(self):
