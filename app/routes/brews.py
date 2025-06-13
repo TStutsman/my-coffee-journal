@@ -19,6 +19,8 @@ def save_brew():
     data = format_request(request.json)
 
     brew = Brew(**data)
+    if brew.water_amt and brew.dose:
+        brew.ratio = round(brew.water_amt / brew.dose, 2)
     db.session.add(brew)
     db.session.commit()
 
@@ -34,6 +36,9 @@ def update_brew(id):
     brew:Brew = Brew.query.get(id)
     for key in data:
         setattr(brew, key, data[key])
+
+    if brew.ratio and brew.dose:
+        brew.ratio = round(brew.water_amt / brew.dose, 2)
     
     db.session.commit()
 
