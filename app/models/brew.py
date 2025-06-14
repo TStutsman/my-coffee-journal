@@ -14,7 +14,7 @@ class Brew(db.Model):
     ratio = db.Column(db.Numeric(scale=4))
     recipe = db.Column(db.String)
     rating = db.Column(db.Numeric(scale=1))
-    date = db.Column(db.Date, server_default=func.current_date())
+    date = db.Column(db.String(12), server_default=func.current_date())
 
     coffee = db.relationship('Coffee', back_populates='brews')
 

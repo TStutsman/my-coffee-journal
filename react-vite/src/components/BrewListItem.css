@@ -13,10 +13,17 @@
     display: flex;
     justify-content: space-between;
 
+    padding-bottom: 5px;
     border-bottom: 1px solid var(--cream);
 }
 
-.brew-list-item p, .brew-list-item h3 {
+.brew-title > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.brew-list-item p, .brew-list-item h3, .brew-list-item h5 {
     margin: 0;
 }
 
@@ -26,6 +33,16 @@
     align-items: flex-start;
 
     padding: 5px 0;
+}
+
+.brew-content > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.brew-content svg {
+    height: 14px;
 }
 
 .brew-buttons {
