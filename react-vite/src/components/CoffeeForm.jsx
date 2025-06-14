@@ -13,7 +13,7 @@ function CoffeeForm({ coffeeId }) {
     const [ process, setProcess ] = useState("");
     const [ roaster, setRoaster ] = useState("");
     const [ roastProfile, setRoastProfile ] = useState("");
-    const [ color, setColor ] = useState("#c5a487")
+    const [ color, setColor ] = useState("#9e4d4d")
 
     const handleSubmit = e => {
         e.preventDefault()
