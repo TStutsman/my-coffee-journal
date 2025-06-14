@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useModal } from '@context';
+import { StarRating } from '@components';
 import './BrewForm.css';
 
 function BrewForm({ brewId }) {
@@ -12,6 +13,14 @@ function BrewForm({ brewId }) {
     const [dose, setDose] = useState("");
     const [brewer, setBrewer] = useState("");
     const [waterAmount, setWaterAmount] = useState("");
+    const [rating, setRating] = useState("0.0");
+    const [tempRating, setTempRating] = useState("0.0")
+
+    const resetRating = () => setTempRating(rating);
+    const setBothRating = (rating) => {
+        setRating(rating);
+        setTempRating(rating);
+    }
 
     useEffect(() => {
         fetch('/api/coffees').then(res => res.json()).then(coffees => {
@@ -33,8 +42,9 @@ function BrewForm({ brewId }) {
                 setGrinder(data.grinder);
                 setGrindSize(data.grind_size);
                 setBrewer(data.brewer);
-                if(data.dose) setDose(data.dose);
-                if(data.water_amt) setWaterAmount(data.water_amt);
+                if(data.dose) setDose(Number(data.dose));
+                if(data.water_amt) setWaterAmount(Number(data.water_amt));
+                if(data.rating) setBothRating(data.rating);
             });
         }
     }, [brewId]);
@@ -43,7 +53,7 @@ function BrewForm({ brewId }) {
         e.preventDefault();
 
         const brew = {
-            coffeeId, grinder, grindSize, dose, brewer, water_amt:waterAmount
+            coffeeId, grinder, grindSize, dose, brewer, water_amt:waterAmount, rating
         }
 
         const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
@@ -93,6 +103,10 @@ function BrewForm({ brewId }) {
             <label>
                 <span>Water Amount</span>
                 <input type="number" min={0} step={0.01} value={waterAmount} onChange={e => setWaterAmount(+e.target.value)}/>
+            </label>
+            <label>
+                <span>Rating</span>
+                <StarRating rating={tempRating} hoverRating={setTempRating} setRating={setBothRating} resetRating={resetRating}/>
             </label>
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
         </form>

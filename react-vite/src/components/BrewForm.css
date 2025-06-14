@@ -30,6 +30,11 @@
     border-bottom: 1px solid var(--cream);
 }
 
+#brew-form label:has(#star-rating) {
+    padding: 14px 2px 4px;
+    border-color: transparent;
+}
+
 #brew-form label:has(select){
     height: 18px;
     padding: 10px 2px 2px;

@@ -1,4 +1,4 @@
-import { BrewForm } from '@components';
+import { BrewForm, StarRating } from '@components';
 import { useModal, useStore } from '@context';
 import { formatDate } from '@utils';
 import { useState } from 'react';
@@ -62,6 +62,7 @@ function BrewListItem({ brew:initialBrew }) {
                     <span>{pWater}g</span>
                 </div>
                 <div>1:{pRatio} ratio</div>
+                <div><StarRating rating={brew.rating} /></div>
 
             </div>
             <div className='brew-buttons'>
