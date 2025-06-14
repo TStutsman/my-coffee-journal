@@ -4,11 +4,13 @@ export default function ColorPicker({ setColor }) {
 
     const colors = {
         1: '#9e4d4d',
-        2: '#aa6f22',
-        3: '#4f8850',
-        4: '#61b0af',
-        5: '#2d4772',
-        6: '#6c4d81'
+        2: '#ae7568',
+        3: '#ba7b48',
+        4: '#c2a43f',
+        5: '#718c4c',
+        6: '#73a2a1',
+        7: '#7b7799',
+        8: '#825c4c',
     }
 
     const pickColor = (id) => {
@@ -24,6 +26,8 @@ export default function ColorPicker({ setColor }) {
             <span className='pick-color' style={{backgroundColor: colors[4]}} onClick={() => pickColor(4)}></span>
             <span className='pick-color' style={{backgroundColor: colors[5]}} onClick={() => pickColor(5)}></span>
             <span className='pick-color' style={{backgroundColor: colors[6]}} onClick={() => pickColor(6)}></span>
+            <span className='pick-color' style={{backgroundColor: colors[7]}} onClick={() => pickColor(7)}></span>
+            <span className='pick-color' style={{backgroundColor: colors[8]}} onClick={() => pickColor(8)}></span>
         </div>
     )
 }
