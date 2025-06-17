@@ -17,6 +17,10 @@
   background-color: var(--cream);
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 a {
   font-weight: 500;
   color: var(--coffee);
@@ -34,6 +38,24 @@ body {
   min-height: 100vh;
 
   overscroll-behavior: contain;
+}
+
+#root {
+  width: 100%;
+  overscroll-behavior-y: contain;
+}
+
+#root::before {
+  content: "";
+
+  height: 999px;
+  width: 100%;
+
+  position: absolute;
+  top: -999px;
+  left: 0;
+
+  background-color: var(--vanilla);
 }
 
 h1 {

@@ -9,6 +9,10 @@ import os
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
+import logging
+logger = logging.getLogger('werkzeug')
+logger.setLevel(logging.ERROR)
+
 app.config.from_object(Config)
 cors = CORS(app, resources={r"*": {"origins": "http://localhost:5173"}})
 
