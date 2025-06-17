@@ -1,11 +1,12 @@
 import { BrewForm, StarRating } from '@components';
 import { useModal, useStore } from '@context';
 import { formatDate } from '@utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './BrewListItem.css';
 
-function BrewListItem({ brew:initialBrew }) {
-    const [ brew, setBrew ] = useState(initialBrew);
+function BrewListItem({ brew:initialBrew, show, focusBrew }) {
+    const [brew, setBrew] = useState(initialBrew);
+    const [itemClass, setItemClass] = useState("brew-list-item");
 
     const { setOnModalClose, setModalContent } = useModal();
     const { fetchBrews } = useStore();
@@ -16,6 +17,14 @@ function BrewListItem({ brew:initialBrew }) {
     const pDose = Number(brew.dose);
     const pWater = Number(brew.water_amt);
     const pDate = formatDate(brew.date);
+
+    useEffect(() => {
+            if(show) {
+                setItemClass("brew-list-item show-item");
+            } else {
+                setItemClass("brew-list-item");
+            }
+        }, [show]);
 
     const editBrew = () => {
         setModalContent(<BrewForm brewId={brew.id} />);
@@ -32,8 +41,10 @@ function BrewListItem({ brew:initialBrew }) {
         });
     }
 
+    const showItem = () => focusBrew();
+
     return (
-        <div className="brew-list-item">
+        <div className={itemClass} onTouchStart={showItem} onMouseOver={showItem}>
             <div className='brew-title'>
                 <div>
                     <h3>{brew.coffee.farm}</h3>

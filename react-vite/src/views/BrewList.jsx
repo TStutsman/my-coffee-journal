@@ -1,9 +1,10 @@
 import { BrewListItem } from "@components";
 import { useStore } from '@context';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function BrewList(){
     const { brews, fetchBrews } = useStore();
+    const [focusedBrew, setFocusedBrew] = useState(0);
 
     useEffect(() => {
         fetchBrews();
@@ -11,8 +12,13 @@ function BrewList(){
 
     return (
         <div className="brew-list">
-            { brews.map(brew => (
-                <BrewListItem key={brew.id} brew={brew}/>
+            { brews.map((brew, index) => (
+                <BrewListItem 
+                    key={brew.id} 
+                    brew={brew} 
+                    show={focusedBrew == index}
+                    focusBrew={() => setFocusedBrew(index)}
+                />
             ))}
         </div>
     );
