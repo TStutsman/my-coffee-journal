@@ -8,6 +8,12 @@ class FlavorNote(db.Model):
 
     coffees = db.relationship('Coffee', secondary='coffees_flavor_notes', back_populates='notes')
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "note": self.note
+        }
+
 class CoffeeFlavorNote(db.Model):
     __tablename__ = 'coffees_flavor_notes'
     coffee_id = db.Column(db.Integer, db.ForeignKey('coffees.id'), primary_key=True)
@@ -39,7 +45,8 @@ class Coffee(db.Model):
             "process": self.process,
             "roaster": self.roaster,
             "roast_profile": self.roast_profile,
-            "color": self.color
+            "color": self.color,
+            "notes": [note.to_dict() for note in self.notes]
         }
     
     def __repr__(self):
