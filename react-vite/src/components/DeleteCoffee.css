@@ -1,0 +1,29 @@
+.delete-coffee {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 200px;
+    width: 350px;
+
+    border-radius: 10px;
+    background-color: var(--vanilla);
+}
+
+.delete-modal h6 {
+    font-size: 18px;
+    word-wrap: pretty;
+}
+
+.modal-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+button.cancel {
+    background-color: lch(from var(--mocha) calc(l + 20) calc(c - 2) h);
+}
+button.delete {
+    background-color: rgb(129, 8, 8);
+}
