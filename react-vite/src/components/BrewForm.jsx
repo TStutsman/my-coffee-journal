@@ -125,6 +125,11 @@ function BrewForm({ brewId }) {
             <label>
                 <span>Water Temp</span>
                 <input type="number" min={0} step={1} max={celsius ? 100 : 212} value={waterTemp} onChange={e => setWaterTemp(+e.target.value)}/>
+                <div id="degrees-switch" onClick={() => setCelsius(!celsius)}>
+                    <div id="switch-circle" className={celsius ? "celsius" : "fahrenheit"}>
+                        {celsius ? <>&deg;C</> : <>&deg;F</>}
+                    </div>
+                </div>
             </label>
             <label>
                 <span>Notes</span>
