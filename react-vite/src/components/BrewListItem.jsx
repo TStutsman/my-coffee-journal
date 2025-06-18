@@ -77,13 +77,24 @@ function BrewListItem({ brew:initialBrew, show, focusBrew }) {
                     }
                 </div>
                 <div>1:{pRatio} ratio</div>
-                {
-                    brew.notes &&
-                    <div>{brew.notes}</div>
-                }
-                {
-                    brew.recipe &&
-                    <div>{brew.recipe}</div>
+                { 
+                    (brew.recipe || brew.notes) &&
+                    <div className='content-p'>
+                    {
+                        brew.recipe &&
+                        <div className='recipe'>
+                            <h6>Recipe</h6>
+                            <p>{brew.recipe}</p>
+                        </div>
+                    }
+                    {
+                        brew.notes &&
+                        <div className='notes'>
+                            <h6>Notes</h6>
+                            <p>{brew.notes}</p>
+                        </div>
+                    }
+                    </div>
                 }
                 <div><StarRating rating={brew.rating} /></div>
 
