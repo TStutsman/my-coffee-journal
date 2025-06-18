@@ -13,7 +13,11 @@ function BrewForm({ brewId }) {
     const [dose, setDose] = useState("");
     const [brewer, setBrewer] = useState("");
     const [waterAmount, setWaterAmount] = useState("");
+    const [waterTemp, setWaterTemp] = useState("");
+    const [celsius, setCelsius] = useState(false);
     const [rating, setRating] = useState("0.0");
+    const [recipe, setRecipe] = useState("");
+    const [notes, setNotes] = useState("");
     const [tempRating, setTempRating] = useState("0.0")
 
     const resetRating = () => setTempRating(rating);
@@ -44,6 +48,10 @@ function BrewForm({ brewId }) {
                 setBrewer(data.brewer);
                 if(data.dose) setDose(Number(data.dose));
                 if(data.water_amt) setWaterAmount(Number(data.water_amt));
+                if(data.water_temp) setWaterTemp(Number(data.water_temp));
+                if(data.notes) setNotes(data.notes);
+                if(data.recipe) setRecipe(data.recipe);
+                if(data.celsius) setCelsius(data.celsius);
                 if(data.rating) setBothRating(data.rating);
             });
         }
@@ -53,7 +61,17 @@ function BrewForm({ brewId }) {
         e.preventDefault();
 
         const brew = {
-            coffeeId, grinder, grindSize, dose, brewer, water_amt:waterAmount, rating
+            coffeeId,
+            grinder,
+            grindSize,
+            dose,
+            brewer,
+            water_amt:waterAmount,
+            water_temp:waterTemp,
+            celsius,
+            recipe,
+            notes,
+            rating
         }
 
         const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
@@ -105,9 +123,22 @@ function BrewForm({ brewId }) {
                 <input type="number" min={0} step={0.01} value={waterAmount} onChange={e => setWaterAmount(+e.target.value)}/>
             </label>
             <label>
+                <span>Water Temp</span>
+                <input type="number" min={0} step={1} max={celsius ? 100 : 212} value={waterTemp} onChange={e => setWaterTemp(+e.target.value)}/>
+            </label>
+            <label>
+                <span>Notes</span>
+                <textarea value={notes} onChange={e => setNotes(e.target.value)}/>
+            </label>
+            <label>
+                <span>Recipe</span>
+                <textarea value={recipe} onChange={e => setRecipe(e.target.value)}/>
+            </label>
+            <label>
                 <span>Rating</span>
                 <StarRating rating={tempRating} hoverRating={setTempRating} setRating={setBothRating} resetRating={resetRating}/>
             </label>
+
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
         </form>
     );

@@ -31,13 +31,21 @@
 }
 
 #brew-form label:has(#star-rating) {
-    padding: 14px 2px 4px;
+    padding: 16px 2px 4px;
     border-color: transparent;
 }
 
 #brew-form label:has(select){
     height: 18px;
     padding: 10px 2px 2px;
+}
+
+#brew-form label:has(textarea) {
+    height: 36px;
+    padding: 4px 2px;
+
+    border: 1px solid var(--cream);
+    border-radius: 4px;
 }
 
 #brew-form label>span {
@@ -63,7 +71,7 @@
     padding-left: 2px;
 }
 
-#brew-form input, #brew-form select {
+#brew-form input, #brew-form select, #brew-form textarea {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -77,4 +85,8 @@
     color: var(--cream);
 
     background-color: transparent;
+}
+
+#brew-form textarea {
+    resize: none;
 }
