@@ -1,18 +1,20 @@
 .brew-list-item {
     position: absolute;
+    left: auto;
+    right: auto;
 
     width: 350px;
     min-height: 240px;
 
     /* margin: 10px auto calc(25px - 240px); */
-    margin: 0 auto;
     padding: 15px;
+    box-sizing: border-box;
 
     border: 1px solid var(--cream);
     border-radius: 10px;
 
     /* the amount of 'lift' the card gets on hover */
-    transform: translateY(60px);
+    transform: translateY(250px);
 
     background-color: lch(from var(--vanilla) calc(l - 20) calc(c + 10) h);
     transition: transform .45s cubic-bezier(0.5, 0.2, 0.6, .9);
@@ -56,6 +58,7 @@
 
 .brew-content svg {
     height: 14px;
+    width: 14px;
 }
 
 div.content-p {
