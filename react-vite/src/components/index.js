@@ -4,6 +4,7 @@ import CoffeeForm from "./CoffeeForm";
 import CoffeeListItem from "./CoffeeListItem";
 import ColorPicker from "./ColorPicker";
 import DeleteCoffee from "./DeleteCoffee";
+import If from "./If.jsx";
 import Navigation from "./Navigation";
 import StarRating from "./StarRating";
 
@@ -14,6 +15,7 @@ export {
     CoffeeListItem,
     ColorPicker,
     DeleteCoffee,
+    If,
     Navigation,
     StarRating 
 };
