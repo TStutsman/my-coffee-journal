@@ -11,7 +11,7 @@ function DeleteCoffee({ deleteFn }) {
 
     return (
         <div className="delete-modal delete-coffee">
-            <h6>Are you sure you want to delete this coffee and <em><u>all of it's associated brews</u></em>?</h6>
+            <h6>Are you sure you want to delete this coffee and <em><u>all of it&apos;s associated brews</u></em>?</h6>
             <div className='modal-buttons'>
                 <button className='cancel' onClick={closeModal}>Cancel</button>
                 <button className='delete' onClick={deleteCoffee}>Delete</button>

@@ -1,6 +1,7 @@
 import { BrewListItem } from "@components";
 import { useStore } from '@context';
 import { useEffect, useState } from "react";
+import './BrewList.css';
 
 function BrewList(){
     const { brews, fetchBrews } = useStore();
@@ -16,7 +17,8 @@ function BrewList(){
                 <BrewListItem 
                     key={brew.id} 
                     brew={brew} 
-                    show={focusedBrew == index}
+                    lift={focusedBrew >= index}
+                    position={index+1}
                     focusBrew={() => setFocusedBrew(index)}
                 />
             ))}

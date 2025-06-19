@@ -4,7 +4,7 @@ import { formatDate } from '@utils';
 import { useState, useEffect } from 'react';
 import './BrewListItem.css';
 
-function BrewListItem({ brew:initialBrew, show, focusBrew }) {
+function BrewListItem({ brew:initialBrew, lift, focusBrew, position }) {
     const [brew, setBrew] = useState(initialBrew);
     const [itemClass, setItemClass] = useState("brew-list-item");
 
@@ -19,12 +19,12 @@ function BrewListItem({ brew:initialBrew, show, focusBrew }) {
     const pDate = formatDate(brew.date);
 
     useEffect(() => {
-            if(show) {
-                setItemClass("brew-list-item show-item");
+            if(lift) {
+                setItemClass("brew-list-item lift-item");
             } else {
                 setItemClass("brew-list-item");
             }
-        }, [show]);
+        }, [lift]);
 
     const editBrew = () => {
         setModalContent(<BrewForm brewId={brew.id} />);
@@ -44,7 +44,7 @@ function BrewListItem({ brew:initialBrew, show, focusBrew }) {
     const showItem = () => focusBrew();
 
     return (
-        <div className={itemClass} onTouchStart={showItem} onMouseOver={showItem}>
+        <div className={itemClass} style={{top: (position*65)+'px'}} onTouchStart={showItem} onMouseOver={showItem}>
             <div className='brew-title'>
                 <div>
                     <h3>{brew.coffee.farm}</h3>
