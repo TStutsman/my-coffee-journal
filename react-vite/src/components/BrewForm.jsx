@@ -42,10 +42,10 @@ function BrewForm({ brewId }) {
             fetch(`/api/brews/${brewId}`)
             .then(res => res.json())
             .then(data => {
-                setCoffeeId(data.coffee.id);
-                setGrinder(data.grinder);
-                setGrindSize(data.grind_size);
-                setBrewer(data.brewer);
+                if(data.coffee?.id) setCoffeeId(data.coffee.id);
+                if(data.grinder) setGrinder(data.grinder);
+                if(data.grind_size) setGrindSize(data.grind_size);
+                if(data.brewer) setBrewer(data.brewer);
                 if(data.dose) setDose(Number(data.dose));
                 if(data.water_amt) setWaterAmount(Number(data.water_amt));
                 if(data.water_temp) setWaterTemp(Number(data.water_temp));

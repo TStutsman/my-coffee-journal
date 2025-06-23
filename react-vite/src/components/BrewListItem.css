@@ -21,25 +21,26 @@
 }
 
 .brew-list-item.lift-item {
-    transform: translateY(-65px);
+    transform: translateY(-60px);
 }
 
 .brew-title {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 
     padding-bottom: 5px;
-    border-bottom: 1px solid var(--cream);
+    /* border-bottom: 1px solid var(--cream); */
 }
 
 .brew-title > div {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
-.brew-list-item p, .brew-list-item h3, .brew-list-item h5 {
-    margin: 0;
+.brew-title p {
+    font-size: 12px;
 }
 
 .brew-content {
