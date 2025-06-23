@@ -1,6 +1,21 @@
 .brew-list {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
     width: 350px;
-    margin: 5px auto;
+    min-height: 90%;
+    margin: 10px auto;
+}
+
+button#add-brew {
+    position: fixed;
+    bottom: 35px;
+    right: 40px;
+
+    height: 65px;
+    width: 65px;
+    padding: 14px 12px 12px 14px;
+
+    border-radius: 50%;
 }

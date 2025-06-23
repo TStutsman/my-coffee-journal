@@ -12,9 +12,10 @@
   --mocha: #492d14;
   --vanilla: #c5a487;
   --cream: #f6ebda;
+  --bg: #e7cfb5;
 
   color: var(--cream);
-  background-color: var(--cream);
+  background-color: var(--bg);
 }
 
 html {
@@ -43,19 +44,6 @@ body {
 #root {
   width: 100%;
   overscroll-behavior-y: contain;
-}
-
-#root::before {
-  content: "";
-
-  height: 999px;
-  width: 100%;
-
-  position: absolute;
-  top: -999px;
-  left: 0;
-
-  background-color: var(--vanilla);
 }
 
 h1, h2, h3, h4, h5, h6, p {
