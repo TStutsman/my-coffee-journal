@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import desc
 from ..models import Brew, db
 from ..utils import format_request
 
@@ -6,7 +7,7 @@ brews = Blueprint('brews', __name__)
 
 @brews.get('/')
 def all_brews():
-    brews = Brew.query.all()
+    brews = Brew.query.order_by(desc(Brew.date)).all()
     return jsonify([brew.to_dict() for brew in brews])
 
 @brews.get('/<int:id>')
