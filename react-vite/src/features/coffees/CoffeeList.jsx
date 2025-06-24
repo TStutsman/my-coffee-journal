@@ -1,4 +1,4 @@
-import { CoffeeListItem } from "@components";
+import { CoffeeListItem } from "@coffees";
 import { useStore } from '@context';
 import { useState, useEffect } from "react";
 import './CoffeeList.css';

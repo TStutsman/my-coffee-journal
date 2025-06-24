@@ -1,4 +1,5 @@
-import { BrewForm, If, StarRating } from '@components';
+import { BrewForm, StarRating } from '@brews';
+import { If } from '@components';
 import { useModal, useStore } from '@context';
 import { formatDate } from '@utils';
 import { useState, useEffect } from 'react';

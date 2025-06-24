@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useModal } from '@context';
-import { ColorPicker } from '@components';
+import { ColorPicker } from '@coffees';
 import './CoffeeForm.css';
 
 function CoffeeForm({ coffeeId }) {

@@ -1,4 +1,4 @@
-import { CoffeeForm, DeleteCoffee } from '@components';
+import { CoffeeForm, DeleteCoffee } from '@coffees';
 import { useModal, useStore } from '@context';
 import { useEffect, useState } from 'react';
 import './CoffeeListItem.css';

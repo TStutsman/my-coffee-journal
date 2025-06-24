@@ -6,9 +6,10 @@
     padding: 15px;
     box-sizing: border-box;
 
-    border: 1px solid var(--mocha);
-    border-bottom: 3px solid var(--mocha);
-    border-right: 3px solid var(--mocha);
+    border: 1px solid;
+    border-bottom: 3px solid;
+    border-right: 3px solid;
+    border-color: var(--mocha);
     border-radius: 10px;
 
     background-color: lch(from var(--vanilla) calc(l - 20) calc(c + 10) h);
@@ -19,7 +20,6 @@
 .brew-list-item.show {
     max-height: 450px;
 }
-
 
 .brew-title {
     display: flex;

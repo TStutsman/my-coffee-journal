@@ -1,6 +1,7 @@
 import { Navigation } from '@components'
 import { Modal, ModalProvider, StoreProvider } from '@context'
-import { BrewList, CoffeeList } from '@views'
+import { BrewList } from '@brews'
+import { CoffeeList } from '@coffees';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 

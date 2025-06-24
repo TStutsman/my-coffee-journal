@@ -1,4 +1,4 @@
-import { BrewListItem, BrewForm } from "@components";
+import { BrewListItem, BrewForm } from "@brews";
 import { useStore, useModal } from '@context';
 import { useEffect, useState } from "react";
 import './BrewList.css';

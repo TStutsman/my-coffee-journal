@@ -20,16 +20,17 @@ export default defineConfig(({ mode }) => ({
   server: {
     open: true,
     proxy: {
-      '/api': 'http://127.0.0.1:5000'
+      '/api': 'http://127.0.0.1:8000'
     }
   },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
-      '@views': resolve(__dirname, './src/views'),
       '@context': resolve(__dirname, './src/context'),
-      '@utils': resolve(__dirname, './src/utils')
+      '@brews': resolve(__dirname, './src/features/brews'),
+      '@coffees': resolve(__dirname, './src/features/coffees'),
+      '@utils': resolve(__dirname, './src/utils'),
     }
   }
 }));

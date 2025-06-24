@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useModal } from '@context';
-import { StarRating } from '@components';
+import { StarRating } from '@brews';
 import './BrewForm.css';
 
 function BrewForm({ brewId }) {
