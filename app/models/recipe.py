@@ -1,12 +1,9 @@
 from .db import db
-from sqlalchemy import func
 
-class Brew(db.Model):
-    __tablename__ = 'brews'
+class Recipe(db.Model):
+    __tablename__ = 'recipes'
 
     id = db.Column(db.Integer, primary_key=True)
-    coffee_id = db.Column(db.Integer, db.ForeignKey('coffees.id'))
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
     grinder = db.Column(db.String(50))
     grind_size = db.Column(db.Numeric(scale=2))
     dose = db.Column(db.Numeric(scale=2))
@@ -15,18 +12,13 @@ class Brew(db.Model):
     water_temp = db.Column(db.Numeric(scale=0))
     celsius = db.Column(db.Boolean)
     ratio = db.Column(db.Numeric(scale=4))
-    notes = db.Column(db.String)
-    rating = db.Column(db.Numeric(scale=1))
-    date = db.Column(db.String(12), server_default=func.current_date())
+    details = db.Column(db.String)
 
-    recipe = db.relationship('Recipe', back_populates='brews')
-    coffee = db.relationship('Coffee', back_populates='brews')
+    brews = db.relationship('Brew', back_populates='recipe')
 
     def to_dict(self):
         return {
             "id": self.id,
-            "coffee_id": self.coffee_id,
-            "coffee": self.coffee.to_dict(),
             "grinder": self.grinder,
             "grind_size": self.grind_size,
             "dose": self.dose,
@@ -35,11 +27,8 @@ class Brew(db.Model):
             "water_temp": self.water_temp,
             "celsius": self.celsius,
             "ratio": self.ratio,
-            "recipe": self.recipe,
-            "notes": self.notes,
-            "rating": self.rating,
-            "date": self.date
+            "details": self.details,
         }
     
     def __repr__(self):
-        return f"<Brew {self.id} coffee_id={self.coffee_id} ratio={self.ratio}>"
+        return f"<Recipe {self.id}>"
