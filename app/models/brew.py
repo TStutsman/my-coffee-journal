@@ -6,7 +6,6 @@ class Brew(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     coffee_id = db.Column(db.Integer, db.ForeignKey('coffees.id'))
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'))
     grinder = db.Column(db.String(50))
     grind_size = db.Column(db.Numeric(scale=2))
     dose = db.Column(db.Numeric(scale=2))
@@ -15,11 +14,11 @@ class Brew(db.Model):
     water_temp = db.Column(db.Numeric(scale=0))
     celsius = db.Column(db.Boolean)
     ratio = db.Column(db.Numeric(scale=4))
+    recipe = db.Column(db.String)
     notes = db.Column(db.String)
     rating = db.Column(db.Numeric(scale=1))
     date = db.Column(db.String(12), server_default=func.current_date())
 
-    recipe = db.relationship('Recipe', back_populates='brews')
     coffee = db.relationship('Coffee', back_populates='brews')
 
     def to_dict(self):
@@ -42,4 +41,4 @@ class Brew(db.Model):
         }
     
     def __repr__(self):
-        return f"<Brew {self.id} coffee_id={self.coffee_id} ratio={self.ratio}>"
+        return f"<Brew {self.id} coffee_id={self.coffee_id} date={self.date}>"

@@ -4,6 +4,7 @@ class Recipe(db.Model):
     __tablename__ = 'recipes'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
     grinder = db.Column(db.String(50))
     grind_size = db.Column(db.Numeric(scale=2))
     dose = db.Column(db.Numeric(scale=2))
@@ -14,11 +15,10 @@ class Recipe(db.Model):
     ratio = db.Column(db.Numeric(scale=4))
     details = db.Column(db.String)
 
-    brews = db.relationship('Brew', back_populates='recipe')
-
     def to_dict(self):
         return {
             "id": self.id,
+            "name": self.name,
             "grinder": self.grinder,
             "grind_size": self.grind_size,
             "dose": self.dose,

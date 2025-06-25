@@ -8,6 +8,8 @@ function BrewForm({ brewId }) {
 
     const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
+    const [recipes, setRecipes] = useState([]);
+    const [recipeId, setRecipeId] = useState("");
     const [grinder, setGrinder] = useState("");
     const [grindSize, setGrindSize] = useState("");
     const [dose, setDose] = useState("");
@@ -16,8 +18,8 @@ function BrewForm({ brewId }) {
     const [waterTemp, setWaterTemp] = useState("");
     const [celsius, setCelsius] = useState(false);
     const [rating, setRating] = useState("0.0");
-    const [recipe, setRecipe] = useState("");
     const [notes, setNotes] = useState("");
+    const [details, setDetails] = useState("");
     const [tempRating, setTempRating] = useState("0.0")
 
     const resetRating = () => setTempRating(rating);
@@ -27,11 +29,23 @@ function BrewForm({ brewId }) {
     }
 
     useEffect(() => {
-        fetch('/api/coffees').then(res => res.json()).then(coffees => {
+        fetch('/api/coffees')
+        .then(res => res.json())
+        .then(coffees => {
             setCoffees(coffees.map(coffee => {
                 return {
                     id: coffee.id,
                     label: `${coffee.roaster} - ${coffee.farm}`
+                }
+            }))
+        });
+        fetch('/api/recipes')
+        .then(res => res.json())
+        .then(recipes => {
+            setRecipes(recipes.map(recipe => {
+                return {
+                    id: recipe.id,
+                    label: `${recipe.brewer} -- ${recipe.dose} in, ${recipe.water_amt} out, gs ${recipe.grind_size}`
                 }
             }))
         });
@@ -43,15 +57,26 @@ function BrewForm({ brewId }) {
             .then(res => res.json())
             .then(data => {
                 if(data.coffee?.id) setCoffeeId(data.coffee.id);
-                if(data.grinder) setGrinder(data.grinder);
-                if(data.grind_size) setGrindSize(data.grind_size);
-                if(data.brewer) setBrewer(data.brewer);
-                if(data.dose) setDose(Number(data.dose));
-                if(data.water_amt) setWaterAmount(Number(data.water_amt));
-                if(data.water_temp) setWaterTemp(Number(data.water_temp));
+                if(data.recipe?.id) {
+                    setRecipeId(data.recipe.id);
+                    setGrinder(data.recipe.grinder);
+                    setGrindSize(data.recipe.grind_size);
+                    setBrewer(data.recipe.brewer);
+                    setDose(Number(data.recipe.dose));
+                    setWaterAmount(Number(data.recipe.water_amt));
+                    setWaterTemp(Number(data.recipe.water_temp));
+                    setCelsius(data.recipe.celsius);
+                }
+                else {
+                    if(data.grinder) setGrinder(data.grinder);
+                    if(data.grind_size) setGrindSize(data.grind_size);
+                    if(data.brewer) setBrewer(data.brewer);
+                    if(data.dose) setDose(Number(data.dose));
+                    if(data.water_amt) setWaterAmount(Number(data.water_amt));
+                    if(data.water_temp) setWaterTemp(Number(data.water_temp));
+                    if(data.celsius) setCelsius(data.celsius);
+                }
                 if(data.notes) setNotes(data.notes);
-                if(data.recipe) setRecipe(data.recipe);
-                if(data.celsius) setCelsius(data.celsius);
                 if(data.rating) setBothRating(data.rating);
             });
         }
@@ -66,11 +91,11 @@ function BrewForm({ brewId }) {
             grindSize,
             dose,
             brewer,
-            water_amt:waterAmount,
-            water_temp:waterTemp,
+            water_amt: waterAmount,
+            water_temp: waterTemp,
             celsius,
-            recipe,
             notes,
+            recipe: details,
             rating
         }
 
@@ -99,6 +124,18 @@ function BrewForm({ brewId }) {
                     <option value="" disabled>Select a coffee</option>
                     { coffees.map(coffee => (
                         <option key={coffee.id} value={coffee.id}>{coffee.label}</option>
+                    ))}
+                </select>
+            </label>
+            <label>
+                <span>Recipe</span>
+                <select 
+                    value={recipeId}
+                    onChange={e => setRecipeId(+e.target.value)}
+                >
+                    <option value="" disabled>Select a recipe</option>
+                    { recipes.map(recipe => (
+                        <option key={recipe.id} value={recipe.id}>{recipe.label}</option>
                     ))}
                 </select>
             </label>
@@ -136,8 +173,8 @@ function BrewForm({ brewId }) {
                 <textarea value={notes} onChange={e => setNotes(e.target.value)}/>
             </label>
             <label>
-                <span>Recipe</span>
-                <textarea value={recipe} onChange={e => setRecipe(e.target.value)}/>
+                <span>Details</span>
+                <textarea value={details} onChange={e => setDetails(e.target.value)}/>
             </label>
             <label>
                 <span>Rating</span>

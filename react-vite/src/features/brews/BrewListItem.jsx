@@ -78,7 +78,7 @@ function BrewListItem({ brew:initialBrew, show, focusBrew }) {
                     <If value={brew.recipe}>
                         <div className='recipe'>
                             <h6>Recipe</h6>
-                            <p>{brew.recipe}</p>
+                            <p>{brew.recipe?.details}</p>
                         </div>
                     </If>
                     <If value={brew.notes}>
