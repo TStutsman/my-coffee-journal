@@ -7,7 +7,7 @@ brews = Blueprint('brews', __name__)
 
 @brews.get('/')
 def all_brews():
-    brews = Brew.query.order_by(desc(Brew.date)).all()
+    brews = Brew.query.order_by(desc(Brew.date)).order_by(desc(Brew.id)).all()
     return jsonify([brew.to_dict() for brew in brews])
 
 @brews.get('/<int:id>')
@@ -38,7 +38,7 @@ def update_brew(id):
     for key in data:
         setattr(brew, key, data[key])
 
-    if brew.ratio and brew.dose:
+    if brew.water_amt and brew.dose:
         brew.ratio = round(brew.water_amt / brew.dose, 2)
     
     db.session.commit()

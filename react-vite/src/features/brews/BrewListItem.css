@@ -14,7 +14,7 @@
 
     background-color: lch(from var(--vanilla) calc(l - 20) calc(c + 10) h);
     transition:
-        max-height .45s cubic-bezier(0.5, 0.2, 0.6, .9);
+        max-height .65s cubic-bezier(0.5, 0.2, 0.6, .9);
 }
 
 .brew-list-item.show {

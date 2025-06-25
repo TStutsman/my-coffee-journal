@@ -57,25 +57,14 @@ function BrewForm({ brewId }) {
             .then(res => res.json())
             .then(data => {
                 if(data.coffee?.id) setCoffeeId(data.coffee.id);
-                if(data.recipe?.id) {
-                    setRecipeId(data.recipe.id);
-                    setGrinder(data.recipe.grinder);
-                    setGrindSize(data.recipe.grind_size);
-                    setBrewer(data.recipe.brewer);
-                    setDose(Number(data.recipe.dose));
-                    setWaterAmount(Number(data.recipe.water_amt));
-                    setWaterTemp(Number(data.recipe.water_temp));
-                    setCelsius(data.recipe.celsius);
-                }
-                else {
-                    if(data.grinder) setGrinder(data.grinder);
-                    if(data.grind_size) setGrindSize(data.grind_size);
-                    if(data.brewer) setBrewer(data.brewer);
-                    if(data.dose) setDose(Number(data.dose));
-                    if(data.water_amt) setWaterAmount(Number(data.water_amt));
-                    if(data.water_temp) setWaterTemp(Number(data.water_temp));
-                    if(data.celsius) setCelsius(data.celsius);
-                }
+                if(data.grinder) setGrinder(data.grinder);
+                if(data.grind_size) setGrindSize(data.grind_size);
+                if(data.brewer) setBrewer(data.brewer);
+                if(data.dose) setDose(Number(data.dose));
+                if(data.water_amt) setWaterAmount(Number(data.water_amt));
+                if(data.water_temp) setWaterTemp(Number(data.water_temp));
+                if(data.celsius) setCelsius(data.celsius);
+                if(data.recipe) setDetails(data.recipe);
                 if(data.notes) setNotes(data.notes);
                 if(data.rating) setBothRating(data.rating);
             });
