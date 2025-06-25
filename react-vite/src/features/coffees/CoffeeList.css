@@ -4,3 +4,15 @@
 
     gap: 10px;
 }
+
+button#add-coffee {
+    position: fixed;
+    bottom: 35px;
+    right: 40px;
+
+    height: 65px;
+    width: 65px;
+    padding: 14px 12px 12px 14px;
+
+    border-radius: 50%;
+}
