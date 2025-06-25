@@ -1,6 +1,7 @@
 nav {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     align-items: center;
 
     position: sticky;
@@ -16,18 +17,26 @@ nav {
 
 nav h1 {
     font-size: 22px;
-    margin: 0;
-}
-
-nav svg, nav h1 {
-    transition: color .2s ease-out;
+    letter-spacing: 3px;
+    color: var(--coffee);
 }
 
 nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     height: 24px;
+    
+    transition: color .2s ease-out;
 }
 
-nav button {
+svg#brew-icon {
+    height: 30px;
+    width: 30px;
+}
+
+/* nav button {
     height: 28px;
     padding: 2px 0 0;
     border: none;
@@ -41,4 +50,4 @@ nav button:hover, nav button:active, nav button:focus {
     color: #f6ebda;
     border: none;
     outline: none;
-}
+} */
