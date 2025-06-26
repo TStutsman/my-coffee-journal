@@ -9,7 +9,6 @@ function BrewForm({ brewId }) {
     const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
     const [recipes, setRecipes] = useState([]);
-    const [recipeId, setRecipeId] = useState("");
     const [grinder, setGrinder] = useState("");
     const [grindSize, setGrindSize] = useState("");
     const [dose, setDose] = useState("");
@@ -44,7 +43,7 @@ function BrewForm({ brewId }) {
         .then(recipes => {
             setRecipes(recipes.map(recipe => {
                 return {
-                    id: recipe.id,
+                    ...recipe,
                     label: `${recipe.brewer} -- ${recipe.dose} in, ${recipe.water_amt} out, gs ${recipe.grind_size}`
                 }
             }))
@@ -70,6 +69,22 @@ function BrewForm({ brewId }) {
             });
         }
     }, [brewId]);
+
+    const loadRecipe = (recipeId) => {
+        const recipe = recipes.find(recipe => recipe.id == recipeId);
+
+        if(recipe.coffee?.id) setCoffeeId(recipe.coffee.id);
+        if(recipe.grinder) setGrinder(recipe.grinder);
+        if(recipe.grind_size) setGrindSize(recipe.grind_size);
+        if(recipe.brewer) setBrewer(recipe.brewer);
+        if(recipe.dose) setDose(Number(recipe.dose));
+        if(recipe.water_amt) setWaterAmount(Number(recipe.water_amt));
+        if(recipe.water_temp) setWaterTemp(Number(recipe.water_temp));
+        if(recipe.celsius) setCelsius(recipe.celsius);
+        if(recipe.details) setDetails(recipe.details);
+        if(recipe.notes) setNotes(recipe.notes);
+        if(recipe.rating) setBothRating(recipe.rating);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -116,18 +131,23 @@ function BrewForm({ brewId }) {
                     ))}
                 </select>
             </label>
-            <label>
-                <span>Recipe</span>
-                <select 
-                    value={recipeId}
-                    onChange={e => setRecipeId(+e.target.value)}
-                >
-                    <option value="" disabled>Select a recipe</option>
-                    { recipes.map(recipe => (
-                        <option key={recipe.id} value={recipe.id}>{recipe.label}</option>
-                    ))}
-                </select>
-            </label>
+            <div id="recipe-row">
+                <label>
+                    <span>Recipe</span>
+                    <select 
+                        value={""}
+                        onChange={e => loadRecipe(+e.target.value)}
+                    >
+                        <option value="" disabled>Select a recipe</option>
+                        { recipes.map(recipe => (
+                            <option key={recipe.id} value={recipe.id}>{recipe.label}</option>
+                        ))}
+                    </select>
+                </label>
+                <button id="save-recipe">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="100%" height="100%" fill="currentColor"><path d="M0 48C0 21.5 21.5 0 48 0l0 48 0 393.4 130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4 336 48 48 48 48 0 336 0c26.5 0 48 21.5 48 48l0 440c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488L0 48z"/></svg>
+                </button>
+            </div>
             <label>
                 <span>Grinder</span>
                 <input type="text" value={grinder} onChange={e => setGrinder(e.target.value)}/>

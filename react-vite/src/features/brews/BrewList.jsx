@@ -6,7 +6,7 @@ import './BrewList.css';
 function BrewList(){
     const { brews, fetchBrews } = useStore();
     const { setOnModalClose, setModalContent } = useModal();
-    const [focusedBrew, setFocusedBrew] = useState(0);
+    const [focusedBrew, setFocusedBrew] = useState(-1);
 
     useEffect(() => {
         fetchBrews();
