@@ -60,6 +60,20 @@
     width: 14px;
 }
 
+.grind-details > svg {
+    height: 48px;
+    width: 24px;
+}
+
+.grind-details p {
+    text-align: left;
+}
+
+.brew-content > .brew-details {
+    width: 100%;
+    justify-content: space-between;
+}
+
 div.content-p {
     display: grid;
     grid-template-columns: 1fr 1fr;
