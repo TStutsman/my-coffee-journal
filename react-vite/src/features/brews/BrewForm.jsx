@@ -19,6 +19,7 @@ function BrewForm({ brewId }) {
     const [rating, setRating] = useState("0.0");
     const [notes, setNotes] = useState("");
     const [details, setDetails] = useState("");
+    const [recipeName, setRecipeName] = useState("");
     const [tempRating, setTempRating] = useState("0.0")
 
     const resetRating = () => setTempRating(rating);
@@ -41,12 +42,7 @@ function BrewForm({ brewId }) {
         fetch('/api/recipes')
         .then(res => res.json())
         .then(recipes => {
-            setRecipes(recipes.map(recipe => {
-                return {
-                    ...recipe,
-                    label: `${recipe.brewer} -- ${recipe.dose} in, ${recipe.water_amt} out, gs ${recipe.grind_size}`
-                }
-            }))
+            setRecipes(recipes);
         });
     }, [])
 
@@ -84,6 +80,7 @@ function BrewForm({ brewId }) {
         if(recipe.details) setDetails(recipe.details);
         if(recipe.notes) setNotes(recipe.notes);
         if(recipe.rating) setBothRating(recipe.rating);
+        if(recipe.name) setRecipeName(recipe.name);
     }
 
     const handleSubmit = (e) => {
@@ -133,17 +130,17 @@ function BrewForm({ brewId }) {
             </label>
             <div id="recipe-row">
                 <label>
-                    <span>Recipe</span>
                     <select 
                         value={""}
                         onChange={e => loadRecipe(+e.target.value)}
                     >
                         <option value="" disabled>Select a recipe</option>
                         { recipes.map(recipe => (
-                            <option key={recipe.id} value={recipe.id}>{recipe.label}</option>
+                            <option key={recipe.id} value={recipe.id}>{recipe.name}</option>
                         ))}
                     </select>
                 </label>
+                <span>{recipeName ? recipeName : "New Recipe"}</span>
                 <button id="save-recipe">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="100%" height="100%" fill="currentColor"><path d="M0 48C0 21.5 21.5 0 48 0l0 48 0 393.4 130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4 336 48 48 48 48 0 336 0c26.5 0 48 21.5 48 48l0 440c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488L0 48z"/></svg>
                 </button>
@@ -168,15 +165,17 @@ function BrewForm({ brewId }) {
                 <span>Water Amount</span>
                 <input type="number" min={0} step={0.01} value={waterAmount} onChange={e => setWaterAmount(+e.target.value)}/>
             </label>
-            <label>
-                <span>Water Temp</span>
-                <input type="number" min={0} step={1} max={celsius ? 100 : 212} value={waterTemp} onChange={e => setWaterTemp(+e.target.value)}/>
+            <div id="water-temp">
+                <label>
+                    <span>Water Temp</span>
+                    <input type="number" min={0} step={1} max={celsius ? 100 : 212} value={waterTemp} onChange={e => setWaterTemp(+e.target.value)}/>
+                </label>
                 <div id="degrees-switch" onClick={() => setCelsius(!celsius)}>
                     <div id="switch-circle" className={celsius ? "celsius" : "fahrenheit"}>
                         {celsius ? <>&deg;C</> : <>&deg;F</>}
                     </div>
                 </div>
-            </label>
+            </div>
             <label>
                 <span>Notes</span>
                 <textarea value={notes} onChange={e => setNotes(e.target.value)}/>

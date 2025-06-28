@@ -17,9 +17,17 @@
 }
 
 #recipe-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr;
     align-items: center;
+    justify-items: center;
+    width: 300px;
     gap: 5px;
+}
+
+#recipe-row > label > select, #brew-form > #recipe-row > label, #recipe-row > button {
+    width: 30px;
 }
 
 #save-recipe {
@@ -114,6 +122,11 @@
     color: var(--cream);
 
     background-color: transparent;
+}
+
+#water-temp {
+    display: flex;
+    width: 100%;
 }
 
 #degrees-switch {
