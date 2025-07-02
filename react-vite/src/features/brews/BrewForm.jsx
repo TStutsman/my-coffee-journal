@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Book, Bookmark } from '@assets';
 import { useModal } from '@context';
+import { If } from '@components';
 import { StarRating } from '@brews';
 import './BrewForm.css';
 
@@ -20,7 +22,9 @@ function BrewForm({ brewId }) {
     const [notes, setNotes] = useState("");
     const [details, setDetails] = useState("");
     const [recipeName, setRecipeName] = useState("");
-    const [tempRating, setTempRating] = useState("0.0")
+    const [tempRating, setTempRating] = useState("0.0");
+    const [showRecipeList, setShowRecipeList] = useState(false);
+    const [recipeFocused, setRecipeFocused] = useState(false);
 
     const resetRating = () => setTempRating(rating);
     const setBothRating = (rating) => {
@@ -111,6 +115,26 @@ function BrewForm({ brewId }) {
         .then(res => res.ok ? closeModal() : console.log('error response:', res));
     }
 
+    function saveRecipe() {
+        const recipe = {
+            name: recipeName, grinder, grindSize, dose, brewer, water_amt: waterAmount, water_temp: waterTemp, celsius, details
+        }
+
+        fetch('/api/recipes/', {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(recipe)
+        })
+        .then(res => !res.ok && console.log('error response:', res));
+    }
+
+    function noEmptyValues(e) {
+        e.preventDefault();
+        return grinder && grindSize && dose && brewer && waterAmount && waterTemp && details && recipeName;
+    }
+
     if(coffees.length < 1) return null;
 
     return (
@@ -128,23 +152,26 @@ function BrewForm({ brewId }) {
                     ))}
                 </select>
             </label>
+
             <div id="recipe-row">
-                <label>
-                    <select 
-                        value={""}
-                        onChange={e => loadRecipe(+e.target.value)}
-                    >
-                        <option value="" disabled>Select a recipe</option>
-                        { recipes.map(recipe => (
-                            <option key={recipe.id} value={recipe.id}>{recipe.name}</option>
-                        ))}
-                    </select>
-                </label>
-                <span>{recipeName ? recipeName : "New Recipe"}</span>
-                <button id="save-recipe">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="100%" height="100%" fill="currentColor"><path d="M0 48C0 21.5 21.5 0 48 0l0 48 0 393.4 130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4 336 48 48 48 48 0 336 0c26.5 0 48 21.5 48 48l0 440c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488L0 48z"/></svg>
+                <button id="load-recipe" onClick={(e) => e.preventDefault() || setShowRecipeList(!showRecipeList)}>
+                    <Book/>
+                    <If value={showRecipeList}>
+                        { recipes.map(recipe => {
+                            return <div key={recipe.id} onClick={() => loadRecipe(recipe.id) && setShowRecipeList(false)}>{recipe.name}</div>
+                        })}
+                    </If>
+                </button>
+                {
+                    recipeFocused
+                    ? <textarea id="recipeName" placeholder="New Recipe" autoFocus={recipeFocused} value={recipeName} onChange={(e) => setRecipeName(e.target.value)} onKeyDown={e => e.key == "Enter" && setRecipeFocused(false)}/>
+                    : <span onClick={() => setRecipeFocused(true)}>{recipeName || "New Recipe"}</span>
+                }
+                <button id="save-recipe" onClick={(e) => noEmptyValues(e) ? saveRecipe() : setRecipeFocused(true)}>
+                    <Bookmark/>
                 </button>
             </div>
+
             <label>
                 <span>Grinder</span>
                 <input type="text" value={grinder} onChange={e => setGrinder(e.target.value)}/>
