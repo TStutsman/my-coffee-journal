@@ -26,6 +26,6 @@
 
   border-radius: 8px;
 
-  color: #fff;
+  color: var(--cream);
   background-color: var(--black);
 }

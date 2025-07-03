@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Book, Bookmark } from '@assets';
 import { useModal } from '@context';
 import { If } from '@components';
@@ -25,6 +25,7 @@ function BrewForm({ brewId }) {
     const [tempRating, setTempRating] = useState("0.0");
     const [showRecipeList, setShowRecipeList] = useState(false);
     const [recipeFocused, setRecipeFocused] = useState(false);
+    const [recipeSaved, setRecipeSaved] = useState(false);
 
     const resetRating = () => setTempRating(rating);
     const setBothRating = (rating) => {
@@ -127,7 +128,7 @@ function BrewForm({ brewId }) {
             },
             body: JSON.stringify(recipe)
         })
-        .then(res => !res.ok && console.log('error response:', res));
+        .then(res => res.ok ? setRecipeSaved(true) : console.log('error response:', res));
     }
 
     function noEmptyValues(e) {
@@ -157,18 +158,20 @@ function BrewForm({ brewId }) {
                 <button id="load-recipe" onClick={(e) => e.preventDefault() || setShowRecipeList(!showRecipeList)}>
                     <Book/>
                     <If value={showRecipeList}>
-                        { recipes.map(recipe => {
-                            return <div key={recipe.id} onClick={() => loadRecipe(recipe.id) && setShowRecipeList(false)}>{recipe.name}</div>
-                        })}
+                        <div id="recipe-list">
+                            { recipes.map(recipe => {
+                                return <div className="recipe-list-item" key={recipe.id} onClick={() => loadRecipe(recipe.id) && setShowRecipeList(false)}>{recipe.name}</div>
+                            })}
+                        </div>
                     </If>
                 </button>
                 {
                     recipeFocused
-                    ? <textarea id="recipeName" placeholder="New Recipe" autoFocus={recipeFocused} value={recipeName} onChange={(e) => setRecipeName(e.target.value)} onKeyDown={e => e.key == "Enter" && setRecipeFocused(false)}/>
+                    ? <textarea id="recipeName" placeholder="Name Your Recipe" autoFocus={recipeFocused} onFocus={(e) => e.target.select()} value={recipeName} onChange={(e) => setRecipeName(e.target.value)} onKeyDown={e => e.key == "Enter" && setRecipeFocused(false)}/>
                     : <span onClick={() => setRecipeFocused(true)}>{recipeName || "New Recipe"}</span>
                 }
                 <button id="save-recipe" onClick={(e) => noEmptyValues(e) ? saveRecipe() : setRecipeFocused(true)}>
-                    <Bookmark/>
+                    <Bookmark fill={recipeSaved}/>
                 </button>
             </div>
 
