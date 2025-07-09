@@ -1,8 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { Book, Bookmark } from '@assets';
+import { Recipes, StarRating } from '@brews';
 import { useModal } from '@context';
-import { If } from '@components';
-import { StarRating } from '@brews';
+import { useEffect, useState } from "react";
 import './BrewForm.css';
 
 function BrewForm({ brewId }) {
@@ -10,7 +8,6 @@ function BrewForm({ brewId }) {
 
     const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
-    const [recipes, setRecipes] = useState([]);
     const [grinder, setGrinder] = useState("");
     const [grindSize, setGrindSize] = useState("");
     const [dose, setDose] = useState("");
@@ -22,16 +19,6 @@ function BrewForm({ brewId }) {
     const [notes, setNotes] = useState("");
     const [details, setDetails] = useState("");
     const [recipeName, setRecipeName] = useState("");
-    const [tempRating, setTempRating] = useState("0.0");
-    const [showRecipeList, setShowRecipeList] = useState(false);
-    const [recipeFocused, setRecipeFocused] = useState(false);
-    const [recipeSaved, setRecipeSaved] = useState(false);
-
-    const resetRating = () => setTempRating(rating);
-    const setBothRating = (rating) => {
-        setRating(rating);
-        setTempRating(rating);
-    }
 
     useEffect(() => {
         fetch('/api/coffees')
@@ -43,11 +30,6 @@ function BrewForm({ brewId }) {
                     label: `${coffee.roaster} - ${coffee.farm}`
                 }
             }))
-        });
-        fetch('/api/recipes')
-        .then(res => res.json())
-        .then(recipes => {
-            setRecipes(recipes);
         });
     }, [])
 
@@ -66,14 +48,12 @@ function BrewForm({ brewId }) {
                 if(data.celsius) setCelsius(data.celsius);
                 if(data.recipe) setDetails(data.recipe);
                 if(data.notes) setNotes(data.notes);
-                if(data.rating) setBothRating(data.rating);
+                if(data.rating) setRating(data.rating);
             });
         }
     }, [brewId]);
 
-    const loadRecipe = (recipeId) => {
-        const recipe = recipes.find(recipe => recipe.id == recipeId);
-
+    const loadRecipe = (recipe) => {
         if(recipe.coffee?.id) setCoffeeId(recipe.coffee.id);
         if(recipe.grinder) setGrinder(recipe.grinder);
         if(recipe.grind_size) setGrindSize(recipe.grind_size);
@@ -83,9 +63,27 @@ function BrewForm({ brewId }) {
         if(recipe.water_temp) setWaterTemp(Number(recipe.water_temp));
         if(recipe.celsius) setCelsius(recipe.celsius);
         if(recipe.details) setDetails(recipe.details);
-        if(recipe.notes) setNotes(recipe.notes);
-        if(recipe.rating) setBothRating(recipe.rating);
         if(recipe.name) setRecipeName(recipe.name);
+    }
+
+    function saveRecipe() {
+        const recipe = {
+            name: recipeName, grinder, grindSize, dose, brewer, water_amt: waterAmount, water_temp: waterTemp, celsius, details
+        }
+
+        fetch('/api/recipes/', {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(recipe)
+        })
+        .then(res => res.ok ? console.log('TODO: recipe saved') : console.log('error response:', res));
+    }
+
+    function noEmptyValues(e) {
+        e.preventDefault();
+        return grinder && grindSize && dose && brewer && waterAmount && waterTemp && details && recipeName;
     }
 
     const handleSubmit = (e) => {
@@ -116,26 +114,6 @@ function BrewForm({ brewId }) {
         .then(res => res.ok ? closeModal() : console.log('error response:', res));
     }
 
-    function saveRecipe() {
-        const recipe = {
-            name: recipeName, grinder, grindSize, dose, brewer, water_amt: waterAmount, water_temp: waterTemp, celsius, details
-        }
-
-        fetch('/api/recipes/', {
-            method: 'POST',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-            body: JSON.stringify(recipe)
-        })
-        .then(res => res.ok ? setRecipeSaved(true) : console.log('error response:', res));
-    }
-
-    function noEmptyValues(e) {
-        e.preventDefault();
-        return grinder && grindSize && dose && brewer && waterAmount && waterTemp && details && recipeName;
-    }
-
     if(coffees.length < 1) return null;
 
     return (
@@ -154,26 +132,7 @@ function BrewForm({ brewId }) {
                 </select>
             </label>
 
-            <div id="recipe-row">
-                <button id="load-recipe" onClick={(e) => e.preventDefault() || setShowRecipeList(!showRecipeList)}>
-                    <Book/>
-                    <If value={showRecipeList}>
-                        <div id="recipe-list">
-                            { recipes.map(recipe => {
-                                return <div className="recipe-list-item" key={recipe.id} onClick={() => loadRecipe(recipe.id) && setShowRecipeList(false)}>{recipe.name}</div>
-                            })}
-                        </div>
-                    </If>
-                </button>
-                {
-                    recipeFocused
-                    ? <textarea id="recipeName" placeholder="Name Your Recipe" autoFocus={recipeFocused} onFocus={(e) => e.target.select()} value={recipeName} onChange={(e) => setRecipeName(e.target.value)} onKeyDown={e => e.key == "Enter" && setRecipeFocused(false)}/>
-                    : <span onClick={() => setRecipeFocused(true)}>{recipeName || "New Recipe"}</span>
-                }
-                <button id="save-recipe" onClick={(e) => noEmptyValues(e) ? saveRecipe() : setRecipeFocused(true)}>
-                    <Bookmark fill={recipeSaved}/>
-                </button>
-            </div>
+            <Recipes load={loadRecipe} save={saveRecipe} validate={noEmptyValues} />
 
             <label>
                 <span>Grinder</span>
@@ -216,7 +175,7 @@ function BrewForm({ brewId }) {
             </label>
             <label>
                 <span>Rating</span>
-                <StarRating rating={tempRating} hoverRating={setTempRating} setRating={setBothRating} resetRating={resetRating}/>
+                <StarRating rating={rating} setRating={setRating} />
             </label>
 
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
