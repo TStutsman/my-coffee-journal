@@ -21,6 +21,7 @@ function Recipes({ load, save, validate }) {
     const onSelect = (recipeId) => {
         const recipe = recipes.find(recipe => recipe.id == recipeId);
         load(recipe);
+        setSaved(true);
     }
 
     return (
