@@ -132,7 +132,7 @@ function BrewForm({ brewId }) {
                 </select>
             </label>
 
-            <Recipes load={loadRecipe} save={saveRecipe} validate={noEmptyValues} />
+            <Recipes load={loadRecipe} save={saveRecipe} validate={noEmptyValues} name={recipeName} setName={setRecipeName} />
 
             <label>
                 <span>Grinder</span>

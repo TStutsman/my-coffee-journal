@@ -3,9 +3,8 @@ import { If } from '@components';
 import { useEffect, useState } from 'react';
 import './Recipes.css';
 
-function Recipes({ load, save, validate }) {
+function Recipes({ load, save, validate, name, setName }) {
     const [recipes, setRecipes] = useState([]);
-    const [name, setName] = useState("");
     const [showList, setShowList] = useState(false);
     const [focused, setFocused] = useState(false);
     const [saved, setSaved] = useState(false);
