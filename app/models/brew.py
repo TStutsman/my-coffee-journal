@@ -15,7 +15,7 @@ class Brew(db.Model):
     celsius = db.Column(db.Boolean)
     ratio = db.Column(db.Numeric(scale=4))
     recipe = db.Column(db.String)
-    notes = db.Column(db.String)
+    notes = db.Column(db.String, server_default='')
     rating = db.Column(db.Numeric(scale=1))
     date = db.Column(db.String(12), server_default=func.current_date())
 

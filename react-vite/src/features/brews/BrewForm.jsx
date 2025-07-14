@@ -1,107 +1,42 @@
-import { Recipes, StarRating } from '@brews';
-import { useModal } from '@context';
+import { Recipe, StarRating } from '@brews';
+import { useModal, useStore } from '@context';
+import { formatRequest } from '@utils';
 import { useEffect, useState } from "react";
 import './BrewForm.css';
 
 function BrewForm({ brewId }) {
     const { closeModal } = useModal();
+    const { coffees:unlabeled, brews, recipe, setRecipe } = useStore();
 
-    const [coffees, setCoffees] = useState([])
     const [coffeeId, setCoffeeId] = useState("");
-    const [grinder, setGrinder] = useState("");
-    const [grindSize, setGrindSize] = useState("");
-    const [dose, setDose] = useState("");
-    const [brewer, setBrewer] = useState("");
-    const [waterAmount, setWaterAmount] = useState("");
-    const [waterTemp, setWaterTemp] = useState("");
-    const [celsius, setCelsius] = useState(false);
-    const [rating, setRating] = useState("0.0");
+    const [rating, setRating] = useState(0);
     const [notes, setNotes] = useState("");
-    const [details, setDetails] = useState("");
-    const [recipeName, setRecipeName] = useState("");
 
-    useEffect(() => {
-        fetch('/api/coffees')
-        .then(res => res.json())
-        .then(coffees => {
-            setCoffees(coffees.map(coffee => {
-                return {
-                    id: coffee.id,
-                    label: `${coffee.roaster} - ${coffee.farm}`
-                }
-            }))
-        });
-    }, [])
+    const coffees = unlabeled.map(({id, roaster, farm}) => ({id, label: roaster + " - " + farm}));
 
     useEffect(() => {
         if(brewId) {
-            fetch(`/api/brews/${brewId}`)
-            .then(res => res.json())
-            .then(data => {
-                if(data.coffee?.id) setCoffeeId(data.coffee.id);
-                if(data.grinder) setGrinder(data.grinder);
-                if(data.grind_size) setGrindSize(data.grind_size);
-                if(data.brewer) setBrewer(data.brewer);
-                if(data.dose) setDose(Number(data.dose));
-                if(data.water_amt) setWaterAmount(Number(data.water_amt));
-                if(data.water_temp) setWaterTemp(Number(data.water_temp));
-                if(data.celsius) setCelsius(data.celsius);
-                if(data.recipe) setDetails(data.recipe);
-                if(data.notes) setNotes(data.notes);
-                if(data.rating) setRating(data.rating);
-            });
+            const { coffeeId, rating, notes } = brews[brewId];
+            setCoffeeId(coffeeId);
+            setRating(rating);
+            setNotes(notes || "");
+    
+            const recipe = {...brews[brewId], details: brews[brewId].recipe};
+            delete recipe.coffeeId;
+            delete recipe.rating;
+            delete recipe.notes;
+            delete recipe.coffee;
+            setRecipe(recipe)
         }
     }, [brewId]);
-
-    const loadRecipe = (recipe) => {
-        if(recipe.coffee?.id) setCoffeeId(recipe.coffee.id);
-        if(recipe.grinder) setGrinder(recipe.grinder);
-        if(recipe.grind_size) setGrindSize(recipe.grind_size);
-        if(recipe.brewer) setBrewer(recipe.brewer);
-        if(recipe.dose) setDose(Number(recipe.dose));
-        if(recipe.water_amt) setWaterAmount(Number(recipe.water_amt));
-        if(recipe.water_temp) setWaterTemp(Number(recipe.water_temp));
-        if(recipe.celsius) setCelsius(recipe.celsius);
-        if(recipe.details) setDetails(recipe.details);
-        if(recipe.name) setRecipeName(recipe.name);
-    }
-
-    function saveRecipe() {
-        const recipe = {
-            name: recipeName, grinder, grindSize, dose, brewer, water_amt: waterAmount, water_temp: waterTemp, celsius, details
-        }
-
-        fetch('/api/recipes/', {
-            method: 'POST',
-            headers: {
-                "Content-Type": 'application/json'
-            },
-            body: JSON.stringify(recipe)
-        })
-        .then(res => res.ok ? console.log('TODO: recipe saved') : console.log('error response:', res));
-    }
-
-    function noEmptyValues(e) {
-        e.preventDefault();
-        return grinder && grindSize && dose && brewer && waterAmount && waterTemp && details && recipeName;
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const brew = {
-            coffeeId,
-            grinder,
-            grindSize,
-            dose,
-            brewer,
-            water_amt: waterAmount,
-            water_temp: waterTemp,
-            celsius,
-            notes,
-            recipe: details,
-            rating
-        }
+        const brew = formatRequest({coffeeId, rating, notes, ...recipe, recipe: recipe.details});
+        delete brew.details;
+        delete brew.name;
+        delete brew.id;
 
         const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
         fetch(url, {
@@ -132,50 +67,15 @@ function BrewForm({ brewId }) {
                 </select>
             </label>
 
-            <Recipes load={loadRecipe} save={saveRecipe} validate={noEmptyValues} name={recipeName} setName={setRecipeName} />
+            <Recipe />
 
-            <label>
-                <span>Grinder</span>
-                <input type="text" value={grinder} onChange={e => setGrinder(e.target.value)}/>
-            </label>
-            <label>
-                <span>Grind Size</span>
-                <input type="number" min={0} step={0.25} value={grindSize} onChange={e => setGrindSize(e.target.value)}/>
-            </label>
-            <label>
-                <span>Dose</span>
-                <input type="number" min={0} step={0.01} value={dose} onChange={e => setDose(+e.target.value)}/>
-            </label>
-            <label>
-                <span>Brewer</span>
-                <input type="text" value={brewer} onChange={e => setBrewer(e.target.value)}/>
-            </label>
-            <label>
-                <span>Water Amount</span>
-                <input type="number" min={0} step={0.01} value={waterAmount} onChange={e => setWaterAmount(+e.target.value)}/>
-            </label>
-            <div id="water-temp">
-                <label>
-                    <span>Water Temp</span>
-                    <input type="number" min={0} step={1} max={celsius ? 100 : 212} value={waterTemp} onChange={e => setWaterTemp(+e.target.value)}/>
-                </label>
-                <div id="degrees-switch" onClick={() => setCelsius(!celsius)}>
-                    <div id="switch-circle" className={celsius ? "celsius" : "fahrenheit"}>
-                        {celsius ? <>&deg;C</> : <>&deg;F</>}
-                    </div>
-                </div>
-            </div>
             <label>
                 <span>Notes</span>
                 <textarea value={notes} onChange={e => setNotes(e.target.value)}/>
             </label>
             <label>
-                <span>Details</span>
-                <textarea value={details} onChange={e => setDetails(e.target.value)}/>
-            </label>
-            <label>
                 <span>Rating</span>
-                <StarRating rating={rating} setRating={setRating} />
+                <StarRating rating={rating} setRating={value => setRating(value)} />
             </label>
 
             <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>

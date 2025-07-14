@@ -1,0 +1,18 @@
+#recipe-list {
+    position: absolute;
+    z-index: 4;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    width: 200px;
+
+    border: 1px solid var(--cream);
+    border-radius: 4px;
+    background-color: var(--vanilla);
+}
+
+.recipe-list-item:hover {
+    background-color: lch(from var(--vanilla) calc(l + 7) calc(c + 5) h);
+}

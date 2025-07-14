@@ -1,10 +1,35 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useReducer, useState } from "react";
+import { formatObject } from '@utils';
 
 export const StoreContext = createContext();
 
+const recipeSchema = {
+    name: "",
+    grinder: "",
+    grindSize: "",
+    dose: "",
+    brewer: "",
+    waterAmt: "",
+    waterTemp: "",
+    celsius: false,
+    details: ""
+}
+
+function recipeReducer(state, action) {
+    switch(action.type) {
+        case "update": {
+            return {...state, ...action.payload};
+        }
+        default: {
+            console.log("Unknown recipe action type");
+        }
+    }
+}
+
 export function StoreProvider({ children }) {
     const [ coffees, setCoffees ] = useState([]);
-    const [ brews, setBrews ] = useState([]);
+    const [ brews, setBrews ] = useState({});
+    const [ recipe, dispatch ] = useReducer(recipeReducer, recipeSchema)
 
     const fetchCoffees = useCallback(() => {
         fetch('/api/coffees')
@@ -15,14 +40,29 @@ export function StoreProvider({ children }) {
     const fetchBrews = useCallback(() => {
         fetch('/api/brews')
         .then(res => res.json())
+        .then(brews => brews.map(brew => formatObject(brew)))
+        .then(brews => {
+            const normalized = {inOrder: []};
+            for(const brew of brews) {
+                normalized[brew.id] = brew;
+                normalized.inOrder.push(brew.id);
+            }
+            return normalized;
+        })
         .then(brews => setBrews(brews));
     }, [setBrews]);
+
+    function setRecipe(newValue) {
+        dispatch({type: 'update', payload: newValue});
+    }
 
     const store = {
         coffees,
         fetchCoffees,
         brews,
-        fetchBrews
+        fetchBrews,
+        recipe,
+        setRecipe
     }
 
     return (

@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './StarRating.css';
 
 function StarRating({ rating, setRating }){
-    const [fillStars, setFillStars] = useState(rating || "0.0");
+    const [fillStars, setFillStars] = useState("0.0");
+
+    useEffect(() => {
+        setFillStars(rating);
+    }, [rating]);
 
     const onHover = (e, rating) => {
         const x = e.nativeEvent.offsetX;

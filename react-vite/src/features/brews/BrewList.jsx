@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import './BrewList.css';
 
 function BrewList(){
-    const { brews, fetchBrews } = useStore();
+    const { brews, fetchBrews, fetchCoffees } = useStore();
     const { setOnModalClose, setModalContent } = useModal();
     const [focusedBrew, setFocusedBrew] = useState(-1);
 
     useEffect(() => {
         fetchBrews();
-    }, [fetchBrews]);
+        fetchCoffees();
+    }, [fetchBrews, fetchCoffees]);
 
     const addNewBrew = () => {
         setOnModalClose(() => fetchBrews);
@@ -20,10 +21,10 @@ function BrewList(){
     return (
         <>
         <div className="brew-list">
-            { brews.map((brew, index) => (
+            { brews?.inOrder?.map((brewId, index) => (
                 <BrewListItem 
-                    key={brew.id} 
-                    brew={brew} 
+                    key={brewId} 
+                    brew={brews[brewId]} 
                     show={focusedBrew == index}
                     focusBrew={() => setFocusedBrew(index)}
                 />
