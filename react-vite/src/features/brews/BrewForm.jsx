@@ -26,9 +26,9 @@ function BrewForm({ brewId }) {
             delete recipe.rating;
             delete recipe.notes;
             delete recipe.coffee;
-            setRecipe(recipe)
+            setRecipe(recipe);
         }
-    }, [brewId]);
+    }, [brewId, brews, setRecipe]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
