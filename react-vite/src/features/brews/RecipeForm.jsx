@@ -1,9 +1,8 @@
-import { RecipeSelect } from '@brews';
 import { Bookmark } from '@assets';
 import { useStore } from '@context';
-import { useState } from 'react';
 import { formatRequest } from '@utils';
-import './Recipe.css';
+import { useEffect, useState } from 'react';
+import './RecipeForm.css';
 
 function Recipe() {
     const { recipe, setRecipe } = useStore();
@@ -16,13 +15,13 @@ function Recipe() {
         setSaved(false);
     }
 
-    const loadRecipe = (recipe) => {
-        setRecipe(recipe);
-        setSaved(true);
-    }
+    useEffect(() => {
+        setSaved(recipe?.id);
+    }, [recipe])
 
     function saveRecipe() {
         const recipeSnakeCase = formatRequest(recipe);
+        delete recipeSnakeCase.id;
 
         fetch('/api/recipes/', {
             method: 'POST',
@@ -47,18 +46,17 @@ function Recipe() {
 
     return (
         <>
-            <div id="recipe-row">
-                <RecipeSelect load={loadRecipe}/>
-                {
-                    focused
-                    ? <textarea id="recipeName" placeholder="Name Your Recipe" autoFocus={focused} onFocus={(e) => e.target.select()} value={recipe.name} onChange={(e) => set('name', e.target.value)} onKeyDown={e => e.key == "Enter" && setFocused(false)}/>
-                    : <span onClick={() => setFocused(true)}>{recipe.name || "New Recipe"}</span>
-                }
-                <button id="save-recipe" onClick={(e) => noEmptyValues(e) ? saveRecipe() : setFocused(true)}>
-                    <Bookmark fill={saved}/>
-                </button>
+            <h3>{recipe?.id ? 'Any changes to this recipe?' : 'Create a new recipe'}</h3>
+            <div id='recipe-row'>
+            {
+                focused
+                ? <textarea id="recipe-name" placeholder="Name Your Recipe" autoFocus={focused} onFocus={(e) => e.target.select()} value={recipe.name} onChange={(e) => set('name', e.target.value)} onKeyDown={e => ["Enter", "Tab"].includes(e.key) && setFocused(false)}/>
+                : <span onClick={() => setFocused(true)}>{recipe.name || "New Recipe"}</span>
+            }
+            <button id="save-recipe" disabled={saved} onClick={(e) => noEmptyValues(e) ? saveRecipe() : setFocused(true)}>
+                <Bookmark fill={saved}/>
+            </button>
             </div>
-
             <label>
                 <span>Grinder</span>
                 <input type="text" value={recipe.grinder} onChange={e => set('grinder', e.target.value)}/>

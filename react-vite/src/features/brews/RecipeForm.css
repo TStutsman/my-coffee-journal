@@ -6,34 +6,22 @@
     gap: 5px;
 }
 
-#recipe-row > button {
-    width: 30px;
-
-    transition: all .15s ease-out;
+#recipe-name::placeholder {
+    color: lch(from var(--cream) calc(l - 5) calc(c + 5) h);
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-#recipe-row > button:not(:has(> #recipe-list)):hover {
-    background-color: lch(from var(--vanilla) calc(l + 5) calc(c + 5) h);
-    color: var(--coffee);
-    border-color: var(--coffee);
-}
-
-.recipe-list-item:hover {
-    background-color: lch(from var(--vanilla) calc(l + 7) calc(c + 5) h);
-}
-
-#recipe-row > #recipeName {
+#recipe-row > #recipe-name {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     outline: none;
     overflow: hidden;
     
-    height: 25px;
+    height: 24px;
     width: 100%;
     
     line-height: 1.5;
-    text-align: center;
     color: var(--cream);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: 300;
@@ -43,12 +31,7 @@
     background-color: transparent;
 }
 
-#recipe-row > #recipeName::placeholder {
-    color: lch(from var(--cream) calc(l - 5) calc(c + 5) h);
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
-
-#load-recipe, #save-recipe {
+#save-recipe {
     height: 32px;
     min-width: 32px;
 
@@ -56,4 +39,12 @@
     background-color: transparent;
     border: 1px solid var(--cream);
     border-radius: 4px;
+
+    transition: all .15s ease-out;
+}
+
+#save-recipe:hover {
+    background-color: lch(from var(--vanilla) calc(l + 5) calc(c + 5) h);
+    color: var(--coffee);
+    border-color: var(--coffee);
 }

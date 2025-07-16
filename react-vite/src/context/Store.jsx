@@ -52,9 +52,9 @@ export function StoreProvider({ children }) {
         .then(brews => setBrews(brews));
     }, [setBrews]);
 
-    function setRecipe(newValue) {
+    const setRecipe = useCallback((newValue) => {
         dispatch({type: 'update', payload: newValue});
-    }
+    }, [dispatch]);
 
     const store = {
         coffees,
