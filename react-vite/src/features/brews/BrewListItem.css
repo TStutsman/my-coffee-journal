@@ -1,10 +1,8 @@
 .brew-list-item {
     width: 350px;
     height: 60px;
-    overflow: hidden;
 
     transition: height .65s cubic-bezier(0.5, 0.2, 0.6, .9);
-
     filter: drop-shadow(2px 2px 0 var(--mocha));
 }
 
@@ -23,7 +21,7 @@ div.inner-card {
     border: 1px solid var(--mocha);
     border-radius: 10px;
 
-    background-color: lch(from var(--vanilla) calc(l - 20) calc(c + 10) h);
+    background-color: var(--cappuccino);
 
     transition: transform .5s;
     transform-style: preserve-3d;
@@ -33,6 +31,7 @@ div.front-face {
     position: absolute;
     height: 100%;
     width: 100%;
+    overflow: hidden;
     padding: 15px;
     box-sizing: border-box;
     -webkit-backface-visibility: hidden;
