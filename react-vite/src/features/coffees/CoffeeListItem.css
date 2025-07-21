@@ -12,7 +12,7 @@
     border: 1px solid var(--cream);
     border-radius: 10px;
 
-    transition: margin-bottom .45s cubic-bezier(0.5, 0.2, 0.6, .9);
+    transition: margin-bottom .65s cubic-bezier(0.5, 0.2, 0.6, .9);
 }
 
 .coffee-list-item > * {

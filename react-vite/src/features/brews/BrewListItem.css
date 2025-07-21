@@ -121,9 +121,6 @@ div.recipe, div.notes {
     height: 100%;
     padding: 0 4px;
     box-sizing: border-box;
-
-    background-color: rgba(from var(--vanilla) r g b / .2);
-    border-left: 1px solid var(--vanilla);
 }
 
 .recipe *, .notes * {
