@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session, jsonify
 from ..models import User, db
 from hashlib import sha256
 
@@ -29,7 +29,14 @@ def create_new_user():
 
     db.session.refresh(new_user)
 
-    return new_user.to_dict(), 200
+    session["userId"] = new_user.id
+    session.permanent = True
+
+    response = jsonify({"username": new_user.username})
+    response.status_code = 200
+    response.set_cookie("validSession", "true", 2678000, samesite='Lax')
+
+    return response
 
 @users.post('/login')
 def login_user():
@@ -47,7 +54,14 @@ def login_user():
     hash_object = sha256(request.json["password"].encode('utf-8'))
     passwords_match = user.check_password(hash_object.hexdigest())
     
-    if passwords_match:
-        return user.to_dict()
+    if not passwords_match:
+        return {"errors": {"auth": "Username and password do not match any users. Please try again"}}, 400
 
-    return {"errors": {"auth": "Username and password do not match any users. Please try again"}}, 400
+    session["userId"] = user.id
+    session.permanent = True
+
+    response = jsonify({"username": user.username})
+    response.status_code = 200
+    response.set_cookie("validSession", "true", 2678000, samesite='Lax')
+
+    return response

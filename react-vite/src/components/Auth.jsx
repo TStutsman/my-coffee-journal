@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router'
 import './Auth.css';
 
 function Auth(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [formErrors, setFormErrors] = useState({});
-    const [output, setOutput] = useState("Try to login");
+    const navigate = useNavigate();
 
     const register = () => {
         fetch('/api/users/register', {
@@ -18,7 +19,11 @@ function Auth(){
             })
         })
         .then(res => res.json())
-        .then(data => data.errors ? setFormErrors(data.errors) : setOutput(data));
+        .then(data => {
+            if(data.errors) return setFormErrors(data.errors);
+
+            navigate('/coffees');
+        });
     }
 
     const login = () => {
@@ -32,8 +37,20 @@ function Auth(){
             })
         })
         .then(res => res.json())
-        .then(data => data.errors ? setFormErrors(data.errors) : setOutput(data));
+        .then(data => {
+            if(data.errors) return setFormErrors(data.errors);
+
+            navigate('/coffees');
+        });
     }
+
+    useEffect(()=> {
+        const sessionExists = document.cookie.split(';').some((row) => row.startsWith('validSession'));
+        if(sessionExists) {
+            navigate('/coffees');
+        }
+    }, [navigate])
+    
 
     return (
         <div className="auth">
@@ -52,7 +69,6 @@ function Auth(){
             { formErrors.auth && <p className="form-error">{formErrors.auth}</p> }
             <button onClick={register}>Register</button>
             <button onClick={login}>Login</button>
-            <p style={{color:"black"}}>{output.id} {output.username}</p>
         </div>
     )
 }
