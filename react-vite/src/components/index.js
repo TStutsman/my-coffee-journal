@@ -1,9 +1,9 @@
 import If from "./If.jsx";
-import Login from './Login.jsx';
+import Auth from './Auth.jsx';
 import Navigation from "./Navigation";
 
 export {
     If,
-    Login,
+    Auth,
     Navigation
 };

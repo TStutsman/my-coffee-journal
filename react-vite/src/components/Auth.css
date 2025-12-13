@@ -1,0 +1,13 @@
+div.auth {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0 auto;
+    width: 300px;
+}
+
+p.form-error {
+    color: #bf1f1f;
+    font-size: 12px;
+    text-align: left;
+}

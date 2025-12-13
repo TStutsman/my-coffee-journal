@@ -1,4 +1,4 @@
-import { Login, Navigation } from '@components'
+import { Auth, Navigation } from '@components'
 import { Modal, ModalProvider, StoreProvider } from '@context'
 import { BrewList } from '@brews'
 import { CoffeeList } from '@coffees';
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Login />
+        element: <Auth />
       },
       {
         path: '/coffees',

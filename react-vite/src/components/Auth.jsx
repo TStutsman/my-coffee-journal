@@ -1,8 +1,10 @@
 import { useState } from "react";
+import './Auth.css';
 
-function Login(){
+function Auth(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [formErrors, setFormErrors] = useState({});
     const [output, setOutput] = useState("Try to login");
 
     const register = () => {
@@ -16,7 +18,7 @@ function Login(){
             })
         })
         .then(res => res.json())
-        .then(data => setOutput(data));
+        .then(data => data.errors ? setFormErrors(data.errors) : setOutput(data));
     }
 
     const login = () => {
@@ -30,22 +32,24 @@ function Login(){
             })
         })
         .then(res => res.json())
-        .then(data => Object.keys(data).length ? setOutput(data) : setOutput("not found"));
+        .then(data => data.errors ? setFormErrors(data.errors) : setOutput(data));
     }
 
     return (
-        <div>
-            <h1>Login screen</h1>
+        <div className="auth">
             <input type="text"
              placeholder="username"
              value={username}
              onChange={e => setUsername(e.target.value)}
             />
+            { formErrors.username && <p className="form-error">{formErrors.username}</p> }
             <input type="password"
              placeholder="password"
              value={password}
              onChange={e => setPassword(e.target.value)}
             />
+            { formErrors.password && <p className="form-error">{formErrors.password}</p> }
+            { formErrors.auth && <p className="form-error">{formErrors.auth}</p> }
             <button onClick={register}>Register</button>
             <button onClick={login}>Login</button>
             <p style={{color:"black"}}>{output.id} {output.username}</p>
@@ -53,4 +57,4 @@ function Login(){
     )
 }
 
-export default Login;
+export default Auth;
