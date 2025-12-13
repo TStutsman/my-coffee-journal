@@ -5,7 +5,7 @@ class Brew(db.Model):
     __tablename__ = 'brews'
 
     id = db.Column(db.Integer, primary_key=True)
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     coffee_id = db.Column(db.Integer, db.ForeignKey('coffees.id'))
     grinder = db.Column(db.String(50))
     grind_size = db.Column(db.Numeric(scale=2))
@@ -20,7 +20,7 @@ class Brew(db.Model):
     rating = db.Column(db.Numeric(scale=1))
     date = db.Column(db.String(12), server_default=func.current_date())
 
-    # user = db.relationship('User', back_populates="brews")
+    user = db.relationship('User', back_populates="brews")
     coffee = db.relationship('Coffee', back_populates='brews')
 
     def to_dict(self):

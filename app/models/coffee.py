@@ -23,7 +23,7 @@ class Coffee(db.Model):
     __tablename__ = "coffees"
 
     id = db.Column(db.Integer, primary_key=True)
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     country = db.Column(db.String(50), nullable=False)
     region = db.Column(db.String(50))
     farm = db.Column(db.String(50))
@@ -33,7 +33,7 @@ class Coffee(db.Model):
     roast_profile = db.Column(db.String(25))
     color = db.Column(db.String(7))
 
-    # user = db.relationship('User', back_populates='coffees')
+    user = db.relationship('User', back_populates='coffees')
     brews = db.relationship('Brew', back_populates='coffee', cascade='all, delete-orphan')
     notes = db.relationship('FlavorNote', secondary='coffees_flavor_notes', back_populates='coffees')
     
@@ -48,7 +48,7 @@ class Coffee(db.Model):
             "roaster": self.roaster,
             "roast_profile": self.roast_profile,
             "color": self.color,
-            "notes": [note.to_dict() for note in self.notes]
+            "notes": [note.to_dict() for note in self.notes] #type: ignore
         }
     
     def __repr__(self):
