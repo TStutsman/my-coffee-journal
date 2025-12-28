@@ -32,13 +32,16 @@ export function StoreProvider({ children }) {
     const [ recipe, dispatch ] = useReducer(recipeReducer, recipeSchema)
 
     const fetchCoffees = useCallback(() => {
-        fetch('/api/coffees')
+        fetch('/api/coffees', { credentials: 'include' })
         .then(res => res.json())
-        .then(coffees => setCoffees(coffees));
+        .then(data => {
+            if(data.errors) return;
+            setCoffees(data);
+        });
     }, [setCoffees]);
 
     const fetchBrews = useCallback(() => {
-        fetch('/api/brews')
+        fetch('/api/brews', { credentials: 'include' })
         .then(res => res.json())
         .then(brews => brews.map(brew => formatObject(brew)))
         .then(brews => {

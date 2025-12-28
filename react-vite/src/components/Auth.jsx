@@ -46,6 +46,7 @@ function Auth(){
 
     useEffect(()=> {
         const sessionExists = document.cookie.split(';').some((row) => row.startsWith('validSession'));
+        
         if(sessionExists) {
             navigate('/coffees');
         }

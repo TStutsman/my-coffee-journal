@@ -29,7 +29,7 @@ def create_new_user():
 
     db.session.refresh(new_user)
 
-    session["userId"] = new_user.id
+    session["user_id"] = new_user.id
     session.permanent = True
 
     response = jsonify({"username": new_user.username})
@@ -57,7 +57,7 @@ def login_user():
     if not passwords_match:
         return {"errors": {"auth": "Username and password do not match any users. Please try again"}}, 400
 
-    session["userId"] = user.id
+    session["user_id"] = user.id
     session.permanent = True
 
     response = jsonify({"username": user.username})

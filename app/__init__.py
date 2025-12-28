@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, send_from_directory
 from flask_wtf.csrf import generate_csrf
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -14,7 +14,7 @@ logger = logging.getLogger('werkzeug')
 logger.setLevel(logging.ERROR)
 
 app.config.from_object(Config)
-cors = CORS(app, resources={r"*": {"origins": "http://localhost:5173"}})
+cors = CORS(app, resources={r"*": {"origins": "http://127.0.0.1:5173"}}, supports_credentials=True)
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -56,5 +56,5 @@ def inject_outgoing_csrf(response):
 @app.route('/<path:path>')
 def react_route(path):
     if path == 'favicon.ico':
-        return app.send_from_directory('public', 'favicon.ico')
+        return send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
