@@ -38,19 +38,6 @@ function BrewListItem({ brew:initialBrew }) {
         });
     }
 
-    console.log(brew)
-
-    const colors = {
-        '#9e4d4d': 'red',
-        '#ae7568': 'pink',
-        '#ba7b48': 'orange',
-        '#c2a43f': 'yellow',
-        '#718c4c': 'green',
-        '#73a2a1': 'blue',
-        '#7b7799': 'purple',
-        '#825c4c': 'brown',
-    }
-
     return (
         <div className='brew-list-item'>
             <div className='brew-title'>
@@ -63,7 +50,7 @@ function BrewListItem({ brew:initialBrew }) {
 
             <div className='brew-content'>
                     <div>
-                        <p style={{color: `var(--text-${colors[brew.coffee.color]})`}}>{brew.coffee.roaster} {brew.coffee.farm}</p>
+                        <p style={{color: `var(--text-${brew.coffee.color})`}}>{brew.coffee.roaster} {brew.coffee.farm}</p>
                     </div>
                     <div>
                         <span>{pDose}g coffee</span>

@@ -1,12 +1,11 @@
 #color-picker {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     gap: 5px;
-}
 
-#color-picker > span:first-of-type {
-    opacity: .7;
-    margin-right: 8px;
+    padding: 10px 0;
 }
 
 .pick-color {
@@ -15,7 +14,7 @@
     height: 16px;
     width: 16px;
     
-    border: 2px solid var(--text-color);
+    border: 2px solid var(--dp-24);
     border-radius: 50%;
 }
 

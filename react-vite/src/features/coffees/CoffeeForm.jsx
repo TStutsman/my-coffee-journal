@@ -13,7 +13,14 @@ function CoffeeForm({ coffeeId }) {
     const [ process, setProcess ] = useState("");
     const [ roaster, setRoaster ] = useState("");
     const [ roastProfile, setRoastProfile ] = useState("");
-    const [ color, setColor ] = useState("#9e4d4d")
+    const [ color, setColor ] = useState("brown");
+
+    const colorScheme = () => {
+        if(window !== undefined && window.matchMedia){
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        return 'light';
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -51,11 +58,15 @@ function CoffeeForm({ coffeeId }) {
         }
     }, [coffeeId]);
 
+    const formStyle = colorScheme() === 'light' ? {backgroundColor: `var(--${color})`} : {backgroundColor: 'var(--dp-01)'};
+    const buttonStyle = colorScheme() === 'light' ? {} : {color: `var(--text-${color})`}
+    const labelStyle = colorScheme() === 'light' ? {} : {borderColor: `var(--${color})`};
+
     return (
-        <form id="coffee-form" onSubmit={handleSubmit} style={{backgroundColor: color}}>
+        <form id="coffee-form" onSubmit={handleSubmit} style={formStyle}>
             <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
 
-            <label>
+            <label style={labelStyle}>
                 <span>Roaster</span>
                 <input
                     type="text"
@@ -63,7 +74,7 @@ function CoffeeForm({ coffeeId }) {
                     onChange={e => setRoaster(e.target.value)}
                 />
             </label>
-            <label>
+            <label style={labelStyle}>
                 <span>Farm</span>
                 <input 
                     type="text"
@@ -72,7 +83,7 @@ function CoffeeForm({ coffeeId }) {
                 />
             </label>
 
-            <label>
+            <label style={labelStyle}>
                 <span>Region</span>
                 <input 
                     type="text"
@@ -80,7 +91,7 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setRegion(e.target.value)}
                 />
             </label>
-            <label>
+            <label style={labelStyle}>
                 <span>Country</span>
                 <input 
                     type="text"
@@ -89,7 +100,7 @@ function CoffeeForm({ coffeeId }) {
                 />
             </label>
             
-            <label>
+            <label style={labelStyle}>
                 <span>Varietal</span>
                 <input 
                     type="text"
@@ -97,7 +108,7 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setVarietal(e.target.value)}
                 />
             </label>
-            <label>
+            <label style={labelStyle}>
                 <span>Process</span>
                 <input 
                     type="text"
@@ -105,7 +116,7 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setProcess(e.target.value)}
                 />
             </label>
-            <label>
+            <label style={labelStyle}>
                 <span>Roast Profile</span>
                 <input 
                     type="text"
@@ -114,9 +125,10 @@ function CoffeeForm({ coffeeId }) {
                 />
             </label>
             <label>
+                <span>Pick a color</span>
                 <ColorPicker color={color} setColor={setColor} />
             </label>
-            <button type="submit">{ coffeeId ? 'Update' : 'Add' }</button>
+            <button type="submit" style={buttonStyle}>{ coffeeId ? 'Update' : 'Add' }</button>
         </form>
     )
 }

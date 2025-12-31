@@ -6,8 +6,9 @@
     width: 300px;
     padding: 20px;
 
-    border: 1px solid var(--heading-color);
-    border-radius: 8px;
+    border: 1px solid;
+    border-color: var(--dp-24);
+    border-radius: 20px;
 
     transition: background-color .3s ease;
 }
@@ -47,9 +48,16 @@
     transition: all .3s ease;
 }
 
-#coffee-form label > span:has(+ input:not([value=""])), #coffee-form label > span:has( + input:focus) {
+#coffee-form label > span:has(+ input:not([value=""])),
+#coffee-form label > span:has( + input:focus) {
     top: calc(-50% + 8px);
     left: 0;
+    font-size: 12px;
+}
+
+#coffee-form label > span:has( + #color-picker) {
+    top: calc(-50% + 4px);
+    left: 2px;
     font-size: 12px;
 }
 
@@ -72,7 +80,7 @@
 
 #coffee-form button {
     align-self: flex-end;
-    background-color: var(--heading-color);
+    background-color: var(--dp-24);
     transition: all .2s ease;
 }
 
