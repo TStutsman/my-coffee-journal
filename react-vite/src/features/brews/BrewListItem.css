@@ -1,139 +1,70 @@
 .brew-list-item {
     width: 350px;
-    height: 60px;
 
-    transition: height .65s cubic-bezier(0.5, 0.2, 0.6, .9);
-    filter: drop-shadow(2px 2px 0 var(--card-border-color));
-}
+    color: var(--text-3);
+    background-color: var(--dp-01);
 
-.brew-list-item.show {
-    height: 220px;
-    max-height: 450px;
-}
-
-div.inner-card {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-
-    border: 1px solid var(--card-border-color);
-    border-radius: 10px;
-
-    color: var(--text-color);
-    background-color: var(--card-color);
-
-    transition: transform .5s;
-    transform-style: preserve-3d;
-}
-
-div.front-face {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    padding: 15px;
-    box-sizing: border-box;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    border-radius: 20px;
 }
 
 .brew-title {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-    font-family: 'Habibi';
+    padding: 14px 20px;
 
-    padding-bottom: 5px;
+    border-radius: 20px 20px 0 0;
+    background-color: var(--dp-08);
 }
 
 .brew-title > div {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    
-    line-height: 1.1;
+    gap: 15px;
 }
 
-.brew-title p {
-    font-size: 12px;
+.brew-title h5 {
+    font-weight: normal;
+    font-size: 16px;
+    color: lch(from #C5A487 l c h / .75)
 }
 
 .brew-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 3px;
 
-    padding: 5px 0;
+    padding: 14px 20px 18px;
+    font-size: 14px;
+}
+
+.brew-content > :first-child {
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .brew-content > div {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
-.brew-content svg {
-    height: 14px;
-    width: 14px;
+.brew-content > div > :nth-child(2) {
+    color: lch(from #C5A487 l c h / .55)
 }
 
-.grind-details > svg {
-    height: 48px;
-    width: 24px;
-}
-
-.grind-details p {
+.brew-content p {
+    width: 310px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: left;
-}
-
-.brew-content > .brew-details {
-    width: 100%;
-    justify-content: space-between;
-}
-
-div.back-face {
-    position: absolute;
-    top: 10px;
-    padding: 15px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    align-items: flex-start;
-    gap: 2px;
-    margin: 8px 0;
-
-    transform: rotateY(180deg);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.inner-card.flipped{
-    transform: rotateY(180deg);
-}
-
-div.recipe, div.notes {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-
-    height: 100%;
-    padding: 0 4px;
-    box-sizing: border-box;
-}
-
-.recipe *, .notes * {
-    font-size: 14px;
-    text-align: left;
-    white-space: pre-line;
 }
 
 .brew-buttons {
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
 }
 
 .brew-buttons > button {

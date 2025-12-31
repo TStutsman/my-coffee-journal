@@ -6,7 +6,6 @@ import './BrewList.css';
 function BrewList(){
     const { brews, fetchBrews, fetchCoffees } = useStore();
     const { setOnModalClose, setModalContent } = useModal();
-    const [focusedBrew, setFocusedBrew] = useState(-1);
 
     useEffect(() => {
         fetchBrews();
@@ -22,12 +21,10 @@ function BrewList(){
         <>
         <div className="brew-list">
             <h1>brews</h1>
-            { brews?.inOrder?.map((brewId, index) => (
+            { brews?.inOrder?.map((brewId) => (
                 <BrewListItem 
                     key={brewId} 
-                    brew={brews[brewId]} 
-                    show={focusedBrew == index}
-                    focusBrew={() => setFocusedBrew(index)}
+                    brew={brews[brewId]}
                 />
             ))}
         </div>
