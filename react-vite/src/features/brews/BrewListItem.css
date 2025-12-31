@@ -3,7 +3,7 @@
     height: 60px;
 
     transition: height .65s cubic-bezier(0.5, 0.2, 0.6, .9);
-    filter: drop-shadow(2px 2px 0 var(--mocha));
+    filter: drop-shadow(2px 2px 0 var(--card-border-color));
 }
 
 .brew-list-item.show {
@@ -18,10 +18,11 @@ div.inner-card {
     height: 100%;
     box-sizing: border-box;
 
-    border: 1px solid var(--mocha);
+    border: 1px solid var(--card-border-color);
     border-radius: 10px;
 
-    background-color: var(--cappuccino);
+    color: var(--text-color);
+    background-color: var(--card-color);
 
     transition: transform .5s;
     transform-style: preserve-3d;
@@ -42,6 +43,7 @@ div.front-face {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    font-family: 'Habibi';
 
     padding-bottom: 5px;
 }
@@ -136,7 +138,7 @@ div.recipe, div.notes {
 
 .brew-buttons > button {
     padding: 5px 10px;
-    color: rgba(246, 235, 218, .7);
+    color: var(--text-color);
     background-color: transparent;
     border: none;
 
@@ -144,7 +146,7 @@ div.recipe, div.notes {
 }
 
 .brew-buttons > button:hover, .brew-buttons > button:active, .coffee-buttons > button:focus {
-    color: #f6ebda;
+    color: var(--background-color);
     outline: none;
     border: none;
 }

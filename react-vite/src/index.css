@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Familjen Grotesk', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 300;
   
@@ -8,15 +8,68 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  --coffee: #2d1e11;
-  --mocha: #492d14;
-  --cappuccino: #9b6e47;
-  --vanilla: #c5a487;
-  --cream: #f6ebda;
-  --bg: #e7cfb5;
+  color-scheme: light dark;
 
-  color: var(--cream);
-  background-color: var(--bg);
+  --pink: #B86981;
+  --red: #9E4D4D;
+  --brown: #825C4C;
+  --orange: #B97B48;
+  --yellow: #C3A74D;
+  --green: #718C4C;
+  --blue: #73A2A1;
+  --purple: #7B7799;
+
+  --heading-color: #2d1e11;
+  --text-color: #f6ebda;
+  --button-text-color: #e7cfb5;
+  --background-color: #f6ebda;
+  --form-bg: #c5a487;
+  --card-color: #9b6e47;
+  --card-border-color: #492d14;
+
+  color: var(--background-color);
+  background-color: var(--background-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --red: #9E4D4D;
+    --pink: #B86981;
+    --orange: #B97B48;
+    --yellow: #C2A43F;
+    --green: #718C4C;
+    --blue: #73A2A1;
+    --purple: #7B7799;
+    --brown: #825C4C;
+
+    --text-red: #E57E7E;
+    --text-pink: #EB98B1;
+    --text-orange: #E09D65;
+    --text-yellow: #D9C06D;
+    --text-green: #91B85C;
+    --text-blue: #9FD1D0;
+    --text-purple: #C5BFF1;
+    --text-brown: #DCA690;
+
+    --dp-00: #14100D;
+    --dp-01: #201915;
+    --dp-02: #241D18;
+    --dp-24: #3A2E25;
+
+    --background-color: #14100D;
+    --nav-bg: #241D18;
+
+    --text-1: #f6ebda;
+    --text-2: #E7CFB5;
+    --text-3: #D6BEA1;
+
+    --heading-color: #f6ebda;
+    --text-color: #D6BEA1;
+    --button-text-color: #f6ebda;
+    --card-color: #492d14;
+    --form-bg: #2d1e11;
+    --card-border-color: #2d1e11;
+  }
 }
 
 html {
@@ -25,11 +78,11 @@ html {
 
 a {
   font-weight: 500;
-  color: var(--coffee);
+  color: var(--heading-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: var(--cream);
+  color: var(--text-color);
 }
 
 body {
@@ -47,7 +100,7 @@ body {
   overscroll-behavior-y: contain;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
 }
@@ -55,6 +108,8 @@ h1, h2, h3, h4, h5, h6, p {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: 'Habibi';
+  color: var(--text-color);
 }
 
 button {
@@ -64,11 +119,46 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: var(--cream);
-  background-color: var(--mocha);
+  color: var(--text-color);
+  background-color: var(--card-border-color);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: var(--cream);
+  border-color: var(--text-color);
+}
+
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  src: url('./assets/fonts/FamiljenGrotesk-Regular.ttf') format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  src: url('./assets/fonts/FamiljenGrotesk-Medium.ttf') format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  src: url('./assets/fonts/FamiljenGrotesk-SemiBold.ttf') format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  src: url('./assets/fonts/FamiljenGrotesk-Bold.ttf') format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Habibi';
+  src: url('./assets/fonts/Habibi-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'DG One';
+  src: url('./assets/fonts/DelaGothicOne-Regular.ttf') format("truetype");
 }

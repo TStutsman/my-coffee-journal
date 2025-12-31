@@ -20,6 +20,7 @@ function CoffeeList(){
     return (
         <>
         <div className="coffee-list">
+            <h1>coffees</h1>
             { coffees.map((coffee, index) => (
                 <CoffeeListItem 
                     key={coffee.id} 

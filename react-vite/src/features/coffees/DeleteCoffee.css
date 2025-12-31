@@ -7,7 +7,7 @@
     width: 350px;
 
     border-radius: 10px;
-    background-color: var(--vanilla);
+    background-color: var(--form-bg);
 }
 
 .delete-modal h6 {
@@ -22,7 +22,7 @@
 }
 
 button.cancel {
-    background-color: lch(from var(--mocha) calc(l + 20) calc(c - 2) h);
+    background-color: lch(from var(--card-border-color) calc(l + 20) calc(c - 2) h);
 }
 button.delete {
     background-color: rgb(129, 8, 8);

@@ -1,8 +1,19 @@
 .coffee-list {
+    width: 350px;
+    margin: 20px auto 0;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    gap: 10px;
+    gap: 8px;
+}
+
+.coffee-list > h1 {
+    align-self: flex-start;
+    margin: 0;
+    font-size: 36px;
+    color: var(--text-2);
 }
 
 button#add-coffee {
@@ -19,6 +30,6 @@ button#add-coffee {
 }
 
 button#add-coffee:hover {
-    border: 1px solid var(--cappuccino);
-    background-color: var(--cappuccino);
+    border: 1px solid var(--card-color);
+    background-color: var(--card-color);
 }

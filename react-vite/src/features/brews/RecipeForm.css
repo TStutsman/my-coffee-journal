@@ -7,7 +7,7 @@
 }
 
 #recipe-name::placeholder {
-    color: lch(from var(--cream) calc(l - 5) calc(c + 5) h);
+    color: lch(from var(--text-color) calc(l - 5) calc(c + 5) h);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -22,12 +22,12 @@
     width: 100%;
     
     line-height: 1.5;
-    color: var(--cream);
+    color: var(--text-color);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: 300;
     
     border: none;
-    border-bottom: 1px solid var(--cream);
+    border-bottom: 1px solid var(--text-color);
     background-color: transparent;
 }
 
@@ -37,14 +37,14 @@
 
     padding: 5px 8px;
     background-color: transparent;
-    border: 1px solid var(--cream);
+    border: 1px solid var(--text-color);
     border-radius: 4px;
 
     transition: all .15s ease-out;
 }
 
 #save-recipe:hover {
-    background-color: lch(from var(--vanilla) calc(l + 5) calc(c + 5) h);
-    color: var(--coffee);
-    border-color: var(--coffee);
+    background-color: lch(from var(--form-bg) calc(l + 5) calc(c + 5) h);
+    color: var(--heading-color);
+    border-color: var(--heading-color);
 }

@@ -21,6 +21,7 @@ function BrewList(){
     return (
         <>
         <div className="brew-list">
+            <h1>brews</h1>
             { brews?.inOrder?.map((brewId, index) => (
                 <BrewListItem 
                     key={brewId} 

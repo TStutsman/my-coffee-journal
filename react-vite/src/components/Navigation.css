@@ -1,24 +1,24 @@
 nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
 
     position: sticky;
     top: 0;
     z-index: 2;
 
-    background-color: #c5a487;
+    background-color: var(--nav-bg);
 
-    height: 60px;
+    height: 54px;
     width: 100vw;
     margin: 0;
 }
 
-nav h1 {
-    font-size: 22px;
-    letter-spacing: 3px;
-    color: var(--coffee);
+nav h3 {
+    font-size: 16px;
+    font-family: 'DG One', 'Habibi', system-ui, -apple-system, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--text-2);
+    text-transform: uppercase;
 }
 
 nav a {
@@ -26,28 +26,12 @@ nav a {
     align-items: center;
     justify-content: center;
     
-    height: 24px;
+    height: 20px;
     
     transition: color .2s ease-out;
 }
 
 svg#brew-icon {
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
 }
-
-/* nav button {
-    height: 28px;
-    padding: 2px 0 0;
-    border: none;
-    outline: none;
-
-    color: var(--coffee);
-    background-color: transparent;
-}
-
-nav button:hover, nav button:active, nav button:focus {
-    color: #f6ebda;
-    border: none;
-    outline: none;
-} */

@@ -3,20 +3,19 @@
     display: flex;
     flex-direction: column;
 
+    box-sizing: border-box;
     width: 350px;
-    height: 250px;
 
-    margin: 10px auto calc(11px - 250px);
-    padding:0 10px 5px;
+    margin: 0 auto;
+    padding:0 0 50px;
 
-    border: 1px solid var(--cream);
-    border-radius: 10px;
+    border-radius: 20px;
 
     transition: margin-bottom .65s cubic-bezier(0.5, 0.2, 0.6, .9);
 }
 
 .coffee-list-item > * {
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .coffee-list-item.show-item {
@@ -25,25 +24,34 @@
 
 .coffee-title {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 
-    padding:10px 0 0;
+    padding: 10px 20px;
     border-bottom: 1px solid;
     margin-bottom: 5px;
+    border-radius: 20px 20px 0 0;
 }
 
-.coffee-title > * {
+.coffee-title > h4 {
     margin: 0;
+    font-family: 'Familjen Grotesk';
+    font-weight: 400;
+    color: lch(from var(--text-color) l c h / .65)
+}
+
+.coffee-title > h4:first-child {
+    font-weight: 600;
 }
 
 .coffee-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 3px;
+    padding-top: 10px;
 
-    padding: 0;
+    font-size: 14px;
 }
 
 .coffee-content p {
@@ -56,8 +64,7 @@
     position: absolute;
     bottom: 10px;
 
-    width: calc(100% - 20px);
-    padding: 0;
+    width: calc(100% - 40px);
 
     display: flex;
     justify-content: space-between;
@@ -77,9 +84,19 @@
 .coffee-buttons > button:hover, .coffee-buttons > button:active, .coffee-buttons > button:focus {
     border: none;
     outline: none;
-    color: var(--cream);
+    color: var(--text-color);
 }
 
 .trash-icon, .edit-icon {
     height: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .coffee-list-item {
+        color: var(--text-color);
+        background-color: var(--dp-01);
+    }
+    .coffee-title {
+        background-color: var(--dp-24);
+    }
 }

@@ -7,17 +7,28 @@ function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
     const { setModalContent, setOnModalClose } = useModal();
     const { fetchCoffees } = useStore();
 
+    const colors = {
+        '#9e4d4d': 'red',
+        '#ae7568': 'pink',
+        '#ba7b48': 'orange',
+        '#c2a43f': 'yellow',
+        '#718c4c': 'green',
+        '#73a2a1': 'blue',
+        '#7b7799': 'purple',
+        '#825c4c': 'brown',
+    }
+
     // this slice of state allows the item to update its own values (i.e. after an edit)
     const [coffee, setCoffee] = useState(initialCoffee);
-    const [itemClass, setItemClass] = useState("coffee-list-item");
+    const [itemClass, setItemClass] = useState(`coffee-list-item ${colors[coffee.color]}`);
 
-    useEffect(() => {
-        if(show) {
-            setItemClass("coffee-list-item show-item");
-        } else {
-            setItemClass("coffee-list-item");
-        }
-    }, [show]);
+    // useEffect(() => {
+    //     if(show) {
+    //         setItemClass((prev) => prev + " show-item");
+    //     } else {
+    //         setItemClass(`coffee-list-item ${colors[coffee.color]}`);
+    //     }
+    // }, [show]);
 
     const editCoffee = () => {
         setModalContent(<CoffeeForm coffeeId={coffee.id} />);
@@ -42,10 +53,10 @@ function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
     const showItem = () => focusCoffee();
 
     return (
-        <div className={itemClass} style={{backgroundColor: coffee.color}} onTouchStart={showItem} onMouseOver={showItem}>
-            <div className='coffee-title'>
-                <h3>{coffee.roaster}</h3>
-                <div>{coffee.farm}</div>
+        <div className={itemClass} onTouchStart={showItem} onMouseOver={showItem}>
+            <div className='coffee-title' style={{borderColor: `var(--${colors[coffee.color]})`}}>
+                <h4 style={{color: `var(--text-${colors[coffee.color]})`}}>{coffee.farm}</h4>
+                <h4>{coffee.roaster}</h4>
             </div>
             <div className='coffee-content'>
                 <p>{coffee.region ? coffee.region + ', ' : ""}{coffee.country}</p>

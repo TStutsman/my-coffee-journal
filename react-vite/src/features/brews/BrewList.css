@@ -5,7 +5,14 @@
 
     width: 350px;
     min-height: 90%;
-    margin: 10px auto;
+    margin: 20px auto;
+}
+
+.brew-list > h1 {
+    align-self: flex-start;
+    margin: 0;
+    font-size: 36px;
+    color: var(--text-2)
 }
 
 button#add-brew {
@@ -22,6 +29,6 @@ button#add-brew {
 }
 
 button#add-brew:hover {
-    border: 1px solid var(--cappuccino);
-    background-color: var(--cappuccino);
+    border: 1px solid var(--card-color);
+    background-color: var(--card-color);
 }

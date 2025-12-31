@@ -6,7 +6,7 @@
 
     padding: 10px 40px;
 
-    border: 2px solid var(--coffee);
+    border: 2px solid var(--heading-color);
     border-radius: 8px;
     background-color: #c5a487;
 }
@@ -27,7 +27,7 @@
     width: calc(100% - 4px);
     padding: 10px 2px 4px;
 
-    border-bottom: 1px solid var(--cream);
+    border-bottom: 1px solid var(--text-color);
 }
 
 #brew-form label:has(select){
@@ -36,7 +36,7 @@
     height: 18px;
     padding: 6px 2px;
 
-    border: 1px solid var(--cream);
+    border: 1px solid var(--text-color);
     border-radius: 4px;
 }
 
@@ -49,7 +49,7 @@
     height: 100px;
     padding: 4px 2px;
 
-    border: 1px solid var(--cream);
+    border: 1px solid var(--text-color);
     border-radius: 4px;
 }
 
@@ -84,9 +84,9 @@
     padding: 0 2px;
 
     font-size: 12px;
-    color: rgba(from var(--cream) r g b / .8);
+    color: rgba(from var(--text-color) r g b / .8);
 
-    background-color: var(--vanilla);
+    background-color: var(--form-bg);
     opacity: 1;
 }
 
@@ -95,9 +95,9 @@
     margin-left: 4px;
     padding: 0 2px;
 
-    color: rgba(from var(--cream) r g b / .8);
+    color: rgba(from var(--text-color) r g b / .8);
 
-    background-color: var(--vanilla);
+    background-color: var(--form-bg);
     opacity: 1;
 }
 
@@ -117,7 +117,7 @@
     width: 100%;
 
     font-size: 16px;
-    color: var(--cream);
+    color: var(--text-color);
 
     background-color: transparent;
 }
@@ -136,14 +136,14 @@
     font-size: 14px;
 
     border-radius: 13px;
-    background-color: var(--mocha);
+    background-color: var(--card-border-color);
 
     cursor: pointer;
     transition: background-color .2s ease;
 }
 
 #degrees-switch:hover {
-    background-color: lch(from var(--mocha) calc(l + 20) c h);
+    background-color: lch(from var(--card-border-color) calc(l + 20) c h);
 }
 
 #switch-circle {
@@ -159,10 +159,10 @@
     width: 20px;
 
     font-size: 12px;
-    color: var(--coffee);
+    color: var(--heading-color);
 
     border-radius: 50%;
-    background-color: var(--cream);
+    background-color: var(--text-color);
 
     transition: all .3s ease;
 }
@@ -183,7 +183,7 @@
 }
 
 #page-controls > :disabled {
-    background-color: lch(from var(--vanilla) calc(l - 5) c h);
+    background-color: lch(from var(--form-bg) calc(l - 5) c h);
     border: none;
     cursor: default;
 }
