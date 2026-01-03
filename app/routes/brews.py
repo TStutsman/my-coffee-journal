@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, Response, session
 from sqlalchemy import desc
 from ..models import Brew, db
 from ..utils import format_request, login_required
-from typing import Sequence
+from typing import List
 
 brews = Blueprint('brews', __name__)
 
@@ -15,7 +15,7 @@ def all_brews() -> Response:
     :return: a response containing a JSON list of brew dictionaries
     :rtype: Response
     """
-    brews:Sequence[Brew] = Brew.query.filter_by(user_id=session['user_id']).order_by(desc(Brew.date)).order_by(desc(Brew.id)).all()
+    brews:List[Brew] = Brew.query.filter_by(user_id=session['user_id']).order_by(desc(Brew.date)).order_by(desc(Brew.id)).all()
     return jsonify([brew.to_dict() for brew in brews]) # status_code: 200 (auto)
 
 

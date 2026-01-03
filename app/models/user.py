@@ -9,6 +9,7 @@ class User(db.Model):
     
     brews = db.relationship('Brew', back_populates="user", cascade='all, delete-orphan')
     coffees = db.relationship('Coffee', back_populates="user", cascade='all, delete-orphan')
+    recipes = db.relationship('Recipe', back_populates="user", cascade="all, delete-orphan")
 
     def check_password(self, password_attempt) -> bool:
         """

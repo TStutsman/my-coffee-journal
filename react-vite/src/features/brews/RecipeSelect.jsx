@@ -7,7 +7,7 @@ function RecipeSelect({ load }) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        fetch('/api/recipes')
+        fetch('/api/recipes', {credentials: 'include'})
         .then(res => res.json())
         .then(recipes => recipes.map(recipe => formatObject(recipe)))
         .then(recipes => {
