@@ -1,5 +1,3 @@
-from .camel_to_snake import camel_to_snake
-
 # Removes empty keys and converts camel to snake
 def format_request(request):
     """
@@ -17,3 +15,13 @@ def format_request(request):
             formatted_request[new_key] = request[key]
 
     return formatted_request
+
+
+def camel_to_snake(string):
+    snake = ""
+    for c in string:
+        if c.isupper():
+            snake += '_' + c.lower()
+        else:
+            snake += c
+    return snake

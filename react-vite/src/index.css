@@ -54,7 +54,11 @@
     --dp-00: #14100D;
     --dp-01: #201915;
     --dp-02: #241D18;
+    --dp-03: #271F19;
+    --dp-04: #29211B;
+    --dp-06: #2E251E;
     --dp-08: #30271F;
+    --dp-16: #372C24;
     --dp-24: #3A2E25;
 
     --background-color: #14100D;
@@ -121,7 +125,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   color: var(--text-color);
-  background-color: var(--card-border-color);
+  background-color: var(--dp-24);
   cursor: pointer;
   transition: border-color 0.25s;
 }

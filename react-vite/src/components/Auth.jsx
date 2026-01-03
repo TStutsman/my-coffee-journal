@@ -8,7 +8,9 @@ function Auth(){
     const [formErrors, setFormErrors] = useState({});
     const navigate = useNavigate();
 
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault();
+
         fetch('/api/users/register', {
             method: "POST",
             headers: {
@@ -26,7 +28,9 @@ function Auth(){
         });
     }
 
-    const login = () => {
+    const login = (e) => {
+        e.preventDefault();
+
         fetch('/api/users/login', {
             method: "POST",
             headers: {
@@ -45,31 +49,41 @@ function Auth(){
     }
 
     useEffect(()=> {
-        const sessionExists = document.cookie.split(';').some((row) => row.startsWith('validSession'));
+        const validSessionCookie = document.cookie.split(';').find((row) => row.startsWith('validSession')).split('=');
         
-        if(sessionExists) {
+        if(validSessionCookie[1] == 'true') {
             navigate('/coffees');
         }
-    }, [navigate])
+    }, [navigate]);
     
 
     return (
-        <div className="auth">
-            <input type="text"
-             placeholder="username"
-             value={username}
-             onChange={e => setUsername(e.target.value)}
-            />
-            { formErrors.username && <p className="form-error">{formErrors.username}</p> }
-            <input type="password"
-             placeholder="password"
-             value={password}
-             onChange={e => setPassword(e.target.value)}
-            />
-            { formErrors.password && <p className="form-error">{formErrors.password}</p> }
-            { formErrors.auth && <p className="form-error">{formErrors.auth}</p> }
-            <button onClick={register}>Register</button>
-            <button onClick={login}>Login</button>
+        <div id="auth-wrapper">
+            <form id="auth-form">
+                <label>
+                    <span>Username</span>
+                    <input 
+                        type="text"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                </label>
+                { formErrors.username && <p className="form-error">{formErrors.username}</p> }
+                <label>
+                    <span>Password</span>
+                    <input 
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </label>
+                { formErrors.password && <p className="form-error">{formErrors.password}</p> }
+                { formErrors.auth && <p className="form-error">{formErrors.auth}</p> }
+                <div className="form-controls">
+                    <button type="submit" onClick={login}>Login</button>
+                    <a onClick={register}>Register</a>
+                </div>
+            </form>
         </div>
     )
 }

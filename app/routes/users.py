@@ -1,21 +1,29 @@
-from flask import Blueprint, request, session, jsonify
+from flask import Blueprint, request, session, jsonify, Response
 from ..models import User, db
 from hashlib import sha256
 
 users = Blueprint('users', __name__)
 
 @users.post('/register')
-def create_new_user():
+def create_new_user() -> Response:
     if request.json is None:
-        return {"errors": {"client_error": "POST /register requires a request body with a username and password"}}, 400
+        res = jsonify({"errors": {"client_error": "POST api/users/register requires a request body with a username and password"}})
+        res.status_code = 400
+        return res
     if len(request.json["username"]) < 1:
-        return {"errors": {"username": "Username required"}}, 400
+        res = jsonify({"errors": {"username": "Username required"}})
+        res.status_code = 400
+        return res
     if len(request.json["password"]) < 1:
-        return {"errors": {"password": "Password required"}}, 400
+        res = jsonify({"errors": {"password": "Password required"}})
+        res.status_code = 400
+        return res
     
     existing_user: User | None = db.session.scalars(db.select(User).filter_by(username=request.json["username"])).first()
     if existing_user is not None:
-        return {"errors": {"username": "Sorry, this username is already taken. Please try again"}}, 400
+        res = jsonify({"errors": {"username": "Sorry, this username is already taken. Please try again"}})
+        res.status_code = 400
+        return res
 
     new_user = User()
     new_user.username = request.json["username"]
@@ -39,23 +47,33 @@ def create_new_user():
     return response
 
 @users.post('/login')
-def login_user():
+def login_user() -> Response:
     if request.json is None:
-        return {"errors": {"client_error": "POST /login requires a request body with a username and password"}}, 400
+        res = jsonify({"errors": {"client_error": "POST api/users/login requires a request body with a username and password"}})
+        res.status_code = 400
+        return res
     if len(request.json["username"]) < 1:
-        return {"errors": {"username": "Username required"}}, 400
+        res = jsonify({"errors": {"username": "Username required"}})
+        res.status_code = 400
+        return res
     if len(request.json["password"]) < 1:
-        return {"errors": {"password": "Password required"}}, 400
+        res = jsonify({"errors": {"password": "Password required"}})
+        res.status_code = 400
+        return res
 
     user:User | None = db.session.scalars(db.select(User).filter_by(username=request.json["username"])).first()
     if user is None:
-        return {"errors": {"auth": "Username and password do not match any users. Please try again"}}, 400
+        res = jsonify({"errors": {"auth": "Username and password do not match any users. Please try again"}})
+        res.status_code = 400
+        return res
     
     hash_object = sha256(request.json["password"].encode('utf-8'))
     passwords_match = user.check_password(hash_object.hexdigest())
     
     if not passwords_match:
-        return {"errors": {"auth": "Username and password do not match any users. Please try again"}}, 400
+        res = jsonify({"errors": {"auth": "Username and password do not match any users. Please try again"}})
+        res.status_code = 400
+        return res
 
     session["user_id"] = user.id
     session.permanent = True
@@ -63,5 +81,15 @@ def login_user():
     response = jsonify({"username": user.username})
     response.status_code = 200
     response.set_cookie("validSession", "true", 2678000, samesite='Lax')
+
+    return response
+
+@users.get('/logout')
+def logout_user() -> Response:
+    session.clear()
+
+    response = Response()
+    response.status_code = 200
+    response.set_cookie("validSession", "false")
 
     return response

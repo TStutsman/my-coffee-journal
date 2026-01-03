@@ -1,15 +1,14 @@
 import { CoffeeForm, DeleteCoffee } from '@coffees';
 import { useModal, useStore } from '@context';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './CoffeeListItem.css';
 
-function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
+function CoffeeListItem({ coffee: initialCoffee }){
     const { setModalContent, setOnModalClose } = useModal();
     const { fetchCoffees } = useStore();
 
     // this slice of state allows the item to update its own values (i.e. after an edit)
     const [coffee, setCoffee] = useState(initialCoffee);
-    const [itemClass, setItemClass] = useState(`coffee-list-item ${coffee.color}`);
 
     const editCoffee = () => {
         setModalContent(<CoffeeForm coffeeId={coffee.id} />);
@@ -31,10 +30,8 @@ function CoffeeListItem({ coffee: initialCoffee, show, focusCoffee }){
         setModalContent(<DeleteCoffee deleteFn={deleteCoffee} />)
     }
 
-    const showItem = () => focusCoffee();
-
     return (
-        <div className={itemClass} onTouchStart={showItem} onMouseOver={showItem}>
+        <div className={`coffee-list-item ${coffee.color}`}>
             <div className='coffee-title' style={{borderColor: `var(--${coffee.color})`}}>
                 <h4 style={{color: `var(--text-${coffee.color})`}}>{coffee.farm}</h4>
                 <h4>{coffee.roaster}</h4>

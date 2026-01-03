@@ -34,6 +34,7 @@ function CoffeeForm({ coffeeId }) {
 
         fetch(url, {
             method,
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

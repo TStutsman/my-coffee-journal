@@ -1,12 +1,11 @@
-import { CoffeeListItem, CoffeeForm } from "@coffees";
-import { useStore, useModal } from '@context';
-import { useState, useEffect } from "react";
+import { CoffeeForm, CoffeeListItem } from "@coffees";
+import { useModal, useStore } from '@context';
+import { useEffect } from "react";
 import './CoffeeList.css';
 
 function CoffeeList(){
     const { coffees, fetchCoffees } = useStore();
     const { setOnModalClose, setModalContent } = useModal();
-    const [focusedCoffee, setFocusedCoffee] = useState(0);
 
     const addNewCoffee = () => {
         setOnModalClose(() => fetchCoffees);
@@ -21,12 +20,10 @@ function CoffeeList(){
         <>
         <div className="coffee-list">
             <h1>coffees</h1>
-            { coffees.map((coffee, index) => (
+            { coffees.map((coffee) => (
                 <CoffeeListItem 
                     key={coffee.id} 
-                    coffee={coffee} 
-                    show={focusedCoffee == index} 
-                    focusCoffee={() => setFocusedCoffee(index)}
+                    coffee={coffee}
                 />
             ))}
         </div>

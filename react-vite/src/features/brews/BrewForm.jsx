@@ -44,6 +44,7 @@ function BrewForm({ brewId }) {
         const url = brewId ? `/api/brews/${brewId}` : '/api/brews/';
         fetch(url, {
             method: brewId ? 'PUT' : 'POST',
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },

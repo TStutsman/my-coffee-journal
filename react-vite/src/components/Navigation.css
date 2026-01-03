@@ -31,6 +31,12 @@ nav a {
     transition: color .2s ease-out;
 }
 
+nav a.logout {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
 svg#brew-icon {
     height: 24px;
     width: 24px;

@@ -4,11 +4,10 @@
     align-items: flex-end;
     gap: 20px;
 
-    padding: 10px 40px;
+    padding: 20px 40px;
 
-    border: 2px solid var(--heading-color);
-    border-radius: 8px;
-    background-color: #c5a487;
+    border-radius: 20px;
+    background-color: var(--dp-01);
 }
 
 #brew-form h3 {
@@ -183,7 +182,10 @@
 }
 
 #page-controls > :disabled {
-    background-color: lch(from var(--form-bg) calc(l - 5) c h);
+    background-color: var(--dp-04);
+    color: var(--dp-00);
     border: none;
+    border-top: 2px solid var(--dp-00);
+    border-left: 2px solid var(--dp-00);
     cursor: default;
 }

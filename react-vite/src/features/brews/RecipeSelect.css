@@ -10,11 +10,13 @@
     cursor: pointer;
     padding: 10px;
 
-    border: solid var(--text-color);
+    border: solid var(--dp-06);
     border-width: 1px;
-    border-radius: 4px;
+    border-radius: 10px;
+
+    background-color: var(--dp-08);
 }
 
 .recipe-list-item:hover {
-    background-color: lch(from var(--form-bg) calc(l + 7) calc(c + 5) h);
+    background-color: var(--dp-02);
 }
