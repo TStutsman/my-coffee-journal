@@ -18,7 +18,8 @@ function CoffeeListItem({ coffee: initialCoffee }){
     const deleteCoffee = () => {
         fetch(`/api/coffees/${coffee.id}`,
             {
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include'
             }
         ).then(res => {
             // refresh coffee list context

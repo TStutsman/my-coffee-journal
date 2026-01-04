@@ -49,6 +49,19 @@ def save_coffee() -> Response:
     coffee = Coffee(**data)
     coffee.user_id = session['user_id']
 
+    if coffee.country is None:
+        res = jsonify({"errors": {"country": "Coffee must include a country of origin"}})
+        res.status_code = 400
+        return res
+    if coffee.process is None:
+        res = jsonify({"errors": {"process": "Coffee must include a process"}})
+        res.status_code = 400
+        return res
+    if coffee.roaster is None:
+        res = jsonify({"errors": {"roaster": "Coffee must include the name of a roastery or some unique identifier"}})
+        res.status_code = 400
+        return res
+
     db.session.add(coffee)
     db.session.commit()
 
@@ -74,7 +87,7 @@ def edit_coffee(id) -> Response:
     coffee:Coffee | None = Coffee.query.get(id)
 
     if not coffee:
-        res = jsonify({"errors": {"coffee", "Couldn't find the coffee with the requested id"}})
+        res = jsonify({"errors": {"client_error", "Couldn't find the coffee with the requested id"}})
         res.status_code = 404
         return res
     if coffee.user_id != session['user_id']:

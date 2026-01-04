@@ -6,14 +6,16 @@ import './CoffeeForm.css';
 function CoffeeForm({ coffeeId }) {
     const { closeModal } = useModal();
 
-    const [ country, setCountry ] = useState("");
-    const [ region, setRegion ] = useState("");
-    const [ farm, setFarm ] = useState("");
-    const [ varietal, setVarietal ] = useState("");
-    const [ process, setProcess ] = useState("");
-    const [ roaster, setRoaster ] = useState("");
-    const [ roastProfile, setRoastProfile ] = useState("");
-    const [ color, setColor ] = useState("brown");
+    const [formErrors, setFormErrors] = useState({});
+
+    const [country, setCountry] = useState("");
+    const [region, setRegion] = useState("");
+    const [farm, setFarm] = useState("");
+    const [varietal, setVarietal] = useState("");
+    const [process, setProcess] = useState("");
+    const [roaster, setRoaster] = useState("");
+    const [roastProfile, setRoastProfile] = useState("");
+    const [color, setColor] = useState("brown");
 
     const colorScheme = () => {
         if(window !== undefined && window.matchMedia){
@@ -39,7 +41,15 @@ function CoffeeForm({ coffeeId }) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(coffee)
-        }).then(res => res.ok && closeModal());
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.errors){
+                setFormErrors(data.errors);
+            } else {
+                closeModal();
+            }
+        })
     }
 
     useEffect(() => {
@@ -67,14 +77,18 @@ function CoffeeForm({ coffeeId }) {
         <form id="coffee-form" onSubmit={handleSubmit} style={formStyle}>
             <h2>{ coffeeId ? 'Edit Coffee' : 'Add A Coffee' }</h2>
 
-            <label style={labelStyle}>
-                <span>Roaster</span>
-                <input
-                    type="text"
-                    value={roaster}
-                    onChange={e => setRoaster(e.target.value)}
-                />
-            </label>
+            <div>
+                <label style={labelStyle}>
+                    <span>Roaster</span>
+                    <input
+                        type="text"
+                        value={roaster}
+                        onChange={e => setRoaster(e.target.value)}
+                    />
+                </label>
+                {formErrors?.roaster && <p className="form-error">{formErrors.roaster}</p>}
+            </div>
+
             <label style={labelStyle}>
                 <span>Farm</span>
                 <input 
@@ -92,14 +106,18 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setRegion(e.target.value)}
                 />
             </label>
-            <label style={labelStyle}>
-                <span>Country</span>
-                <input 
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                />
-            </label>
+
+            <div>
+                <label style={labelStyle}>
+                    <span>Country</span>
+                    <input 
+                        type="text"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
+                </label>
+                {formErrors?.country && <p className="form-error">{formErrors.country}</p>}
+            </div>
             
             <label style={labelStyle}>
                 <span>Varietal</span>
@@ -109,14 +127,19 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setVarietal(e.target.value)}
                 />
             </label>
-            <label style={labelStyle}>
-                <span>Process</span>
-                <input 
-                    type="text"
-                    value={process}
-                    onChange={(e) => setProcess(e.target.value)}
-                />
-            </label>
+
+            <div>
+                <label style={labelStyle}>
+                    <span>Process</span>
+                    <input 
+                        type="text"
+                        value={process}
+                        onChange={(e) => setProcess(e.target.value)}
+                    />
+                </label>
+                {formErrors?.process && <p className="form-error">{formErrors.process}</p>}
+            </div>
+
             <label style={labelStyle}>
                 <span>Roast Profile</span>
                 <input 
@@ -125,6 +148,7 @@ function CoffeeForm({ coffeeId }) {
                     onChange={(e) => setRoastProfile(e.target.value)}
                 />
             </label>
+
             <label>
                 <span>Pick a color</span>
                 <ColorPicker color={color} setColor={setColor} />
