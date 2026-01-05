@@ -1,5 +1,5 @@
-from flask import Flask, redirect, request, send_from_directory
-from flask_wtf.csrf import generate_csrf
+from flask import Flask, redirect, request, send_from_directory, jsonify, Response
+from flask_wtf.csrf import generate_csrf, validate_csrf, ValidationError
 from flask_migrate import Migrate
 from flask_cors import CORS
 from app.config import Config
@@ -35,6 +35,22 @@ def change_http_to_https():
 
             # redirect the session to the https url
             return redirect(url, code=301)
+        
+        
+@app.before_request
+def check_incoming_csrf():
+    if request.method is 'GET':
+        return # Since sessions persist, send CSRF on all GET requests
+    
+    # If the request is state-changing, validate csrf
+    validate_csrf(request.cookies.get('csrf_token'))
+
+@app.errorhandler(ValidationError)
+def handle_csrf_error(e) -> Response:
+    res = jsonify({"errors": {"client_error": "Invalid request, please try again"}})
+    res.status_code = 403 # Unauthorized
+    return res
+        
         
 @app.after_request
 def inject_outgoing_csrf(response):
