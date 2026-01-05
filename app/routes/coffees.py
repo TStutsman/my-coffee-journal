@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, session, Response
+from sqlalchemy import desc
 from ..models import Coffee, db
 from ..utils import format_request, login_required
 from typing import Sequence
@@ -14,7 +15,7 @@ def all_coffees() -> Response:
     :return: A response object containing JSONified list of coffee dictionaries
     :rtype: Response
     """
-    coffees:Sequence[Coffee] = db.session.scalars(db.select(Coffee).filter_by(user_id=session['user_id'])).all()
+    coffees:Sequence[Coffee] = db.session.scalars(db.select(Coffee).filter_by(user_id=session['user_id']).order_by(desc(Coffee.id))).all()
     return jsonify([coffee.to_dict() for coffee in coffees])
 
 

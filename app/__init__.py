@@ -39,7 +39,7 @@ def change_http_to_https():
         
 @app.before_request
 def check_incoming_csrf():
-    if request.method is 'GET':
+    if request.method == 'GET':
         return # Since sessions persist, send CSRF on all GET requests
     
     # If the request is state-changing, validate csrf
