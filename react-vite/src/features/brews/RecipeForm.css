@@ -1,50 +1,266 @@
-#recipe-row {
+#recipe-form-modal {
+    position: relative;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    box-sizing: border-box;
+    width: 350px;
+    height: 540px;
+    padding: 25px;
+
+    border-radius: 20px;
+    background-color: var(--dp-04);
+}
+
+#recipe-form-modal h2 {
+    align-self: flex-start;
+    font-family: 'Habibi';
+    font-size: 22px;
+}
+
+#recipe-form {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     width: 300px;
-    gap: 5px;
+    gap: 20px;
 }
 
-#recipe-name::placeholder {
-    color: lch(from var(--text-color) calc(l - 5) calc(c + 5) h);
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+#recipe-form h5 {
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-#recipe-row > #recipe-name {
+#recipe-form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+}
+
+#recipe-form label {
+    font-size: 14px;
+    color: var(--text-2);
+}
+
+#recipe-form input, #recipe-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 10px;
+    
+    font-size: 16px;
+    color: var(--text-3);
+
+    border: 1px solid var(--dp-24);
+    border-radius: 8px;
+    background-color: var(--dp-01);
+
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     outline: none;
-    overflow: hidden;
-    
-    height: 24px;
+}
+
+#recipe-form textarea {
+    height: 203px;
+    resize: none;
+}
+
+#recipe-form textarea::placeholder {
+    color: lch(from var(--text-3) l c h / .4);
+}
+
+#water-temp {
+    display: flex;
     width: 100%;
-    
-    line-height: 1.5;
-    color: var(--text-color);
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-weight: 300;
-    
-    border: none;
-    border-bottom: 1px solid var(--text-color);
-    background-color: transparent;
 }
 
-#save-recipe {
-    height: 32px;
-    min-width: 32px;
-
-    padding: 5px 8px;
-    background-color: transparent;
-    border: 1px solid var(--text-color);
-    border-radius: 4px;
-
-    transition: all .15s ease-out;
+#water-temp > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-#save-recipe:hover {
-    background-color: lch(from var(--form-bg) calc(l + 5) calc(c + 5) h);
-    color: var(--heading-color);
-    border-color: var(--heading-color);
+#degrees-switch {
+    position: relative;
+
+    box-sizing: border-box;
+    height: 16px;
+    padding: 1px;
+    min-width: 48px;
+    margin: 0;
+
+    font-size: 14px;
+
+    border-radius: 13px;
+    background-color: var(--dp-01);
+
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+#degrees-switch .switch-label {
+    position: absolute;
+    top: 1px;
+    user-select: none;
+
+    font-size: 12px;
+    line-height: 1;
+    color: lch(from var(--text-3) l c h / .6);
+}
+
+#degrees-switch:hover > #switch-circle {
+    background-color: var(--secondary-2);
+}
+
+#switch-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 1px;
+    left: 3%;
+
+    height: 14px;
+
+    --switch-circle-width: 25px;
+    width: var(--switch-circle-width);
+
+    font-size: 10px;
+    color: var(--text-3);
+
+    border-radius: 7px;
+    background-color: var(--secondary);
+
+    transition: all .3s ease;
+}
+
+#switch-circle.celsius {
+    left: calc(97% - var(--switch-circle-width));
+}
+
+#recipe-form-modal > #page-controls {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+
+#recipe-form-modal > #page-controls > button {
+    border: 1px solid var(--dp-00);
+    background-color: var(--secondary);
+    transition: background-color .3s ease;
+}
+
+#recipe-form-modal > #page-controls > button:hover:not(:disabled) {
+    background-color: var(--secondary-2);
+}
+
+#recipe-form-modal > #page-controls > :disabled {
+    background-color: var(--dp-08);
+    color: var(--dp-00);
+    cursor: default;
+}
+
+input#recipe-name {
+    margin-bottom: 5px;
+}
+
+#recipe-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    overflow: scroll;
+    padding: 10px;
+
+    border: 1px solid var(--dp-00);
+    border-radius: 16px 16px 0 0;
+    background-color: var(--dp-01);
+}
+
+#recipe-summary > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid var(--dp-08);
+    border-radius: 12px;
+    background-color: var(--dp-06);
+}
+
+#recipe-summary p {
+    text-align: left;
+    line-height: 1.1;
+}
+
+p.summary-item-label {
+    font-size: 12px;
+    color: lch(from var(--text-3) l c h / .7);
+}
+
+#recipe-summary-buttons {
+    display: flex;
+    gap: 1px;
+    box-sizing: border-box;
+    width: 100%;
+
+    border: 1px solid var(--dp-00);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    background-color: var(--dp-00);
+}
+#recipe-summary-buttons > * {
+    flex-grow: 1;
+    border-radius: 0;
+}
+#recipe-summary-buttons > button {
+    transition: background-color .3s ease;
+}
+#recipe-summary-buttons > button:hover {
+    border-color: transparent;
+    background-color: lch(from var(--dp-24) calc(l + 5) calc(c + 3) h);
+}
+
+#recipe-summary-buttons > button:first-of-type {
+    border-radius: 0 0 0 16px;
+}
+#recipe-summary-buttons > button:last-of-type {
+    border-radius: 0 0 16px 0;
+}
+button#recipe-save-btn {
+    background-color: var(--secondary);
+}
+button#recipe-save-btn:hover {
+    background-color: var(--secondary-2);
+}
+
+#recipe-summary-buttons > button:disabled {
+    color: lch(from var(--text-3) l c h / .4);
+    cursor: auto;
+    background-color: var(--dp-02);
+    transition: none;
+}
+#recipe-summary-buttons > button:disabled:hover {
+    border-color: transparent;
+    background-color: var(--dp-02);
 }

@@ -1,18 +1,18 @@
-import { RecipeForm, RecipeSelect, StarRating } from '@brews';
-import { If } from '@components';
+import RecipeForm from '@brews/RecipeForm';
+import Range from '@components/Range';
 import { useModal, useStore } from '@context';
-import { formatRequest } from '@utils';
+import { formatObject, formatRequest } from '@utils';
 import { useEffect, useState } from "react";
 import './BrewForm.css';
 
-function BrewForm({ brewId }) {
-    const { closeModal } = useModal();
+export default function BrewForm({ brewId, initialPage=0 }) {
+    const { closeModal, setModalContent } = useModal();
     const { coffees:unlabeled, brews, recipe, setRecipe } = useStore();
 
     const [coffeeId, setCoffeeId] = useState("");
     const [rating, setRating] = useState(0);
     const [notes, setNotes] = useState("");
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(initialPage);
 
     const coffees = unlabeled.map(({id, roaster, farm, color}) => ({id, label: roaster + " - " + farm, color}));
 
@@ -68,59 +68,159 @@ function BrewForm({ brewId }) {
         setPage(page+1)
     }
 
+    function adjustRecipe(e) {
+        e.preventDefault();
+        setModalContent(<RecipeForm />);
+    }
+
     if(coffees.length < 1) return null;
 
     return (
-        <form id="brew-form" onSubmit={handleSubmit}>
-            <If value={page === 0}>
-                <h3>Which recipe are you using today?</h3>
-                <RecipeSelect load={loadRecipe}/>
-            </If>
+        <div id='brew-form-modal'>
+            <h2>Add a Brew</h2>
+            {page === 0 && <RecipeSelect load={loadRecipe}/>}
 
-            <If value={page === 1}>
-                <RecipeForm />
-            </If>
+            {page > 0 &&
+            <form id="brew-form">
+                { page === 1 && <>
+                    <h5>Would you like to adjust this recipe?</h5>
+                    <div id='recipe-summary'>
+                        <div>
+                            <div>
+                                <p className='summary-item-label'>Grinder</p>
+                                <p>{recipe.grinder}</p>
+                            </div>
+                            <div>
+                                <p className='summary-item-label'>Grind Size</p>
+                                <p>{recipe.grindSize}</p>
+                            </div>
+                            <div>
+                                <p className='summary-item-label'>Dose</p>
+                                <p>{recipe.dose}g coffee</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <p className='summary-item-label'>Brewer</p>
+                                <p>{recipe.brewer}</p>
+                            </div>
+                            <div>
+                                <p className='summary-item-label'>Water</p>
+                                <p>{recipe.waterAmt}g water</p>
+                            </div>
+                            <div>
+                                <p className='summary-item-label'>Temperature</p>
+                                <p>{recipe.waterTemp} &deg;{recipe.celsius ? 'C' : 'F'}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <p className='summary-item-label'>Details</p>
+                                <p style={{whiteSpace: 'pre-line'}}>{recipe.details}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button id='adjust-recipe-btn' onClick={adjustRecipe}>Adjust This Recipe</button>
+                </>}
 
-            <If value={page === 2}>
-                <h3>Which coffee are you brewing?</h3>
-                <label>
-                    <span>Coffee</span>
-                    <select 
-                        value={coffeeId} 
-                        onChange={e => setCoffeeId(+e.target.value)}
-                    >
-                        <option value="" disabled>Select a coffee</option>
-                        { coffees.map(coffee => (
-                            <option key={coffee.id} value={coffee.id}>
-                                {coffee.label}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-            </If>
-            
-            <If value={page === 3}>
-                <h3>How was your brew?</h3>
-                <label>
-                    <span id='notes-label'>Notes</span>
-                    <textarea id='notes-ta' value={notes} onChange={e => setNotes(e.target.value)}/>
-                </label>
-                <label>
-                    <span>Rating</span>
-                    <StarRating rating={rating} setRating={value => setRating(value)} />
-                </label>
-            </If>
-
+                { page === 2 && <>
+                    <h5>Coffee</h5>
+                    <div>
+                        <label htmlFor='coffee-select'>Coffee</label>
+                        <select 
+                            id='coffee-select'
+                            value={coffeeId} 
+                            onChange={e => setCoffeeId(+e.target.value)}
+                        >
+                            <option value="" disabled>Select a coffee</option>
+                            { coffees.map(coffee => (
+                                <option key={coffee.id} value={coffee.id}>
+                                    {coffee.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </>}
+                
+                {page === 3 && <>
+                    <h5>Rating & Notes</h5>
+                    <div id='rating-notes-page'>
+                        <div id='rating-container'>
+                            <label htmlFor='rating'>Rating</label>
+                            <div id='display-rating'>
+                                <div>
+                                    {Math.floor(rating)}
+                                    <span>.{(rating % 1) * 10}</span>
+                                </div>
+                                &nbsp;/&nbsp;5
+                            </div>
+                            <Range id="rating" value={rating} onChange={e => setRating(e.target.value)} min={0} max={5} step={.5}/>
+                        </div>
+                        <div>
+                            <label htmlFor='notes-ta'>Notes</label>
+                            <textarea 
+                            id='notes-ta' 
+                            value={notes} 
+                            onChange={e => setNotes(e.target.value)}
+                            placeholder='Tasted like...&#10;Try grinding finer&#10;etc.'
+                            />
+                        </div>
+                    </div>
+                </>}
+            </form>
+            }
             <div id='page-controls'>
-                <button disabled={page === 0} onClick={prevPage}>&lt;</button>
+                <button disabled={page === 0} onClick={prevPage}>&larr;</button>
                 { page < 3 ?
-                    <button onClick={nextPage}>&#10003;</button>
+                    <button onClick={nextPage}>&rarr;</button>
                     :
-                    <button type="submit">{brewId ? "Update Brew" : "Add Brew"}</button>
+                    <button onClick={handleSubmit}>{brewId ? "Update Brew" : "Add Brew"}</button>
                 }
             </div>
-        </form>
+        </div>
     );
 }
 
-export default BrewForm;
+
+function RecipeSelect({ load }) {
+    const [recipes, setRecipes] = useState([]);
+    const { setModalContent } = useModal();
+
+    useEffect(() => {
+        fetch('/api/recipes', {credentials: 'include'})
+        .then(res => res.json())
+        .then(recipes => recipes.map(recipe => formatObject(recipe)))
+        .then(recipes => {
+            setRecipes(recipes);
+        });
+    }, []);
+
+    const onSelect = (recipeId) => {
+        const recipe = recipes.find(recipe => recipe.id == recipeId);
+        load(recipe);
+    }
+
+    return (
+        <>
+        <div id='recipe-select'>
+            <h5>Choose a Recipe</h5>
+            <div id="recipe-list">
+                <div id='create-recipe-option' className="recipe-list-item" onClick={() => setModalContent(<RecipeForm />)}>
+                    Create New Recipe +
+                </div>
+                { recipes.map(recipe => {
+                    return (
+                        <div 
+                            className="recipe-list-item" 
+                            key={recipe.id} 
+                            onClick={() => onSelect(recipe.id)}
+                            >
+                                {recipe.name}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+        </>
+    );
+}

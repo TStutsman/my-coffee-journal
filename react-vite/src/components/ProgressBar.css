@@ -1,0 +1,14 @@
+.progress-bar-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 5px;
+    border-radius: 3px;
+    background-color: var(--dp-01);
+}
+
+.progress-bar {
+    height: 5px;
+    border-radius: 3px;
+    transition: width .3s ease;
+}

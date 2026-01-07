@@ -1,184 +1,135 @@
-#brew-form {
+#brew-form-modal {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 20px;
 
-    padding: 20px 40px;
+    box-sizing: border-box;
+    width: 350px;
+    height: 540px;
+    overflow-y: scroll;
+    padding: 25px 0;
 
     border-radius: 20px;
-    background-color: var(--dp-01);
+    background-color: var(--dp-04);
 }
 
-#brew-form h3 {
-    align-self: center;
-    margin-top: 0;
+#brew-form-modal h2 {
+    align-self: flex-start;
+    font-family: 'Habibi';
+    font-size: 22px;
+    padding: 0 25px;
 }
 
-#brew-form label {
-    display: flex;
-    align-items: center;
-
-    position: relative;
-    box-sizing: content-box;
-
-    height: 16px;
-    width: calc(100% - 4px);
-    padding: 10px 2px 4px;
-
-    border-bottom: 1px solid var(--text-color);
-}
-
-#brew-form label:has(select){
-    cursor: pointer;
-
-    height: 18px;
-    padding: 6px 2px;
-
-    border: 1px solid var(--text-color);
-    border-radius: 4px;
-}
-
-#brew-form label:has(#star-rating) {
-    padding: 16px 2px 4px;
-    border-color: transparent;
-}
-
-#brew-form label:has(textarea) {
-    height: 100px;
-    padding: 4px 2px;
-
-    border: 1px solid var(--text-color);
-    border-radius: 4px;
-}
-
-#brew-form label>span {
-    position: absolute;
-    margin: 0;
-    top: 8px;
-    left: 2px;
-    
+#brew-form-modal h5 {
+    font-weight: normal;
     font-size: 16px;
-    line-height: 1;
-    
-    opacity: .7;
-    transition: all .3s ease;
+    padding-bottom: 15px;
 }
 
-#brew-form label>span:has( + :focus), #brew-form label>span:has( + :not([value=""])){
-    top: calc(-50% + 8px);
-    left: 0;
-    font-size: 12px;
+#brew-form {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 25px;
 }
 
-#brew-form label>span:has( + textarea:empty){
-    top: 4px;
-    left: 4px;
-    font-size: 16px;
+#brew-form #recipe-summary {
+    height: 280px;
 }
 
-#brew-form label>span:has( + textarea:focus), #brew-form label>span:has( + textarea:not(:empty)) {
-    top: -8px;
-    left: 4px;
-    padding: 0 2px;
-
-    font-size: 12px;
-    color: rgba(from var(--text-color) r g b / .8);
-
-    background-color: var(--form-bg);
-    opacity: 1;
+#adjust-recipe-btn {
+    width: 100%;
+    border: 1px solid var(--dp-00);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    transition: background-color .3s ease;
 }
-
-
-#brew-form label>span:has( + select) {
-    margin-left: 4px;
-    padding: 0 2px;
-
-    color: rgba(from var(--text-color) r g b / .8);
-
-    background-color: var(--form-bg);
-    opacity: 1;
+#adjust-recipe-btn:hover {
+    background-color: lch(from var(--dp-24) calc(l + 5) calc(c + 5) h);
 }
 
 #brew-form select {
-    cursor: pointer;
-    padding-left: 4px;
-}
-
-#brew-form input, #brew-form select, #brew-form textarea {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     border: none;
     outline: none;
 
-    height: 100%;
     width: 100%;
+    padding: 10px;
 
-    font-size: 16px;
-    color: var(--text-color);
-
+    color: var(--text-3);
     background-color: transparent;
 }
 
-#water-temp {
+#rating-notes-page {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    gap: 50px;
 }
 
-#degrees-switch {
-    position: relative;
-
-    height: 26px;
-    min-width: 42px;
-
-    font-size: 14px;
-
-    border-radius: 13px;
-    background-color: var(--card-border-color);
-
-    cursor: pointer;
-    transition: background-color .2s ease;
+#rating-notes-page > div {
+    text-align: left;
 }
 
-#degrees-switch:hover {
-    background-color: lch(from var(--card-border-color) calc(l + 20) c h);
+#rating-container {
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: 3fr 2fr;
 }
 
-#switch-circle {
+#display-rating {
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    top: 3px;
-    left: 3px;
-
-    height: 20px;
-    width: 20px;
-
-    font-size: 12px;
-    color: var(--heading-color);
-
-    border-radius: 50%;
-    background-color: var(--text-color);
-
-    transition: all .3s ease;
+    line-height: 1;
+    font-size: 48px;
+    justify-self: center;
 }
 
-#switch-circle.celsius {
-    left: 19px;
+#display-rating > div {
+    width: 55px;
+}
+
+#display-rating span {
+    font-size: 32px;
+}
+
+#rating {
+    grid-column: 1 / 4;
+    grid-row: 2;
+    margin-top: 30px;
 }
 
 #brew-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 10px;
+    height: 170px;
     resize: none;
+    
+    font-size: 16px;
+    color: var(--text-3);
+
+    border: 1px solid var(--dp-24);
+    border-radius: 8px;
+    background-color: var(--dp-01);
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+#brew-form textarea::placeholder {
+    color: lch(from var(--text-3) l c h / .4);
 }
 
 #page-controls {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    width: 300px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
 }
 
 #page-controls > :disabled {
@@ -188,4 +139,57 @@
     border-top: 2px solid var(--dp-00);
     border-left: 2px solid var(--dp-00);
     cursor: default;
+}
+
+/* RecipeSelect */
+
+#recipe-select {
+    width: 100%;
+    height: 360px;
+    position: relative;
+    padding: 0 0 30px;
+}
+
+#recipe-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    
+    width: 100%;
+    height: 340px;
+    overflow-y: scroll;
+}
+
+.recipe-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+    box-sizing: border-box;
+    width: 300px;
+    height: 56px;
+    padding: 30px;
+    
+    border-radius: 10px;
+    
+    background-color: var(--dp-08);
+    box-shadow: 3px 2px 6px var(--dp-00);
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+#create-recipe-option {
+    color: var(--text-2);
+    background-color: var(--secondary);
+}
+
+#create-recipe-option:hover {
+    background-color: #7D423C;
+}
+
+.recipe-list-item:hover {
+    color: var(--text-2);
+    background-color: var(--dp-24);
+    box-shadow: 5px 3px 8px var(--dp-00);
 }

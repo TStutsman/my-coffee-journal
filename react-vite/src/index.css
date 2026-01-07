@@ -61,6 +61,9 @@
     --dp-16: #372C24;
     --dp-24: #3A2E25;
 
+    --secondary: #623C32;
+    --secondary-2: #7D423C;
+
     --background-color: #14100D;
     --nav-bg: #241D18;
 
@@ -129,6 +132,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: var(--text-color);
 }

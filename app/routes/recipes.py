@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, Response, session
 from ..models import Recipe, db
 from ..utils import format_request, login_required
 from typing import List
+from decimal import Decimal, ROUND_HALF_UP
 
 recipes = Blueprint('recipes', __name__)
 
@@ -29,7 +30,7 @@ def save_recipe() -> Response:
     recipe = Recipe(**data)
     recipe.user_id = session['user_id']
     if recipe.water_amt and recipe.dose:
-        recipe.ratio = round(recipe.water_amt / recipe.dose, 2)
+        recipe.ratio = (Decimal(recipe.water_amt) / Decimal(recipe.dose)).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
     db.session.add(recipe)
     db.session.commit()
 
