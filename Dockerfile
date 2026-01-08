@@ -23,4 +23,4 @@ EXPOSE 8000
 
 RUN flask db upgrade
 
-CMD gunicorn app:app
+CMD gunicorn -w 1 app:app
