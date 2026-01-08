@@ -1,0 +1,10 @@
+__pycache__/
+.venv/
+react-vite/
+instance/
+
+Dockerfile
+Pipfile
+Pipfile.lock
+.gitignore
+.env

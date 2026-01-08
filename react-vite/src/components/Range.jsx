@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import './Range.css';
 
 function Range({min=0, max=100, step=1, id, value, onChange}) {

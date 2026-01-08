@@ -1,7 +1,7 @@
 import DeleteBrew from '@brews/DeleteBrew';
 import BrewForm from '@brews/BrewForm';
 import { useModal, useStore } from '@context';
-import { formatDate } from '@utils';
+import { formatDate, formatObject } from '@utils';
 import './BrewDetails.css'
 
 function BrewDetails({ brew, setBrew }) {

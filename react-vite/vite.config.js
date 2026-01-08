@@ -34,5 +34,9 @@ export default defineConfig(({ mode }) => ({
       '@coffees': resolve(__dirname, './src/features/coffees'),
       '@utils': resolve(__dirname, './src/utils'),
     }
+  },
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true
   }
 }));

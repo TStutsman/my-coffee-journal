@@ -7,7 +7,7 @@ from app.models import db
 from .routes import api
 import os
 
-app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+app = Flask(__name__, static_folder='../dist', static_url_path='/')
 
 import logging
 logger = logging.getLogger('werkzeug')

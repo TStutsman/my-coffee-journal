@@ -13,6 +13,7 @@ wtforms = "*"
 flask-cors = "*"
 flask-wtf = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [dev-packages]
 

@@ -5,7 +5,7 @@ import ProgressBar from '@components/ProgressBar';
 import './RecipeForm.css';
 import BrewForm from './BrewForm';
 
-function RecipeForm({ brewId }) {
+function RecipeForm() {
     const { recipe, setRecipe } = useStore();
     const { setModalContent } = useModal();
 
@@ -36,9 +36,7 @@ function RecipeForm({ brewId }) {
         })
         .then(res => res.status < 500 ? res.json() : undefined)
         .then(data => {
-            if(data?.errors) {
-                
-            } else {
+            if(!data?.errors) {
                 setSaved(true);
             }
         });
@@ -203,17 +201,17 @@ function Switch({ value, changeFn }) {
 }
 
 // creates an empty object and initializes any fields passed to the arg object
-function createRecipe(obj = {}) {
-    return {
-        name: "",
-        grinder: "",
-        grindSize: "",
-        dose: "",
-        brewer: "",
-        waterAmt: "",
-        waterTemp: "",
-        celsius: false,
-        details: "",
-        ...obj
-    }
-}
+// function createRecipe(obj = {}) {
+//     return {
+//         name: "",
+//         grinder: "",
+//         grindSize: "",
+//         dose: "",
+//         brewer: "",
+//         waterAmt: "",
+//         waterTemp: "",
+//         celsius: false,
+//         details: "",
+//         ...obj
+//     }
+// }
