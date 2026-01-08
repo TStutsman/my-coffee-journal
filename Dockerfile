@@ -15,6 +15,7 @@ COPY . .
 
 EXPOSE 8000
 
+RUN flask db migrate
 RUN flask db upgrade
 
 CMD gunicorn app:app
