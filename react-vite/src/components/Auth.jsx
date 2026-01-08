@@ -49,9 +49,10 @@ function Auth(){
     }
 
     useEffect(()=> {
-        const validSessionCookie = document.cookie.split(';').find((row) => row.startsWith('validSession')).split('=');
+        const validSessionCookie = document.cookie.split(';').find((row) => row.startsWith('validSession'));
+        const valid = validSessionCookie ? validSessionCookie.split('=')[1] : 'false';
         
-        if(validSessionCookie[1] == 'true') {
+        if(valid == 'true') {
             navigate('/coffees');
         }
     }, [navigate]);
