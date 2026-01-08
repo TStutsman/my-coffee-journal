@@ -5,6 +5,7 @@
     background-color: var(--dp-01);
 
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .brew-title {
@@ -49,35 +50,14 @@
     gap: 10px;
 }
 
-.brew-content > div > :nth-child(2) {
+.brew-content .secondary-details {
     color: lch(from #C5A487 l c h / .55)
 }
 
-.brew-content p {
+.brew-list-item .brew-content p {
     width: 310px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-}
-
-.brew-buttons {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.brew-buttons > button {
-    padding: 5px 10px;
-    color: var(--text-color);
-    background-color: transparent;
-    border: none;
-
-    transition: color .2s ease;
-}
-
-.brew-buttons > button:hover, .brew-buttons > button:active, .coffee-buttons > button:focus {
-    color: var(--background-color);
-    outline: none;
-    border: none;
 }

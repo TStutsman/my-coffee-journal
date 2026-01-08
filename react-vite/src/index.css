@@ -8,75 +8,75 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  color-scheme: light dark;
+  color-scheme: dark light;
 
-  --pink: #B86981;
   --red: #9E4D4D;
-  --brown: #825C4C;
+  --pink: #B86981;
   --orange: #B97B48;
-  --yellow: #C3A74D;
+  --yellow: #C2A43F;
   --green: #718C4C;
   --blue: #73A2A1;
   --purple: #7B7799;
+  --brown: #825C4C;
 
-  --heading-color: #2d1e11;
-  --text-color: #f6ebda;
-  --button-text-color: #e7cfb5;
-  --background-color: #f6ebda;
-  --form-bg: #c5a487;
-  --card-color: #9b6e47;
-  --card-border-color: #492d14;
+  --text-red: #E57E7E;
+  --text-pink: #EB98B1;
+  --text-orange: #E09D65;
+  --text-yellow: #D9C06D;
+  --text-green: #91B85C;
+  --text-blue: #9CCFCE;
+  --text-purple: #C5BFF1;
+  --text-brown: #DCA690;
+
+  --dp-00: #14100D;
+  --dp-01: #201915;
+  --dp-02: #241D18;
+  --dp-03: #271F19;
+  --dp-04: #29211B;
+  --dp-06: #2E251E;
+  --dp-08: #30271F;
+  --dp-16: #372C24;
+  --dp-24: #3A2E25;
+
+  --secondary: #623C32;
+  --secondary-2: #7D423C;
+
+  --background-color: #14100D;
+  --nav-bg: #241D18;
+
+  --text-1: #f6ebda;
+  --text-2: #E7CFB5;
+  --text-3: #D6BEA1;
+
+  --heading-color: #f6ebda;
+  --text-color: #D6BEA1;
+  --button-text-color: #f6ebda;
+  --card-color: #492d14;
+  --form-bg: #2d1e11;
+  --card-border-color: #2d1e11;
 
   color: var(--background-color);
   background-color: var(--background-color);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --red: #9E4D4D;
     --pink: #B86981;
+    --red: #9E4D4D;
+    --brown: #825C4C;
     --orange: #B97B48;
-    --yellow: #C2A43F;
+    --yellow: #C3A74D;
     --green: #718C4C;
     --blue: #73A2A1;
     --purple: #7B7799;
-    --brown: #825C4C;
 
-    --text-red: #E57E7E;
-    --text-pink: #EB98B1;
-    --text-orange: #E09D65;
-    --text-yellow: #D9C06D;
-    --text-green: #91B85C;
-    --text-blue: #9FD1D0;
-    --text-purple: #C5BFF1;
-    --text-brown: #DCA690;
-
-    --dp-00: #14100D;
-    --dp-01: #201915;
-    --dp-02: #241D18;
-    --dp-03: #271F19;
-    --dp-04: #29211B;
-    --dp-06: #2E251E;
-    --dp-08: #30271F;
-    --dp-16: #372C24;
-    --dp-24: #3A2E25;
-
-    --secondary: #623C32;
-    --secondary-2: #7D423C;
-
-    --background-color: #14100D;
-    --nav-bg: #241D18;
-
-    --text-1: #f6ebda;
-    --text-2: #E7CFB5;
-    --text-3: #D6BEA1;
-
-    --heading-color: #f6ebda;
-    --text-color: #D6BEA1;
-    --button-text-color: #f6ebda;
-    --card-color: #492d14;
-    --form-bg: #2d1e11;
-    --card-border-color: #2d1e11;
+    --heading-color: #2d1e11;
+    --text-color: #f6ebda;
+    --button-text-color: #e7cfb5;
+    --background-color: #f6ebda;
+    --form-bg: #c5a487;
+    --card-color: #9b6e47;
+    --card-border-color: #492d14;
   }
 }
 
