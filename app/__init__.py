@@ -2,8 +2,8 @@ from flask import Flask, redirect, request, send_from_directory, jsonify, Respon
 from flask_wtf.csrf import generate_csrf, validate_csrf, ValidationError
 from flask_migrate import Migrate
 from flask_cors import CORS
-from app.config import Config
-from app.models import db
+from .config import Config
+from .models import db
 from .routes import api
 import os
 
