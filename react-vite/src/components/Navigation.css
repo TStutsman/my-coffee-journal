@@ -37,7 +37,7 @@ nav a.logout {
     top: 15px;
 }
 
-svg#brew-icon {
+svg#brew-icon, svg#coffee-icon {
     height: 24px;
     width: 24px;
 }
