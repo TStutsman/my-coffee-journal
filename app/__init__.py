@@ -51,14 +51,15 @@ def handle_csrf_error(e) -> Response:
     res.status_code = 403 # Unauthorized
     return res
         
-        
+
+# The after request runs after every request EXCEPT the static_folder
 @app.after_request
 def inject_outgoing_csrf(response):
     """
     Middleware to add a generated csrf_token to each outgoing response.
     Additional security flags are set on the cookie for production environment.
     """
-    in_production = os.getenv('FLASK_DEBUG') or False
+    in_production = True if os.getenv('FLASK_ENV') == "production" else False
     response.set_cookie(
         'csrf_token',
         generate_csrf(),
@@ -68,13 +69,25 @@ def inject_outgoing_csrf(response):
     )
     return response
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def react_route(path):
-    if path == 'favicon.ico':
-        return send_from_directory('public', 'favicon.ico')
-    return app.send_static_file('index.html')
+@app.get('/csrf')
+def get_csrf():
+    in_production = True if os.getenv('FLASK_ENV') == "production" else False
+    response = Response()
+    response.set_cookie(
+        'csrf_token',
+        generate_csrf(),
+        secure = in_production,
+        samesite = 'Strict' if in_production else None,
+        httponly = True
+    )
+    return response
 
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file('index.html')
+# @app.route('/<path:path>')
+# def react_route(path):
+#     if path == 'favicon.ico':
+#         return send_from_directory('public', 'favicon.ico')
+#     return app.send_static_file('index.html')
+
+# @app.errorhandler(404)
+# def not_found(e):
+#     return app.send_static_file('index.html')

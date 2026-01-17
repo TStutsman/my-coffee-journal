@@ -54,7 +54,10 @@ function Auth(){
         
         if(valid == 'true') {
             navigate('/coffees');
+            return;
         }
+
+        fetch('/api/csrf');
     }, [navigate]);
     
 
