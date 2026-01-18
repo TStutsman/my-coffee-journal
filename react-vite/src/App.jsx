@@ -2,7 +2,7 @@ import { Auth, Navigation } from '@components'
 import { Modal, ModalProvider, StoreProvider } from '@context'
 import { BrewList } from '@brews'
 import { CoffeeList } from '@coffees';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
 
 function Layout() {
@@ -34,8 +34,11 @@ const router = createBrowserRouter([
       {
         path: '/brews',
         element: <BrewList />
+      },
+      {
+        path: '/*',
+        element: <Navigate to='/'/>
       }
-      
     ]
   }
 ])

@@ -7,7 +7,8 @@ from .models import db
 from .routes import api
 import os
 
-app = Flask(__name__, static_folder='../dist', static_url_path='/')
+static_assets_path = os.path.join(os.getcwd(), 'dist', 'assets')
+app = Flask(__name__, static_folder=static_assets_path, static_url_path='/assets')
 
 import logging
 logger = logging.getLogger('werkzeug')
@@ -82,12 +83,12 @@ def get_csrf():
     )
     return response
 
-# @app.route('/<path:path>')
-# def react_route(path):
-#     if path == 'favicon.ico':
-#         return send_from_directory('public', 'favicon.ico')
-#     return app.send_static_file('index.html')
+@app.route('/', defaults={"path": ""})
+@app.route('/<path:path>')
+def react_route(path):
+    dist_path = os.path.join(os.getcwd(), 'dist')
 
-# @app.errorhandler(404)
-# def not_found(e):
-#     return app.send_static_file('index.html')
+    if path == 'coffee_bean.svg':
+        return send_from_directory(dist_path, 'coffee_bean.svg')
+
+    return send_from_directory(dist_path, 'index.html')
