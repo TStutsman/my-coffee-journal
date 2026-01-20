@@ -25,10 +25,10 @@ button#add-brew {
     padding: 14px 12px 12px 14px;
 
     border-radius: 50%;
+    background-color: var(--primary);
     transition: background-color .2s ease-out;
 }
 
 button#add-brew:hover {
-    border: 1px solid var(--card-color);
-    background-color: var(--card-color);
+    background-color: var(--primary-2);
 }

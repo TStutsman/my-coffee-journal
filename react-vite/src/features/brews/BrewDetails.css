@@ -67,14 +67,14 @@
 .brew-buttons > button {
     padding: 8px 20px;
     color: var(--text-color);
-    background-color: var(--secondary);
+    background-color: var(--primary);
     border: 1px solid var(--dp-01);
 
     transition: background-color .2s ease;
 }
 
 #brew-details-modal .brew-buttons > button:hover, #brew-details-modal .brew-buttons > button:active {
-    background-color: var(--secondary-2);
+    background-color: var(--primary-2);
     outline: none;
     border: 1px solid var(--dp-01);
 }

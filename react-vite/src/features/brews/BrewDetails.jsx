@@ -1,4 +1,4 @@
-import DeleteBrew from '@brews/DeleteBrew';
+import DeleteModalWrap from '@components/DeleteModalWrap';
 import BrewForm from '@brews/BrewForm';
 import { useModal, useStore } from '@context';
 import { formatDate, formatObject } from '@utils';
@@ -26,19 +26,25 @@ function BrewDetails({ brew, setBrew }) {
         });
     }
     
-    const deleteBrew = () => {
-        fetch(`/api/brews/${brew.id}`,
-            {
-                method: 'DELETE',
-                credentials: 'include'
-            }
-        ).then(res => {
-            if(res.ok) fetchBrews();
-        });
-    }
-
+    
     const openConfirmDelete = () => {
-        setModalContent(<DeleteBrew deleteFn={deleteBrew} />)
+        const deleteBrew = () => {
+            fetch(`/api/brews/${brew.id}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include'
+                }
+            ).then(res => {
+                if(res.ok) fetchBrews();
+            });
+        }
+
+        setModalContent(
+            <DeleteModalWrap
+            heading={'Are you sure you want to delete this brew?'}
+            deleteFn={deleteBrew}
+            />
+        )
     }
 
     return (

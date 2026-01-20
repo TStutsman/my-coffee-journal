@@ -1,4 +1,5 @@
-import { CoffeeForm, DeleteCoffee } from '@coffees';
+import { CoffeeForm } from '@coffees';
+import DeleteModalWrap from '@components/DeleteModalWrap';
 import { useModal, useStore } from '@context';
 import { useState } from 'react';
 import './CoffeeListItem.css';
@@ -15,20 +16,26 @@ function CoffeeListItem({ coffee: initialCoffee }){
         setOnModalClose(() => () => fetch(`/api/coffees/${coffee.id}`).then(res => res.json()).then(data => setCoffee(data)));
     }
     
-    const deleteCoffee = () => {
-        fetch(`/api/coffees/${coffee.id}`,
-            {
-                method: 'DELETE',
-                credentials: 'include'
-            }
-        ).then(res => {
-            // refresh coffee list context
-            if(res.ok) fetchCoffees();
-        });
-    }
-    
     const openConfirmDelete = () => {
-        setModalContent(<DeleteCoffee deleteFn={deleteCoffee} />)
+        const deleteCoffee = () => {
+            fetch(`/api/coffees/${coffee.id}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include'
+                }
+            ).then(res => {
+                // refresh coffee list context
+                if(res.ok) fetchCoffees();
+            });
+        }
+
+        setModalContent(
+            <DeleteModalWrap
+            heading={`Delete '${coffee.farm}' by ${coffee.roaster}?`}
+            info={'This action will delete all brews of this coffee'}
+            deleteFn={deleteCoffee}
+            />
+        )
     }
 
     return (

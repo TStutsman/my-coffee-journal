@@ -65,7 +65,7 @@ function RecipeForm() {
     return (
         <div id='recipe-form-modal'>
             <h2>Create New Recipe</h2>
-            <ProgressBar percentage={(90*page/3) + 10} color={'var(--secondary-2)'}/>
+            <ProgressBar percentage={(90*page/3) + 10} color={'var(--primary-2)'}/>
             <form id='recipe-form' autoComplete='off'>
 
                 {page === 0 && <>

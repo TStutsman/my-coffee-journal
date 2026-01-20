@@ -116,7 +116,7 @@
 }
 
 #degrees-switch:hover > #switch-circle {
-    background-color: var(--secondary-2);
+    background-color: var(--primary-2);
 }
 
 #switch-circle {
@@ -137,7 +137,7 @@
     color: var(--text-3);
 
     border-radius: 7px;
-    background-color: var(--secondary);
+    background-color: var(--primary);
 
     transition: all .3s ease;
 }
@@ -159,12 +159,12 @@
 
 #recipe-form-modal > #page-controls > button {
     border: 1px solid var(--dp-00);
-    background-color: var(--secondary);
+    background-color: var(--primary);
     transition: background-color .3s ease;
 }
 
 #recipe-form-modal > #page-controls > button:hover:not(:disabled) {
-    background-color: var(--secondary-2);
+    background-color: var(--primary-2);
 }
 
 #recipe-form-modal > #page-controls > :disabled {
@@ -248,10 +248,10 @@ p.summary-item-label {
     border-radius: 0 0 16px 0;
 }
 button#recipe-save-btn {
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 button#recipe-save-btn:hover {
-    background-color: var(--secondary-2);
+    background-color: var(--primary-2);
 }
 
 #recipe-summary-buttons > button:disabled {

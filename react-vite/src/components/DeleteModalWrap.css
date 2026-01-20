@@ -1,0 +1,50 @@
+.delete-modal-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    /* height: 200px; */
+    width: 350px;
+    padding: 25px 0;
+
+    border-radius: 1.25rem;
+    background-color: var(--form-bg);
+}
+
+.delete-modal-wrap > * {
+    padding: 0 2.4rem;
+}
+
+.delete-modal-wrap h6 {
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+    color: var(--heading-color);
+    margin-bottom: .65rem;
+    text-wrap: balance;
+}
+
+.delete-modal-wrap p {
+    font-size: .85rem;
+    color: var(--text-3);
+}
+
+.delete-modal-wrap .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-modal-wrap button {
+    box-shadow: 3px 2px 6px var(--dp-00);
+}
+.delete-modal-wrap button.cancel {
+    background-color: var(--dp-24);
+}
+.delete-modal-wrap button.cancel:hover {
+    background-color: lch(from var(--dp-24) calc(l + 5) c h);
+}
+.delete-modal-wrap button.delete {
+    background-color: var(--primary);
+}
+.delete-modal-wrap button.delete:hover {
+    background-color: var(--primary-2);
+}

@@ -1,7 +1,5 @@
 :root {
   font-family: 'Familjen Grotesk', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 300;
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -38,24 +36,22 @@
   --dp-16: #372C24;
   --dp-24: #3A2E25;
 
-  --secondary: #623C32;
-  --secondary-2: #7D423C;
+  --primary: #623C32;
+  --primary-2: #7D423C;
 
-  --background-color: #14100D;
-  --nav-bg: #241D18;
+  --background-color: var(--dp-00);
+  --nav-bg: var(--dp-02);
+  --form-bg: var(--dp-04);
 
   --text-1: #f6ebda;
   --text-2: #E7CFB5;
   --text-3: #D6BEA1;
 
-  --heading-color: #f6ebda;
-  --text-color: #D6BEA1;
-  --button-text-color: #f6ebda;
-  --card-color: #492d14;
-  --form-bg: #2d1e11;
-  --card-border-color: #2d1e11;
+  --heading-color: var(--text-1);
+  --text-color: var(--text-3);
+  --button-text-color: var(--text-1);
 
-  color: var(--background-color);
+  color: var(--text-color);
   background-color: var(--background-color);
 }
 
@@ -73,10 +69,11 @@
     --heading-color: #2d1e11;
     --text-color: #f6ebda;
     --button-text-color: #e7cfb5;
+    
     --background-color: #f6ebda;
     --form-bg: #c5a487;
-    --card-color: #9b6e47;
-    --card-border-color: #492d14;
+    /* --card-color: #9b6e47;
+    --card-border-color: #492d14; */
   }
 }
 
@@ -121,20 +118,16 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border-radius: .5rem;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   color: var(--text-color);
   background-color: var(--dp-24);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: var(--text-color);
+  transition: background-color 0.3s ease;
 }
 
 
