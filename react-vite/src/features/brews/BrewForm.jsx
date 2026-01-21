@@ -123,24 +123,7 @@ export default function BrewForm({ brewId, initialPage=0 }) {
                     <button id='adjust-recipe-btn' onClick={adjustRecipe}>Adjust This Recipe</button>
                 </>}
 
-                { page === 2 && <>
-                    <h5>Coffee</h5>
-                    <div>
-                        <label htmlFor='coffee-select'>Coffee</label>
-                        <select 
-                            id='coffee-select'
-                            value={coffeeId} 
-                            onChange={e => setCoffeeId(+e.target.value)}
-                        >
-                            <option value="" disabled>Select a coffee</option>
-                            { coffees.map(coffee => (
-                                <option key={coffee.id} value={coffee.id}>
-                                    {coffee.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </>}
+                { page === 2 && <CoffeeSelect {...{coffees, setCoffeeId}} />}
                 
                 {page === 3 && <>
                     <h5>Rating & Notes</h5>
@@ -222,5 +205,28 @@ function RecipeSelect({ load }) {
             </div>
         </div>
         </>
+    );
+}
+
+
+function CoffeeSelect({ coffees, setCoffeeId }) {
+    return (
+        <div id='coffee-select'>
+            <h5>Coffee</h5>
+            <div id="coffee-select-list">
+                { coffees.map(coffee => {
+                    return (
+                        <div 
+                            className="coffee-select-list-item" 
+                            key={coffee.id} 
+                            onClick={() => setCoffeeId(+coffee.id)}
+                            style={{color: `var(--${coffee.color})`}}
+                            >
+                                {coffee.label}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
 }
