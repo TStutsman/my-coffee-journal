@@ -48,7 +48,7 @@ function CoffeeListItem({ coffee: initialCoffee }){
                 <p>{coffee.region ? coffee.region + ', ' : ""}{coffee.country}</p>
                 {coffee.varietal && <p>{coffee.varietal}</p>}
                 <p>{coffee.process} Process</p>
-                <p>{coffee.roast_profile} Roast</p>d
+                <p>{coffee.roast_profile} Roast</p>
             </div>
 
             <div className='coffee-buttons'>
