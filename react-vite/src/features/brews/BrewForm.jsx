@@ -7,14 +7,14 @@ import './BrewForm.css';
 
 export default function BrewForm({ brewId, initialPage=0 }) {
     const { closeModal, setModalContent } = useModal();
-    const { coffees:unlabeled, brews, recipe, setRecipe } = useStore();
+    const { coffees, brews, recipe, setRecipe } = useStore();
 
-    const [coffeeId, setCoffeeId] = useState("");
+    const [coffeeId, setCoffeeId] = useState(-1);
     const [rating, setRating] = useState(0);
     const [notes, setNotes] = useState("");
     const [page, setPage] = useState(initialPage);
 
-    const coffees = unlabeled.map(({id, roaster, farm, color}) => ({id, label: roaster + " - " + farm, color}));
+    // const coffees = unlabeled.map(({id, roaster, farm, color}) => ({id, label: roaster + " - " + farm, color}));
 
     useEffect(() => {
         if(brewId) {
@@ -54,13 +54,19 @@ export default function BrewForm({ brewId, initialPage=0 }) {
     }
 
     function nextPage(e) {
-        e.preventDefault();
+        if(e !== undefined) e.preventDefault();
         setPage(page+1);
     }
 
     function prevPage(e) {
-        e.preventDefault();
+        if(e !== undefined) e.preventDefault();
         setPage(page-1);
+    }
+
+    function selectCoffee(e) {
+        e.preventDefault();
+        setCoffeeId(+e.target.value)
+        nextPage();
     }
 
     function loadRecipe(recipe) {
@@ -78,11 +84,12 @@ export default function BrewForm({ brewId, initialPage=0 }) {
     return (
         <div id='brew-form-modal'>
             <h2>Add a Brew</h2>
-            {page === 0 && <RecipeSelect load={loadRecipe}/>}
-
-            {page > 0 &&
+            <div id='brew-form-wrap'>
             <form id="brew-form">
-                { page === 1 && <>
+                { page === 0 && <RecipeSelect load={loadRecipe}/> }
+
+                { page === 1 && 
+                <div id='recipe-summary-wrap'>
                     <h5>Would you like to adjust this recipe?</h5>
                     <div id='recipe-summary'>
                         <div>
@@ -121,13 +128,15 @@ export default function BrewForm({ brewId, initialPage=0 }) {
                         </div>
                     </div>
                     <button id='adjust-recipe-btn' onClick={adjustRecipe}>Adjust This Recipe</button>
-                </>}
+                </div>
+                }
 
-                { page === 2 && <CoffeeSelect {...{coffees, setCoffeeId}} />}
+                { page === 2 && <CoffeeSelect {...{coffees, coffeeId, onClick: selectCoffee}} />}
                 
-                {page === 3 && <>
+                { page === 3 && 
+                <div id='rating-notes-wrap'>
                     <h5>Rating & Notes</h5>
-                    <div id='rating-notes-page'>
+                    <div id='rating-notes-content'>
                         <div id='rating-container'>
                             <label htmlFor='rating'>Rating</label>
                             <div id='display-rating'>
@@ -149,9 +158,11 @@ export default function BrewForm({ brewId, initialPage=0 }) {
                             />
                         </div>
                     </div>
-                </>}
+                </div>
+                }
             </form>
-            }
+            </div>
+
             <div id='page-controls'>
                 <button disabled={page === 0} onClick={prevPage}>&larr;</button>
                 { page < 3 ?
@@ -194,11 +205,11 @@ function RecipeSelect({ load }) {
                 { recipes.map(recipe => {
                     return (
                         <div 
-                            className="recipe-list-item" 
-                            key={recipe.id} 
-                            onClick={() => onSelect(recipe.id)}
-                            >
-                                {recipe.name}
+                        className="recipe-list-item" 
+                        key={recipe.id} 
+                        onClick={() => onSelect(recipe.id)}
+                        >
+                            {recipe.name}
                         </div>
                     );
                 })}
@@ -209,21 +220,24 @@ function RecipeSelect({ load }) {
 }
 
 
-function CoffeeSelect({ coffees, setCoffeeId }) {
+function CoffeeSelect({ coffees, coffeeId, onClick }) {
     return (
         <div id='coffee-select'>
-            <h5>Coffee</h5>
+            <h5>Choose a Coffee</h5>
             <div id="coffee-select-list">
                 { coffees.map(coffee => {
+                    const selected = +coffeeId === +coffee.id;
+                    const className = selected ? "coffee-select-list-item selected" : "coffee-select-list-item";
                     return (
-                        <div 
-                            className="coffee-select-list-item" 
-                            key={coffee.id} 
-                            onClick={() => setCoffeeId(+coffee.id)}
-                            style={{color: `var(--${coffee.color})`}}
-                            >
-                                {coffee.label}
-                        </div>
+                        <button 
+                        className={className}
+                        key={coffee.id}
+                        value={coffee.id}
+                        onClick={onClick}
+                        style={{color: `var(--${coffee.color})`}}
+                        >
+                            {coffee.farm}
+                        </button>
                     );
                 })}
             </div>
