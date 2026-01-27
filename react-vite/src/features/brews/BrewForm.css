@@ -28,9 +28,12 @@
     padding-bottom: 15px;
 }
 
-#brew-form {
+#brew-form-wrap {
     box-sizing: border-box;
     width: 100%;
+}
+
+#brew-form #recipe-summary-wrap {
     padding: 0 25px;
 }
 
@@ -60,13 +63,17 @@
     background-color: transparent;
 }
 
-#rating-notes-page {
+#rating-notes-wrap {
+    padding: 0 25px;
+}
+
+#rating-notes-content {
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
 
-#rating-notes-page > div {
+#rating-notes-content > div {
     text-align: left;
 }
 
@@ -192,4 +199,64 @@
     color: var(--text-2);
     background-color: var(--dp-24);
     box-shadow: 5px 3px 8px var(--dp-00);
+}
+
+
+/* CoffeeSelect */
+
+#coffee-select {
+    width: 100%;
+    height: 360px;
+    position: relative;
+    padding: 0 0 30px;
+}
+
+#coffee-select-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    
+    box-sizing: border-box;
+    width: 100%;
+    height: 340px;
+    overflow-y: scroll;
+    padding: .25rem 0;
+}
+
+.coffee-select-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    font-weight: 400;
+    
+    box-sizing: border-box;
+    width: 300px;
+    height: 56px;
+    padding: 30px;
+    
+    border-radius: 10px;
+    border: .1rem solid transparent;
+    
+    background-color: var(--dp-08);
+    box-shadow: 3px 2px 6px var(--dp-00);
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.coffee-select-list-item:hover {
+    background-color: var(--dp-24);
+    box-shadow: 5px 3px 8px var(--dp-00);
+}
+
+.coffee-select-list-item:active {
+    background-color: var(--dp-08);
+    box-shadow: 3px 2px 6px var(--dp-00);
+}
+
+.coffee-select-list-item.selected {
+    background-color: var(--dp-24);
+    border-color: lch(from var(--text-3) l c h / .4);
 }

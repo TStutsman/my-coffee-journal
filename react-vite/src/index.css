@@ -133,34 +133,34 @@ button {
 
 @font-face {
   font-family: 'Familjen Grotesk';
-  src: url('./assets/fonts/FamiljenGrotesk-Regular.ttf') format("truetype");
+  src: url('./assets/fonts/FamiljenGrotesk-Regular.woff') format("woff");
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Familjen Grotesk';
-  src: url('./assets/fonts/FamiljenGrotesk-Medium.ttf') format("truetype");
+  src: url('./assets/fonts/FamiljenGrotesk-Medium.woff') format("woff");
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Familjen Grotesk';
-  src: url('./assets/fonts/FamiljenGrotesk-SemiBold.ttf') format("truetype");
+  src: url('./assets/fonts/FamiljenGrotesk-SemiBold.woff') format("woff");
   font-weight: 600;
 }
 
 @font-face {
   font-family: 'Familjen Grotesk';
-  src: url('./assets/fonts/FamiljenGrotesk-Bold.ttf') format("truetype");
+  src: url('./assets/fonts/FamiljenGrotesk-Bold.woff') format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: 'Habibi';
-  src: url('./assets/fonts/Habibi-Regular.ttf') format("truetype");
+  src: url('./assets/fonts/Habibi-Regular.woff') format("woff");
 }
 
 @font-face {
   font-family: 'DG One';
-  src: url('./assets/fonts/DelaGothicOne-Regular.ttf') format("truetype");
+  src: url('./assets/fonts/DelaGothicOne-Regular.woff') format("woff");
 }
