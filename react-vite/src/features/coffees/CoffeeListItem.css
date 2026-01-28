@@ -75,7 +75,7 @@
 
     padding: 5px 10px;
 
-    color: rgba(246, 235, 218, .7);
+    color: lch(from var(--text-color) l c h / .8);
     background-color: transparent;
     
     transition: color .2s ease;
@@ -85,10 +85,6 @@
     border: none;
     outline: none;
     color: var(--text-color);
-}
-
-.trash-icon, .edit-icon {
-    height: 16px;
 }
 
 @media (prefers-color-scheme: dark) {

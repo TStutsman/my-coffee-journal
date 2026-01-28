@@ -2,8 +2,7 @@
     position: relative;
     width: 350px;
     height: 540px;
-    background-color: var(--dp-02);
-    border-radius: 20px;
+    background-color: transparent;
 }
 
 #brew-details-modal .brew-content {
@@ -11,13 +10,18 @@
     flex-direction: column;
     gap: 10px;
 
+    box-sizing: border-box;
     height: 400px;
     overflow-y: scroll;
-    padding: 10px 20px 18px;
+    
+    padding: .625rem 1.25rem 1.25rem;
+
+    border-radius: 0 0 1.25rem 1.25rem;
+    background-color: var(--dp-02);
 }
 
 #brew-details-modal .brew-content > div:first-child {
-    padding: 0 10px;
+    padding: 0 .625rem;
     margin-bottom: 0;
 }
 
@@ -54,21 +58,26 @@
 
 .brew-buttons {
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
 
     box-sizing: border-box;
     width: 100%;
 
     display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
+    justify-content: space-around;
+    padding: 0 1.25rem;
 }
 
 .brew-buttons > button {
-    padding: 8px 20px;
+    width: 2.75em;
+    height: 2.75em;
+
+    font-size: 24px;
     color: var(--text-color);
     background-color: var(--primary);
+
     border: 1px solid var(--dp-01);
+    border-radius: 50%;
 
     transition: background-color .2s ease;
 }
