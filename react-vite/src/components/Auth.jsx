@@ -56,8 +56,6 @@ function Auth(){
             navigate('/coffees');
             return;
         }
-
-        fetch('/api/csrf');
     }, [navigate]);
     
 
