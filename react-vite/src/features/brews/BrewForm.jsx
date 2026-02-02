@@ -1,8 +1,10 @@
 import RecipeForm from '@brews/RecipeForm';
+import DeleteModalWrap from '@components/DeleteModalWrap';
 import Range from '@components/Range';
 import { useModal, useStore } from '@context';
 import { formatObject, formatRequest } from '@utils';
-import { useEffect, useState } from "react";
+import TrashCan from '@assets/TrashCan';
+import { useCallback, useEffect, useState } from "react";
 import './BrewForm.css';
 
 export default function BrewForm({ brewId, initialPage=0 }) {
@@ -180,7 +182,7 @@ function RecipeSelect({ load }) {
     const [recipes, setRecipes] = useState([]);
     const { setModalContent } = useModal();
 
-    useEffect(() => {
+    const fetchRecipes = useCallback(() => {
         fetch('/api/recipes', {credentials: 'include'})
         .then(res => res.json())
         .then(recipes => recipes.map(recipe => formatObject(recipe)))
@@ -189,9 +191,33 @@ function RecipeSelect({ load }) {
         });
     }, []);
 
+    useEffect(() => {
+        fetchRecipes();
+    }, [fetchRecipes]);
+
     const onSelect = (recipeId) => {
         const recipe = recipes.find(recipe => recipe.id == recipeId);
         load(recipe);
+    }
+
+    const openConfirmDelete = (e, recipe) => {
+        e.stopPropagation();
+
+        const deleteRecipe = () => {
+            fetch(`/api/recipes/${recipe.id}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            }).then(res => {
+                if (res.ok) fetchRecipes();
+            });
+        }
+
+        setModalContent(
+            <DeleteModalWrap
+            heading={`Delete recipe "${recipe.name}"?`}
+            deleteFn={deleteRecipe}
+            />
+        );
     }
 
     return (
@@ -204,12 +230,18 @@ function RecipeSelect({ load }) {
                 </div>
                 { recipes.map(recipe => {
                     return (
-                        <div 
-                        className="recipe-list-item" 
-                        key={recipe.id} 
+                        <div
+                        className="recipe-list-item"
+                        key={recipe.id}
                         onClick={() => onSelect(recipe.id)}
                         >
-                            {recipe.name}
+                            <span>{recipe.name}</span>
+                            <button
+                            className="recipe-delete-btn"
+                            onClick={(e) => openConfirmDelete(e, recipe)}
+                            >
+                                <TrashCan />
+                            </button>
                         </div>
                     );
                 })}

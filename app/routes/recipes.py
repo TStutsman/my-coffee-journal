@@ -38,3 +38,31 @@ def save_recipe() -> Response:
     db.session.refresh(recipe)
 
     return jsonify(recipe.to_dict()) # status_code: 200 (auto)
+
+
+@recipes.delete('/<int:id>')
+@login_required
+def delete_recipe(id) -> Response:
+    """
+    Deletes the recipe with the specified 'id' from the database
+
+    :param id: a recipe id
+    :return: An empty response with a "204 - successfully deleted" status code
+    :rtype: Response
+    """
+    recipe = Recipe.query.get(id)
+    if recipe is None:
+        res = jsonify({"errors": {"client_error": "Couldn't find the selected recipe"}})
+        res.status_code = 400
+        return res
+
+    if recipe.user_id != session['user_id']:
+        res = jsonify({"errors": {"client_error": "Users cannot delete recipes that they did not create"}})
+        res.status_code = 403
+        return res
+
+    db.session.delete(recipe)
+    db.session.commit()
+
+    res = Response(status=204)
+    return res

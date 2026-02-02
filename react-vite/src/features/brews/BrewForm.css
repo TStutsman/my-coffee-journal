@@ -171,19 +171,36 @@
 .recipe-list-item {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    
+    justify-content: space-between;
+
     box-sizing: border-box;
     width: 300px;
     height: 56px;
     padding: 30px;
-    
+
     border-radius: 10px;
-    
+
     background-color: var(--dp-08);
     box-shadow: 3px 2px 6px var(--dp-00);
     transition: all .3s ease;
     cursor: pointer;
+}
+
+.recipe-delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity .2s ease;
+}
+
+.recipe-delete-btn:hover {
+    opacity: 1;
 }
 
 #create-recipe-option {
