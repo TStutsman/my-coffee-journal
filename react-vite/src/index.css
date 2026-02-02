@@ -36,14 +36,22 @@
   --dp-16: #372C24;
   --dp-24: #3A2E25;
 
-  --primary: #623C32;
-  --primary-2: #7D423C;
+  --primary-100: color-mix(in oklch, var(--primary-500), white 80%);
+  --primary-200: color-mix(in oklch, var(--primary-500), white 60%);
+  --primary-300: color-mix(in oklch, var(--primary-500), white 40%);
+  --primary-400: color-mix(in oklch, var(--primary-500), white 20%);
+  --primary-500: #7D423C;
+  --primary-600: color-mix(in oklch, var(--primary-500), #14100D 20%);
+  --primary-700: color-mix(in oklch, var(--primary-500), #14100D 40%);
+  --primary-800: color-mix(in oklch, var(--primary-500), #14100D 60%);
+  --primary-900: color-mix(in oklch, var(--primary-500), #14100D 80%);
+
 
   --background-color: var(--dp-00);
   --nav-bg: var(--dp-02);
   --form-bg: var(--dp-04);
 
-  --text-1: #f6ebda;
+  --text-1: #F6EBDA;
   --text-2: #E7CFB5;
   --text-3: #D6BEA1;
 

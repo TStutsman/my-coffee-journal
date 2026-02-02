@@ -26,10 +26,10 @@ button#add-coffee {
     padding: 14px 12px 12px 14px;
 
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--primary-600);
     transition: all .2s ease-out;
 }
 
 button#add-coffee:hover {
-    background-color: var(--primary-2);
+    background-color: var(--primary-500);
 }

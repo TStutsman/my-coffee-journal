@@ -188,7 +188,7 @@
 
 #create-recipe-option {
     color: var(--text-2);
-    background-color: var(--primary);
+    background-color: var(--primary-600);
 }
 
 #create-recipe-option:hover {

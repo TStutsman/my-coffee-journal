@@ -43,8 +43,8 @@
     background-color: lch(from var(--dp-24) calc(l + 5) c h);
 }
 .delete-modal-wrap button.delete {
-    background-color: var(--primary);
+    background-color: var(--primary-600);
 }
 .delete-modal-wrap button.delete:hover {
-    background-color: var(--primary-2);
+    background-color: var(--primary-500);
 }
