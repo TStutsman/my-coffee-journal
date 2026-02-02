@@ -31,7 +31,7 @@ function CoffeeForm({ coffeeId }) {
             country, region, farm, varietal, process, roaster, roastProfile, color
         }
         
-        const url = coffeeId ? `/api/coffees/${coffeeId}` : '/api/coffees';
+        const url = coffeeId ? `/api/coffees/${coffeeId}` : '/api/coffees/';
         const method = coffeeId ? 'PUT' : 'POST';
 
         fetch(url, {
