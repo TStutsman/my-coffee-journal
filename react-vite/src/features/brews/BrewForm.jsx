@@ -181,7 +181,7 @@ function RecipeSelect({ load }) {
     const { setModalContent } = useModal();
 
     useEffect(() => {
-        fetch('/api/recipes', {credentials: 'include'})
+        fetch('/api/recipes/', {credentials: 'include'})
         .then(res => res.json())
         .then(recipes => recipes.map(recipe => formatObject(recipe)))
         .then(recipes => {
